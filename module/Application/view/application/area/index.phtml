@@ -1,0 +1,63 @@
+<section class="content-header">
+	<h1>Gestion de Áreas</h1>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-success">
+				<div class="box-header">
+					<div class="box-title"></div>
+					<div class="box-tools">
+						<button id="btn-agregar-area" class="btn btn-box-tool btn-flat label-success"><i class="fa fa-plus"></i> AGREGAR</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-bordered" id="datatable-area">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Descripción</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="box-footer"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="modal fade" id="modal-area">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form id="form-area">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal">&times</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="txtidarea" name="txtidarea" value="0">
+					<div class="form-group">
+						<label class="control-label">Área padre</label>
+						<select class="form-control" id="cboArea" name="cboArea">
+							<option value="0"><< NINGUNO >></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Nombre</label>
+						<input type="text" name="txtnombre" id="txtnombre" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label class="control-label">Descripcion</label>
+						<input type="text" name="txtdescripcion" id="txtdescripcion" class="form-control" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default btn-flat" data-dismiss="modal">Cancelar</button>
+					<button class="btn btn-success btn-flat" id="btn-guardar-area"><i class="fa fa-save"></i> Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
