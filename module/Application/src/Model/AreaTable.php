@@ -14,31 +14,31 @@ class AreaTable{
     }
 
     public function fetchAll(){
-        $resultSet = $this->tableGateway->select();
+        $resultSet = $this->tableGateway->select(['ACTIVE'=>true]);
         $entries = array();
         foreach ($resultSet as $row) {
-            $entities[] = get_object_vars($row);
+            $entries[] = get_object_vars($row);
         }
-        return $entities;
+        return $entries;
     }
 
     public function get($id){
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('ID_AREA' => $id));
+        $rowset = $this->tableGateway->select(['ID_AREA' => $id]);
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception(Enviroment::NOT_FIND);
         }
-        return $row;
+        return get_object_vars($row);
     }
 
     public function save($userId, $arrData){
         try {
             $result = 0;
-            $date = getdate();
+            $arrData['ID_AREA'] = (int) $arrData['ID_AREA'];
             $arrData['ID_PARENT_AREA'] = ((int)$arrData['ID_PARENT_AREA']) == 0? null : ((int)$arrData['ID_PARENT_AREA']);
-            if (((int)$arrData['ID_AREA'])==0) {
-                $arrData['FECHA_CREACION'] = sprintf('%s-%s-%s', $date['year'], $date['mon'], $date['mday']);
+            if (((int)$arrData['ID_AREA'])===0) {
+                $arrData['FECHA_CREACION'] = Enviroment::GetDate();
                 $arrData['USUARIO_CREACION'] = $userId;
                 $arrData['ACTIVE'] = true;
                 $arrData['ESTADO'] = 1;
@@ -50,7 +50,7 @@ class AreaTable{
                 ];
             }else{
                 if ($this->get($arrData['ID_AREA'])) {
-                    $arrData['FECHA_MODIFICACION'] = sprintf('%s-%s-%s', $date['year'], $date['mon'], $date['mday']);
+                    $arrData['FECHA_MODIFICACION'] = Enviroment::GetDate();
                     $arrData['USUARIO_MODIFICACION'] = $userId;
                     $result = $this->tableGateway->update($arrData, ['ID_AREA'=> $arrData['ID_AREA']]);
                     return [
@@ -70,5 +70,18 @@ class AreaTable{
                 'message'   =>  htmlspecialchars($e->getMessage())
             ];
         }
+    }
+
+    public function delete($userId,$id){
+        $id = (int) $id;
+        $row = $this->get($id);
+        $row['ACTIVE'] = false;
+        $row['FECHA_MODIFICACION'] = Enviroment::GetDate();
+        $row['USUARIO_MODIFICACION'] = $userId;
+        $result = $this->tableGateway->update($row, ['ID_AREA'=> $id]);
+        return [
+            'success'   =>  true,
+            'message'   =>  Enviroment::MSG_DELETE
+        ];
     }
 }

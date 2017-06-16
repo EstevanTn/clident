@@ -28,13 +28,36 @@ class AreaController extends AbstractActionController
       ];
       if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
         $params = [
-            'ID_AREA' =>  $this->getRequest()->getPost('ID_AREA',0),
-            'ID_PARENT_AREA'  =>  $this->getRequest()->getPost('ID_PARENT_AREA', null),
+            'ID_AREA' => (int) $this->getRequest()->getPost('ID_AREA',0),
+            'ID_PARENT_AREA'  => $this->getRequest()->getPost('ID_PARENT_AREA', null),
             'NOMBRE'  => $this->getRequest()->getPost('NOMBRE', null),
             'DESCRIPCION' =>  $this->getRequest()->getPost('DESCRIPCION', null)
           ];
         $response = $this->table->save(1, $params);
       }
+      return new JsonModel($response);
+    }
+
+    public function getAction(){
+      $response = [
+        'success' =>  false,
+        'message' => 'No disponible.'
+      ];
+      if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
+        $response = $this->table->get($this->getRequest()->getPost('ID_AREA', 0));
+      }
+      return new JsonModel($response);
+    }
+
+    public function deleteAction(){
+      $response = [
+        'success' =>  false,
+        'message' => 'No disponible.'
+      ];
+      if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
+        $response = $this->table->delete(1,$this->getRequest()->getPost('ID_AREA', 0));
+      }
+      //$response = $this->table->delete(1,$this->getRequest()->getQuery('ID_AREA', 0));
       return new JsonModel($response);
     }
 

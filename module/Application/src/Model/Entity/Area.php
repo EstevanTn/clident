@@ -20,7 +20,7 @@ class Area {
         $date = getdate();
         $strdate = sprintf('%s-%s-%s', $date['year'], $date['mon'], $date['mday']);
         $this->ID_AREA = !empty($data['ID_AREA']) ? $data['ID_AREA'] : 0;
-        $this->ID_PARENT_AREA = !empty($data['ID_PARENT_AREA']) ? $data['ID_PARENT_AREA'] : 0;
+        $this->ID_PARENT_AREA = !empty($data['ID_PARENT_AREA']) ? $data['ID_PARENT_AREA'] : null;
         $this->NOMBRE = !empty($data['NOMBRE']) ? $data['NOMBRE'] : '';
         $this->DESCRIPCION = !empty($data['DESCRIPCION']) ? $data['DESCRIPCION'] : '';
         $this->ESTADO = !empty($data['ESTADO']) ? $data['ESTADO'] : 1;
