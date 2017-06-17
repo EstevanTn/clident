@@ -91,23 +91,15 @@ var area = {
 			}
 		});
 	},
-	Delete: function(ID_AREA){
+	fnDelete: function(ID_AREA){
 		var url = this.StringFormat('{0}/delete', this.requestPath);
-		BootstrapDialog.confirm({
-			title: 'Confirmación',
-			message: '¿Desea eliminar este registro?',
-			callback: function(result){
-				if (result) {
-					$.ajax({
-					url: url,
-					data: { ID_AREA: ID_AREA },
-					success: function(response){
-						BasePage.Notify(response, function(){
-							$('#datatable-area').dataTable()._fnAjaxUpdate();
-						});
-					}
+		$.ajax({
+			url: url,
+			data: { ID_AREA: ID_AREA },
+			success: function(response){
+				BasePage.Notify(response, function(){
+					$('#datatable-area').dataTable()._fnAjaxUpdate();
 				});
-				}
 			}
 		});
 	},

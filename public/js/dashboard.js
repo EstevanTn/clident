@@ -96,6 +96,7 @@
             searching: false,
             ordering: false,
             ServerSide: true,
+            destroy: true,
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
             },
@@ -141,6 +142,8 @@
          */
         Init: function(){
             var context = this;
+            context['AppUtils'] = new appUtils();
+            
             jQuery.extend(jQuery.validator.messages, {
                 required: "El campo es requerido.",
                 remote: "El campo es requerido.",
@@ -216,8 +219,8 @@
                 type: 'POST',
                 //contentType: 'Content-Type: application/json; charset=utf-8',
                 dataType: 'json',
-                error: function(xhr, status, statusText){
-                    console.error(statusText, status);
+                error: function(xhr, status, error){
+                    console.error(status, xhr.responseText);
                 }
             });
             jQuery(w.document).ready(function(){
@@ -238,12 +241,25 @@
                 if(jQuery.isFunction(context.InitOnReady)){
                     context.InitOnReady.call(context, context);
                 }
+                context.CustomThemeStyles();
             });
 
         },
+        CustomThemeStyles: function(){
+            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').each(function(){
+                jQuery(this).css({'text-transform':'uppercase'});
+            });
+            jQuery('.btn, button, a.btn').each(function(){
+                jQuery(this).addClass('btn-flat');
+            });
+            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('keyup', function(){
+                jQuery(this).val(this.value.toUpperCase());
+            });
+        },
         GridSetup: function(options){
+            options[name] = typeof options[name] === 'string'?options[name]:this.ControllerName;
             options = ReplaceObjectPropierty(this.defaults.datatable, options);
-            jQuery(this.StringFormat('#datatable-{0}', this.ControllerName)).DataTable(options);
+            jQuery(this.StringFormat('#datatable-{0}', options[name])).DataTable(options);
         },
         StringFormat: function(){
             var args = new Array();
@@ -271,7 +287,7 @@
             name = this.StringFormat('#form-{0}',name);
             jQuery(name).validate().resetForm();
             jQuery(name).find('.form-group').removeClass('has-error');
-            jQuery(name).find('input[type=\'text\'], textarea').val('');
+            jQuery(name).find('input[type=\'text\'], textarea, input[type=\'email\']').val('');
             jQuery(name).find('input[type=\'number\'], input[type=\'hidden\']').val(0);
             jQuery(name).find('select').val(0).trigger('change');
             jQuery(name).find('[data-default-value]').each(function(){
@@ -334,6 +350,20 @@
                 }
             }
             fn_notify.call(this, options);
+        },
+        Delete: function(Id){
+            var context = this;
+            BootstrapDialog.confirm({
+                title: 'Confirmacion',
+                message: '¿Deseas eliminar este registro?',
+                callback: function(result){
+                    if(result){
+                        if(jQuery.isFunction(context.fnDelete)){
+                            context.fnDelete.call(context,Id);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -345,7 +375,6 @@
         var page = new BasePage(controller);
         page.Init();
         w.BasePage = page;
-        page[controller] = page;
     };
 
     InitDashboard();

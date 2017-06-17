@@ -44,18 +44,15 @@ class AreaController extends AbstractActionController
         'message' => 'No disponible.'
       ];
       if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
-        $response = $this->table->get($this->getRequest()->getPost('ID_AREA', 0));
+        $response = $this->table->get('ID_AREA', $this->getRequest()->getPost('ID_AREA', 0));
       }
       return new JsonModel($response);
     }
 
     public function deleteAction(){
-      $response = [
-        'success' =>  false,
-        'message' => 'No disponible.'
-      ];
+      $response = \Application\Model\Entity\Enviroment::AJAX_RESPONSE;
       if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
-        $response = $this->table->delete(1,$this->getRequest()->getPost('ID_AREA', 0));
+        $response = $this->table->delete(1,'ID_AREA',$this->getRequest()->getPost('ID_AREA', 0));
       }
       //$response = $this->table->delete(1,$this->getRequest()->getQuery('ID_AREA', 0));
       return new JsonModel($response);

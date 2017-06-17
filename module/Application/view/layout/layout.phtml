@@ -31,9 +31,22 @@
             //appendFile('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js')
             appendFile($this->basePath('plugins/jQueryValidate/jquery.validate.js'))
         ?>
-        
+        <style>
+            label.control-label {
+                text-transform: capitalize;
+            }
+            table > thead > tr th {
+                text-transform: uppercase;
+            }
+            *[class*="title"] {
+                text-transform: uppercase;
+            }
+            .content-header > h1 {
+                text-transform: uppercase;
+            }
+        </style>
     </head>
-    <body class="hold-transition skin-red sidebar-mini">
+    <body class="hold-transition skin-red sidebar-mini fixed">
         <div class="wrapper">
             <header class="main-header">
                 <a href="<?=$this->basePath('/')?>" class="logo">
@@ -80,7 +93,19 @@
                 <section class="sidebar">
                     <ul class="sidebar-menu">
                         <li class="header">PANEL DE ADMINISTRACIÓN</li>
-                        <li class="trewview active" data-controllers="paciente,tratamiento,dentista">
+                        <li class="treeview active" data-controllers="tipo">
+                            <a href="#">
+                                <i class="fa fa-gear"></i>
+                                <span>Configuración</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="<?=$this->basePath()?>/tipo"><i class="fa fa-indent"></i> Tipo</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview" data-controllers="paciente,tratamiento,dentista">
                             <a href="#">
                                 <i class="fa fa-gears"></i>
                                 <span>Mantenimiento</span>
@@ -114,11 +139,17 @@
             <div class="content-wrapper">
                 <?=$this->content?>
             </div>
+
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 2.3.8</div>
+                <strong>Copyright © 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> Todos los derechos reservados.
+            </footer>
         </div>
         <?= $this->inlineScript()->
             //appendFile('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')->
             appendFile($this->basePath('plugins/jQueryUI/jquery-ui.min.js'))->
             appendFile($this->basePath('bootstrap/js/bootstrap.min.js'))->
+            appendFile($this->basePath('plugins/mask/jquery.mask.min.js'))->
             appendFile($this->basePath('plugins/datatables/jquery.datatables.min.js'))->
             appendFile($this->basePath('plugins/datatables/datatables.bootstrap.min.js'))->
             appendFile($this->basePath('plugins/bootstrapDialog/bootstrap-dialog.min.js'))->
@@ -127,9 +158,11 @@
             appendFile($this->basePath('plugins/datepicker/bootstrap-datepicker.js'))->
             appendFile($this->basePath('plugins/bootstrap-notify/bootstrap-notify.min.js'))->
             appendFile($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'))->
+            appendFile($this->basePath('plugins/slimScroll/jquery.slimscroll.min.js'))->            
             appendFile($this->basePath('plugins/fastclick/fastclick.js'))->
             appendFile($this->basePath('dist/js/app.min.js'))->
             appendFile($this->basePath('js/pages/'.$this->ControllerName().'.js'))->
+            appendFile($this->basePath('js/app.utils.js'))->
             appendFile($this->basePath('js/dashboard.js?controller='.$this->ControllerName()))?>
     </body>
 </html>

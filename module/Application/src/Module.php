@@ -35,6 +35,26 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Area());
                     return new TableGateway('area', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\PacienteTable::class => function($container){
+                    $tableGateway = $container->get(Model\PacienteTableGateway::class);
+                    return new Model\PacienteTable($tableGateway);
+                },
+                Model\PacienteTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Paciente());
+                    return new TableGateway('paciente', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\TipoTable::class => function($container){
+                    $tableGateway = $container->get(Model\TipoTableGateway::class);
+                    return new Model\TipoTable($tableGateway);
+                },
+                Model\TipoTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Tipo());
+                    return new TableGateway('tipo', $dbAdapter, null, $resultSetPrototype);
+                },
             ] 
         ];
     }
@@ -46,12 +66,19 @@ class Module implements ConfigProviderInterface
                 Controller\IndexController::class => function($container) {
                     return new Controller\IndexController();
                 },
-                Controller\PacienteController::class => function($container) {
-                    return new Controller\PacienteController();
-                },
                 Controller\AreaController::class => function($container) {
                     return new Controller\AreaController(
                         $container->get(Model\AreaTable::class)
+                    );
+                },
+                Controller\PacienteController::class => function($container) {
+                    return new Controller\PacienteController(
+                        $container->get(Model\PacienteTable::class)
+                    );
+                },
+                Controller\TipoController::class => function($container) {
+                    return new Controller\TipoController(
+                        $container->get(Model\TipoTable::class)
                     );
                 },
             ],

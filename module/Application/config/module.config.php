@@ -54,6 +54,16 @@ return [
                     ],
                 ],
             ],
+            'tipo' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/tipo[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\TipoController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 //    'controllers' => [

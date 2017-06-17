@@ -5,31 +5,12 @@ use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 use Application\Model\Entity\Area;
 use Application\Model\Entity\Enviroment;
+use Application\Model\BaseTable;
 
-class AreaTable{
-    private $tableGateway;
+class AreaTable extends BaseTable{
 
     public function __construct(TableGatewayInterface $tableGateway){
         $this->tableGateway = $tableGateway;
-    }
-
-    public function fetchAll(){
-        $resultSet = $this->tableGateway->select(['ACTIVE'=>true]);
-        $entries = array();
-        foreach ($resultSet as $row) {
-            $entries[] = get_object_vars($row);
-        }
-        return $entries;
-    }
-
-    public function get($id){
-        $id  = (int) $id;
-        $rowset = $this->tableGateway->select(['ID_AREA' => $id]);
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception(Enviroment::NOT_FIND);
-        }
-        return get_object_vars($row);
     }
 
     public function save($userId, $arrData){
@@ -72,16 +53,4 @@ class AreaTable{
         }
     }
 
-    public function delete($userId,$id){
-        $id = (int) $id;
-        $row = $this->get($id);
-        $row['ACTIVE'] = false;
-        $row['FECHA_MODIFICACION'] = Enviroment::GetDate();
-        $row['USUARIO_MODIFICACION'] = $userId;
-        $result = $this->tableGateway->update($row, ['ID_AREA'=> $id]);
-        return [
-            'success'   =>  true,
-            'message'   =>  Enviroment::MSG_DELETE
-        ];
-    }
 }
