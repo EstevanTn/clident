@@ -94,7 +94,7 @@
             bLengthChange: false,
             filtering: false,
             searching: false,
-            ordering: false,
+            ordering: true,
             ServerSide: true,
             destroy: true,
             language: {
@@ -102,7 +102,13 @@
             },
             initComplete: function(data, settings){
                 console.info('Se ha cargado los datos a la tabla.');
-            }
+            },
+            columnDefs:[
+                {
+                    targets: [0], 
+                    orderData: [ 0, 1 ] 
+                }
+            ]
         }
     };
 

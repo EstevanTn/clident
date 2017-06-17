@@ -59,7 +59,7 @@ class PacienteTable extends BaseTable{
         }else{
             $id = $data['ID_PACIENTE'];
             $idpersona = $data['ID_PERSONA'];
-            $row = $this->get('', $id);
+            $row = $this->getX( $id);
             $paciente = [
                 'ID_PERSONA'    =>  $data['ID_PERSONA'],
                 'ID_PACIENTE'    =>  $id,
