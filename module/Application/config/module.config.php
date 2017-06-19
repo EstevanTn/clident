@@ -64,6 +64,16 @@ return [
                     ],
                 ],
             ],
+            'odontograma' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/odontograma[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\OdontogramaController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 //    'controllers' => [

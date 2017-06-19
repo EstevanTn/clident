@@ -229,20 +229,20 @@
                     console.error(status, xhr.responseText);
                 }
             });
+            jQuery('.treeview').each(function(e){
+                var controllerNames = jQuery(this).attr('data-controllers');
+                controllerNames = controllerNames.split(',');
+                if(controllerNames.indexOf(context.ControllerName)!==-1){
+                    jQuery(this).addClass('active');
+                }
+                jQuery(this).removeAttr('data-controllers');
+            });
             jQuery(w.document).ready(function(){
                 jQuery('.modal-dialog').draggable({
                     handler: '.modal-header',
                     helper: function(){
                         return $(this).css({'background':'transparent'});
                     }
-                });
-                jQuery('body','.treeview').on('DOMContentLoaded', function(e){
-                    var controllerNames = jQuery(this).data('data-controllers');
-                    controllerNames = controllerNames.split(',');
-                    if(controllerNames.indexOf(context.controllerName)!==0){
-                        jQuery(this).addClass('active');
-                    }
-                    jQuery(this).removeAttr('data-controllers');
                 });
                 if(jQuery.isFunction(context.InitOnReady)){
                     context.InitOnReady.call(context, context);

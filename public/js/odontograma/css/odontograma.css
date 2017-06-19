@@ -1,0 +1,14 @@
+#odontograma-wrapper{
+	/*display: table-cell;  */
+	width: 100%;
+	text-align: center;
+	margin: auto;
+}
+#diente-draw-wrapper{
+	width: 100%; 
+	text-align: center;
+	margin: auto; 
+	padding-top: 15px;
+	border: 1px solid #d2d6de;
+	padding-left: 17px;
+}

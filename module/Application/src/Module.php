@@ -55,6 +55,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Tipo());
                     return new TableGateway('tipo', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\OdontogramaTable::class => function($container){
+                    $tableGateway = $container->get(Model\OdontogramaTableGateway::class);
+                    return new Model\OdontogramaTable($tableGateway);
+                },
+                Model\OdontogramaTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Odontograma());
+                    return new TableGateway('odontograma', $dbAdapter, null, $resultSetPrototype);
+                },
             ] 
         ];
     }
@@ -79,6 +89,11 @@ class Module implements ConfigProviderInterface
                 Controller\TipoController::class => function($container) {
                     return new Controller\TipoController(
                         $container->get(Model\TipoTable::class)
+                    );
+                },
+                Controller\OdontogramaController::class => function($container) {
+                    return new Controller\OdontogramaController(
+                        $container->get(Model\OdontogramaTable::class)
                     );
                 },
             ],

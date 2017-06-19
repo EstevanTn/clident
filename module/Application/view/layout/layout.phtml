@@ -93,7 +93,7 @@
                 <section class="sidebar">
                     <ul class="sidebar-menu">
                         <li class="header">PANEL DE ADMINISTRACIÓN</li>
-                        <li class="treeview active" data-controllers="tipo">
+                        <li class="treeview" data-controllers="tipo">
                             <a href="#">
                                 <i class="fa fa-gear"></i>
                                 <span>Configuración</span>
@@ -105,7 +105,7 @@
                                 <li><a href="<?=$this->basePath()?>/tipo"><i class="fa fa-indent"></i> Tipo</a></li>
                             </ul>
                         </li>
-                        <li class="treeview" data-controllers="paciente,tratamiento,dentista">
+                        <li class="treeview" data-controllers="area,paciente,tratamiento,dentista">
                             <a href="#">
                                 <i class="fa fa-gears"></i>
                                 <span>Mantenimiento</span>
@@ -120,7 +120,7 @@
                                 <li><a href="<?=$this->basePath()?>/tratamiento"><i class="fa fa-tint"></i> Tratamientos</a></li>
                             </ul>
                         </li>
-                        <li class="treeview" data-controllers="cronograma,cita">
+                        <li class="treeview" data-controllers="odontograma,cita">
                             <a href="#">
                                 <i class="fa fa-navicon"></i>
                                 <span>Procesos</span>
@@ -129,7 +129,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?=$this->basePath()?>/cronograma"><i class="fa fa-history"></i> Cronograma</a></li>
+                                <li><a href="<?=$this->basePath()?>/odontograma"><i class="fa fa-history"></i> Odontograma</a></li>
                                 <li><a href="<?=$this->basePath()?>/cita"><i class="fa fa-group"></i> Citas</a></li>
                             </ul>
                         </li>
