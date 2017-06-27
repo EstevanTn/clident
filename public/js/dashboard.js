@@ -108,10 +108,13 @@
             //scrollX:        false,
             //scrollCollapse: true,
             //paging:         false,
-            columnDefs: [
+            /*columnDefs: [
                 { width: 200, targets: 0 }
-            ],
-            fixedColumns: true
+            ],*/
+            fixedColumns: true,
+            drawCallback: function (data){
+              $('a.btn-link').addClass('btn-sm').addClass('btn-flat').parent().addClass('btn-group').addClass('no-padding');
+            },
           }
     };
 
@@ -249,6 +252,9 @@
                 }
                 jQuery(this).removeAttr('data-controllers');
             });
+            jQuery('.box-body').find('table').attr('width', '100%')
+                .addClass('table-hover').addClass('table-striped').parent().addClass('no-padding');
+            //OnReady
             jQuery(w.document).ready(function(){
               jQuery('body').addClass('fixed');
                 jQuery('.modal-dialog').draggable({

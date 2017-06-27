@@ -8,12 +8,15 @@ use Application\Model\Entity\Enviroment;
 
 class PersonalController extends \Zend\Mvc\Controller\AbstractActionController {
     var $table = null;
+
     public function __construct(PersonalTable $table){
         $this->table = $table;
     }
+
     public function indexAction(){
         return new ViewModel();
     }
+
     public function getAllAction(){
       $response = Enviroment::AJAX_TABLE;
       if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
@@ -23,11 +26,34 @@ class PersonalController extends \Zend\Mvc\Controller\AbstractActionController {
       }
       return new JsonModel($response);
     }
+
+    public function searchAction(){
+      $response = Enviroment::AJAX_TABLE;
+      if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
+        $query = $this->getRequest()->getPost('nombre','');
+        $idarea = (int) $this->getRequest()->getPost('idarea',0);
+        $tipopersonal = (int) $this->getRequest()->getPost('tipopersonal',0);
+        $where = 'personal.ACTIVE=1 AND CONCAT(persona.NOMBRE,\' \',persona.APELLIDOS) like \'%'.$query.'%\'';
+        if ($idarea!==0) {
+          $where .= ' AND personal.ID_AREA = \''.$idarea.'\'';
+        }
+        if ($tipopersonal!==0) {
+          $where .= ' AND personal.TIPO_PERSONAL = \''.$tipopersonal.'\'';
+        }
+        $response = [
+          'data' => $this->table->fetchAll($where),
+          'q' =>  $where
+        ];
+      }
+      return new JsonModel($response);
+    }
+
     public function guardarAction(){
       $response = Enviroment::AJAX_RESPONSE;
       if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
         $data = [
           'ID_PERSONAL' =>  $this->getRequest()->getPost('id',0),
+          'ID_PERSONA' =>  $this->getRequest()->getPost('idpersona',0),
           'TIPO_DOCUMENTO' =>  $this->getRequest()->getPost('tipodocumento', null),
           'NUMERO_DOCUMENTO' =>  $this->getRequest()->getPost('numerodocumento',''),
           'NOMBRE' =>  $this->getRequest()->getPost('nombre',''),
@@ -46,6 +72,22 @@ class PersonalController extends \Zend\Mvc\Controller\AbstractActionController {
           'FECHA_CONTRATO_FIN' =>  $this->getRequest()->getPost('fechacontrato_fin', null),
         ];
         $response = $this->table->save(1, $data);
+      }
+      return new JsonModel($response);
+    }
+
+    public function eliminarAction(){
+      $response = Enviroment::AJAX_RESPONSE;
+      if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
+        $response = $this->table->delete(1, 'ID_PERSONAL', $this->getRequest()->getPost('id',0));
+      }
+      return new JsonModel($response);
+    }
+
+    public function getAction(){
+      $response = Enviroment::AJAX_RESPONSE;
+      if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
+        $response = $this->table->get('ID_PERSONAL', $this->getRequest()->getPost('id',0));
       }
       return new JsonModel($response);
     }
