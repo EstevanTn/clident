@@ -18,16 +18,16 @@ var area = {
 				{ data: 'NOMBRE', sWidth: '40%' },
 				{ data: 'DESCRIPCION', sWidth: '50%' },
 				{ data: function(row, type, set, meta){
-					var html = '<a class=\'btn btn-link btn-sm\' onclick=\'BasePage.Get('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
-					html += '<a class=\'btn btn-link btn-sm\' onclick=\'BasePage.Delete('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
+					var html = '<a class=\'btn btn-link btn-sm btn-flat\' onclick=\'BasePage.Get('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
+					html += '<a class=\'btn btn-link btn-sm btn-flat\' onclick=\'BasePage.Delete('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
 					return html;
-				}, sClass:'text-center' }
+				}, sClass:'text-center btn-group', sWidth: '10%', orderable: false }
 			],
 		});
 		$('#btn-agregar-area').on('click', function(){
 			$('#txtidarea').val(0);
 			BasePage.ShowModal({
-				title: '<i class=\'fa fa-plus\'></i> Nueva área', 
+				title: '<i class=\'fa fa-plus\'></i> Nueva área',
 			});
 		});
 		$('#btn-guardar-area').on('click', function(){
@@ -76,7 +76,7 @@ var area = {
 	Get: function(ID_AREA){
 		var url = this.StringFormat('{0}/get', this.requestPath);
 		BasePage.ShowModal({
-			title: '<i class=\'fa fa-edit\'></i> Editar área', 
+			title: '<i class=\'fa fa-edit\'></i> Editar área',
 			callback: function(){
 				$.ajax({
 					url: url,

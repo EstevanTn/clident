@@ -15,6 +15,10 @@ class Enviroment{
 			'message' => 'No tiene los permisos para acceder a la informacion de esta pagina.'
 		];
 
+	const AJAX_TABLE = [
+		'data'	=>	[]
+	];
+
 	//Settings Plugin Datatable jQuery
 	const DRAW = 15;
 

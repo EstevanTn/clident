@@ -74,6 +74,16 @@ return [
                     ],
                 ],
             ],
+            'personal' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/personal[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\PersonalController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 //    'controllers' => [

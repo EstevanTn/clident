@@ -11,7 +11,7 @@
         ?>
 
         <!-- Le styles -->
-        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/dist/img/diente.png'])            
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/dist/img/diente.png'])
             ->prependStylesheet($this->basePath('dist/css/skins/_all-skins.min.css'))
             ->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
             ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
@@ -19,6 +19,7 @@
             ->prependStylesheet($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'))
 
             ->prependStylesheet($this->basePath('plugins/bootstrap-notify/animate.css'))
+            ->prependStylesheet($this->basePath('plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'))
             ->prependStylesheet($this->basePath('plugins/datatables/dataTables.bootstrap.css'))
             ->prependStylesheet($this->basePath('plugins/datepicker/datepicker3.css'))
             ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
@@ -44,9 +45,18 @@
             .content-header > h1 {
                 text-transform: uppercase;
             }
+            .zoom {
+              -webkit-transform:scale(1.3);
+              transform:scale(1.3);
+            }
+            @media screen and (max-width: 767px){
+              div.dataTables_wrapper > div.row > div{
+                text-align: left;
+              }
+            }
         </style>
     </head>
-    <body class="hold-transition skin-red sidebar-mini fixed">
+    <body class="hold-transition skin-red sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <a href="<?=$this->basePath('/')?>" class="logo">
@@ -73,7 +83,7 @@
                                         <p>Alexander Pierce - Web Developer<small>Member since Nov. 2012</small></p>
                                     </li>
                                     <li class="user-body">
-                                        
+
                                     </li>
                                     <li class="user-footer">
                                         <div class="pull-left">
@@ -105,7 +115,7 @@
                                 <li><a href="<?=$this->basePath()?>/tipo"><i class="fa fa-indent"></i> Tipo</a></li>
                             </ul>
                         </li>
-                        <li class="treeview" data-controllers="area,paciente,tratamiento,dentista">
+                        <li class="treeview" data-controllers="area,paciente,tratamiento,personal">
                             <a href="#">
                                 <i class="fa fa-gears"></i>
                                 <span>Mantenimiento</span>
@@ -115,7 +125,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?=$this->basePath()?>/area"><i class="fa fa-check"></i> Áreas</a></li>
-                                <li><a href="<?=$this->basePath()?>/dentista"><i class="fa fa-child"></i> Dentistas</a></li>
+                                <li><a href="<?=$this->basePath()?>/personal"><i class="fa fa-child"></i> Personal</a></li>
                                 <li><a href="<?=$this->basePath()?>/paciente"><i class="fa fa-user-plus"></i> Pacientes</a></li>
                                 <li><a href="<?=$this->basePath()?>/tratamiento"><i class="fa fa-tint"></i> Tratamientos</a></li>
                             </ul>
@@ -149,18 +159,21 @@
             //appendFile('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')->
             appendFile($this->basePath('plugins/jQueryUI/jquery-ui.min.js'))->
             appendFile($this->basePath('bootstrap/js/bootstrap.min.js'))->
+            appendFile($this->basePath('plugins/knob/jquery.knob.js'))->
+            appendFile('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')->
+            appendFile($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'))->
+            appendFile($this->basePath('plugins/slimScroll/jquery.slimscroll.min.js'))->
+            appendFile($this->basePath('plugins/fastclick/fastclick.js'))->
+            appendFile($this->basePath('dist/js/app.min.js'))->
+
             appendFile($this->basePath('plugins/mask/jquery.mask.min.js'))->
             appendFile($this->basePath('plugins/datatables/jquery.datatables.min.js'))->
             appendFile($this->basePath('plugins/datatables/datatables.bootstrap.min.js'))->
+            appendFile($this->basePath('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'))->
             appendFile($this->basePath('plugins/bootstrapDialog/bootstrap-dialog.min.js'))->
-            appendFile($this->basePath('plugins/knob/jquery.knob.js'))->
-            appendFile('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')->
             appendFile($this->basePath('plugins/datepicker/bootstrap-datepicker.js'))->
             appendFile($this->basePath('plugins/bootstrap-notify/bootstrap-notify.min.js'))->
-            appendFile($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'))->
-            appendFile($this->basePath('plugins/slimScroll/jquery.slimscroll.min.js'))->            
-            appendFile($this->basePath('plugins/fastclick/fastclick.js'))->
-            appendFile($this->basePath('dist/js/app.min.js'))->
+
             appendFile($this->basePath('js/pages/'.$this->ControllerName().'.js'))->
             appendFile($this->basePath('js/app.utils.js'))->
             appendFile($this->basePath('js/dashboard.js?controller='.$this->ControllerName()))?>

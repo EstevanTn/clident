@@ -37,7 +37,7 @@ class PacienteTable extends BaseTable{
             'CELULAR'    =>  $data['CELULAR'],
             'TELEFONO'    =>  $data['TELEFONO'],
         ];
-        
+
         if($data['ID_PACIENTE']===0){
             $persona['USUARIO_CREACION'] = $userId;
             $persona['FECHA_CREACION'] = Enviroment::GetDate();
@@ -81,9 +81,9 @@ class PacienteTable extends BaseTable{
     public function getX($id){
         $id = (int) $id;
         $resultSet = $this->Join(
-            'persona', 
-            'paciente.ID_PERSONA=persona.ID_PERSONA', 
-            Persona::getVarNames(), 
+            'persona',
+            'paciente.ID_PERSONA=persona.ID_PERSONA',
+            Persona::getVarNames(),
             ['paciente.ACTIVE'=>true, 'paciente.ID_PACIENTE'=>$id]
            )->current();
         if(!$resultSet){
@@ -94,21 +94,20 @@ class PacienteTable extends BaseTable{
 
     public function fetchAll(){
        return $this->Join(
-            'persona', 
-            'paciente.ID_PERSONA=persona.ID_PERSONA', 
-            Persona::getVarNames(), 
-            ['paciente.ACTIVE'=>true], 
+            'persona',
+            'paciente.ID_PERSONA=persona.ID_PERSONA',
+            Persona::getVarNames(),
+            ['paciente.ACTIVE'=>true],
             true
            );
-        
     }
 
     public function searchQuery($nombre){
         return $this->Join(
-            'persona', 
-            'paciente.ID_PERSONA=persona.ID_PERSONA', 
-            Persona::getVarNames(), 
-            'paciente.ACTIVE = true AND NOMBRE LIKE \'%'.$nombre.'%\' OR APELLIDOS LIKE \'%'.$nombre.'%\'', 
+            'persona',
+            'paciente.ID_PERSONA=persona.ID_PERSONA',
+            Persona::getVarNames(),
+            'paciente.ACTIVE = true AND NOMBRE LIKE \'%'.$nombre.'%\' OR APELLIDOS LIKE \'%'.$nombre.'%\'',
             true
            );
     }

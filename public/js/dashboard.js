@@ -97,19 +97,22 @@
             ordering: true,
             ServerSide: true,
             destroy: true,
+            responsive: true,
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
             },
             initComplete: function(data, settings){
-                console.info('Se ha cargado los datos a la tabla.');
+                console.info('Se ha cargado los datos a la tabla: ', data.sTableId);
             },
-            columnDefs:[
-                {
-                    targets: [0], 
-                    orderData: [ 0, 1 ] 
-                }
-            ]
-        }
+            //scrollY:        "500px",
+            //scrollX:        false,
+            //scrollCollapse: true,
+            //paging:         false,
+            columnDefs: [
+                { width: 200, targets: 0 }
+            ],
+            fixedColumns: true
+          }
     };
 
 
@@ -149,7 +152,16 @@
         Init: function(){
             var context = this;
             context['AppUtils'] = new appUtils();
-            
+
+            $(".connectedSortable").sortable({
+              placeholder: "sort-highlight",
+              connectWith: ".connectedSortable",
+              handle: ".box-header, .nav-tabs",
+              forcePlaceholderSize: true,
+              zIndex: 999999
+            });
+            $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+
             jQuery.extend(jQuery.validator.messages, {
                 required: "El campo es requerido.",
                 remote: "El campo es requerido.",
@@ -238,6 +250,7 @@
                 jQuery(this).removeAttr('data-controllers');
             });
             jQuery(w.document).ready(function(){
+              jQuery('body').addClass('fixed');
                 jQuery('.modal-dialog').draggable({
                     handler: '.modal-header',
                     helper: function(){

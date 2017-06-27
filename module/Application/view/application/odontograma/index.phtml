@@ -2,133 +2,143 @@
 <link rel="stylesheet" href="<?=$this->basePath()?>/js/odontograma/css/jquery.svg.css">
 <link rel="stylesheet" href="<?=$this->basePath()?>/js/odontograma/css/odontograma.css">
 <script src="<?=$this->basePath()?>/js/odontograma/js/modernizr-2.0.6.min.js"></script>
-<section class="content-header">
-    <h1>Control de odontogramas</h1>
-</section>
-<section class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-search"></i> Búsqueda</h3>
-                </div>
-                <div class="panel-body">
 
+<div id="container-odontograma">
+    <section class="content-header">
+        <h1>Control de odontogramas</h1>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-solid">
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">PACIENTE</span>
+                            <input type="text" class="form-control" id="txtbuscarpaciente" name="txtbuscarpaciente" list="lstpaciente"/>
+                            <input type="hidden" id="txtbuscarpaciente-hidden" name="txtbuscarpaciente-hidden" list=""/>
+                            <span class="input-group-btn">
+                                <button data-toggle="tooltip" class="btn btn-default btn-flat" id="btn-limpiar-paciente" title="Limpiar"><i class="fa fa-paint-brush"></i></button>
+                                <button data-toggle="tooltip" title="Mostrar Odontograma" class="btn btn-default btn-flat" id="btn-mostrar-odontograma"><i class="fa fa-eye"></i></button>
+                            </span>
+                            <datalist id="lstpaciente"></datalist>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-solid" id="container-odontograma">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-object-group"></i> Odontograma</h3>
-                    <div class="box-tools">
-                        <button class="btn btn-default btn-sm btn-flat" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-default btn-sm btn-flat" type="button" data-toggle="tooltip" data-widget="fullscreen" title="Pantalla completa"><i class="fa fa-expand"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="odontograma-wrapper">
-                                <div id="odontograma"></div>
-                            </div> 
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-solid" >
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-object-group"></i> Odontograma</h3>
+                        <div class="box-tools">
+                            <button class="btn btn-default btn-sm btn-flat" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-default btn-sm btn-flat" type="button" data-toggle="tooltip" data-widget="fullscreen" title="Pantalla completa"><i class="fa fa-expand"></i></button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                             <table class="table table-bordered table-striped table-hover" id="datatble-detalle-odontograma">
-                                <thead>
-                                    <tr>
-                                        <th>NÚMERO DIENTE</th>
-                                        <th>TRATAMIENTO</th>
-                                        <th>DESCRIPCIÓN</th>
-                                        <th>FECHA</th>
-                                        <th>ACCIONES</th>
-                                    </tr>
-                                </thead>
-                             </table>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div id="odontograma-wrapper">
+                                    <div id="odontograma"></div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-bordered table-striped table-hover" id="datatble-detalle-odontograma">
+                                    <thead>
+                                        <tr>
+                                            <th>NÚMERO DIENTE</th>
+                                            <th>TRATAMIENTO</th>
+                                            <th>DESCRIPCIÓN</th>
+                                            <th>FECHA</th>
+                                            <th>ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="box-footer">
+                    <div class="box-footer">
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="modal fade" id="modal-detalle-odontograma">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="" id="form-detalle-odontograma">
-                <div class="modal-header">
-                    <button data-dismiss="modal" class="close">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Diente</label>
-                                <input readonly="readonly" type="text" class="form-control" id="txtnrodetalle" name="txtnrodetalle"/>
+    <div class="modal fade" id="modal-detalle-odontograma">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="" id="form-detalle-odontograma">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" class="close">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Diente</label>
+                                    <input readonly="readonly" type="text" class="form-control" id="txtnrodetalle" name="txtnrodetalle"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="form-group" id="diente-draw-wrapper">
+                                    <div id="diente-draw"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Cara</label>
+                                    <select id="cbocaradetalle" name="cbocaradetalle" class="form-control">
+                                        <option value="0"><< SELECCIONE >></option>
+                                        <option value="I">Inferior</option>
+                                        <option value="S">Superior</option>
+                                        <option value="D">Derecho</option>
+                                        <option value="Z">Izquierdo</option>
+                                        <option value="C">Centro</option>
+                                        <option value="X">Completo</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2 col-xs-12">
-                            <div class="form-group" id="diente-draw-wrapper">
-                                <div id="diente-draw"></div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tratamiento</label>
+                                    <select class="form-control" id="cbotratamiento" name="cbotratamiento"/>
+                                        
+                                    <select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label">Dentista</label>
+                                    <input type="text" class="form-control" id="txtdentistadetalle" name="txtdentistadetalle" readonly="readonly" />
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Cara</label>
-                                <select id="cbocaradetalle" name="cbocaradetalle" class="form-control">
-                                    <option value="0"><< SELECCIONE >></option>
-                                    <option value="I">Inferior</option>
-                                    <option value="S">Superior</option>
-                                    <option value="D">Derecho</option>
-                                    <option value="Z">Izquierdo</option>
-                                    <option value="C">Centro</option>
-                                    <option value="X">Completo</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Descripción</label>
+                                    <textarea class="form-control" row="5" id="txtdescripciondetalle" name="txtdescripciondetalle"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label class="control-label">Tratamiento</label>
-                                <select class="form-control" id="cbotratamiento" name="cbotratamiento"/>
-                                    
-                                <select>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label class="control-label">Dentista</label>
-                                <input type="text" class="form-control" id="txtdentistadetalle" name="txtdentistadetalle" readonly="readonly" />
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                        <button class="btn btn-success" id="btnGuardarDetalleOdontograma"><i class="fa fa-save"></i> Guardar</button>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Descripción</label>
-                                <textarea class="form-control" row="5" id="txtdescripciondetalle" name="txtdescripciondetalle"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
-                    <button class="btn btn-success" id="btnGuardarDetalleOdontograma"><i class="fa fa-save"></i> Guardar</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
 </div>
 
 <!--<script src="<?=$this->basePath()?>/js/odontograma/js/jquery-1.7.1.min.js"></script>-->

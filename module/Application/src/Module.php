@@ -65,6 +65,26 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Odontograma());
                     return new TableGateway('odontograma', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\PersonalTable::class => function($container){
+                    $tableGateway = $container->get(Model\PersonalTableGateway::class);
+                    return new Model\PersonalTable($tableGateway);
+                },
+                Model\PersonalTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Personal());
+                    return new TableGateway('personal', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\TratamientoTable::class => function($container){
+                    $tableGateway = $container->get(Model\TratamientoTableGateway::class);
+                    return new Model\TratamientoTable($tableGateway);
+                },
+                Model\TratamientoTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Tratamiento());
+                    return new TableGateway('tratamiento', $dbAdapter, null, $resultSetPrototype);
+                },
             ] 
         ];
     }
@@ -94,6 +114,16 @@ class Module implements ConfigProviderInterface
                 Controller\OdontogramaController::class => function($container) {
                     return new Controller\OdontogramaController(
                         $container->get(Model\OdontogramaTable::class)
+                    );
+                },
+                Controller\PersonalController::class => function($container) {
+                    return new Controller\PersonalController(
+                        $container->get(Model\PersonalTable::class)
+                    );
+                },
+                Controller\TratamientoController::class => function($container) {
+                    return new Controller\TratamientoController(
+                        $container->get(Model\TratamientoTable::class)
                     );
                 },
             ],

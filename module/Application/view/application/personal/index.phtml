@@ -1,0 +1,189 @@
+<section class="content-header">
+    <h1>Gestión de personal</h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12 col-md-5 col-sm-12">
+            <div class="input-group">
+                <span class="input-group-addon">PERSONAL</span>
+                <input type="text" class="form-control" id="txtnombre-buscar" name="txtnombre-buscar" placeholder="Ingrese nombre o apellidos" />
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3 col-sm-6">
+            <div class="input-group">
+                <span class="input-group-addon">ÁREA</span>
+                <select class="form-control" id="cboarea-buscar" name="cboarea-buscar"></select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-sm-6">
+            <div class="input-group">
+                <span class="input-group-addon">TIPO PERSONAL</span>
+                <select class="form-control" id="cbotipopersonal-buscar" name="cbotipopersonal-buscar"></select>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-3 col-md-2 pull-right">
+            <button class="btn btn-primary btn-block btn-flat" id="btnbuscar-personal"><i class="fa fa-search"></i> BUSCAR</button>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-list"></i> Lista de personal</h3>
+                    <div class="box-tools">
+                      <button id="btn-agregar-personal" class="btn btn-box-tool btn-flat label-success"><i class="fa fa-plus"></i> AGREGAR</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table" id="datatable-personal">
+                        <thead>
+                            <tr>
+                                <th>Número documento</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Dirección</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-personal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form id="form-personal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="txtidpersonal" name="txtidpersonal"/>
+          <div class="row">
+            <div class="col-sm-6 col-xs-6 col-md-3">
+              <div class="form-group">
+                  <label class="control-label">Tipo documento</label>
+                  <select class="form-control" id="cbotipodocumento" name="cbotipodocumento" min="1">
+                    <option value="0"><< SELECCIONE >></option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-6 col-md-3">
+              <div class="form-group">
+                  <label class="control-label">Número documento</label>
+                  <input type="text" required="true" digits="true" class="form-control" id="txtnumerodocumento" name="txtnumerodocumento" />
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+              <div class="form-group">
+                <label class="control-label">Área</label>
+                <select min="1" class="form-control" id="cboarea" name="cboarea"></select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="control-label">Nombres</label>
+                <input type="text" required="true" letras="true" class="form-control" id="txtnombre" name="txtnombre" maxlength="150" />
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="control-label">Apellidos</label>
+                <input type="text" required="true" letras="true" class="form-control" id="txtapellidos" name="txtapellidos" maxlength="150" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label class="control-label">Dirección</label>
+                <input type="text" name="txtdireccion" maxlength="1024" id="txtdireccion" class="form-control"/>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label class="control-label">Email</label>
+                <input type="email" name="txtemail" maxlength="150" id="txtemail" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <label class="control-label">tipo personal</label>
+                    <select min="1" class="form-control" id="cbotipopersonal" name="cbotipopersonal"></select>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Cargo</label>
+                <input required="true" type="text" name="txtcargo" maxlength="100" id="txtcargo" class="form-control"/>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-12 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Especialidad</label>
+                <input type="text" name="txtespecialidad" maxlength="100" id="txtespecialidad" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Celular</label>
+                <input type="text" name="txtcelular" digits="true" id="txtcelular" class="form-control" minlength="9" maxlength="9" />
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <label class="control-label">teléfono</label>
+                    <input type="text" name="txttelefono" minlength="9" maxlength="9" digits="true" id="txttelefono" class="form-control" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">fecha ingreso</label>
+                <input type="text" required="true" data-mask maxlength="10" name="txtfechaingreso" class="form-control" id="txtfechaingreso" />
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Fecha nacimiento</label>
+                <input type="text" required="true" data-mask maxlength="10" name="txtfechanacimiento" id="txtfechanacimiento" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Fecha contrato (Inicio)</label>
+                <input type="text" data-mask maxlength="10" name="txtfechacontrato1" id="txtfechacontrato1" class="form-control"/>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="control-label">Fecha contrato (Fin)</label>
+                <input type="text" data-mask maxlength="10" name="txtfechacontrato2" id="txtfechacontrato2" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+          <button  id="btn-guardar-personal" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
