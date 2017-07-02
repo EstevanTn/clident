@@ -1,0 +1,5 @@
+var auth = {
+	InitOnReady: function(){
+		
+	}
+}

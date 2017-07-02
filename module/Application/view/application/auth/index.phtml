@@ -1,0 +1,48 @@
+<p class="login-box-msg">Inicia sesión con tus datos.</p>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('auth' ));
+$form->prepare();
+echo $this->form()->openTag($form);
+//echo $this->formCollection($form);
+?>
+<?php if($this->isLoginError):?>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="alert alert-warning alert-dismissable">
+         <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
+         <strong>Error!</strong> <?=$this->messageError?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<div class="form-group has-feedback">
+    <?=$this->formLabel($form->get('username'))?>
+    <?=$this->formElement($form->get('username'))?>
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+</div>
+
+<div class="form-group has-feedback">
+    <?=$this->formLabel($form->get('password'))?>
+    <?=$this->formElement($form->get('password'))?>
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-md-6 col-sm-6">
+		<label class="control-label"><input type="checkbox" name="remember_me" id="remember_me"> Recordarme</label>
+	</div>
+    <div class="col-xs-12 col-md-6 col-sm-6 pull-right">
+        <?=$this->formElement($form->get('submit'))?>  
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.alert button.close').on('click',function (e) {
+	    $(this).parent().fadeOut('slow');
+	});
+});
+</script>
+<?php
+echo $this->form()->closeTag();
+echo $this->error;

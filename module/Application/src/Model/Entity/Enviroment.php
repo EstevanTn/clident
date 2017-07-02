@@ -2,6 +2,9 @@
 namespace Application\Model\Entity;
 
 class Enviroment{
+    //Session settings
+    const NAME_SESSION = 'appTnqSoft';
+    const NAME_COOKIE = 'appTnqSoft';
 	//Mensajes
 	const MSG_SAVE = 'Se ha guardado el registro satisfacoriamente.';
 	const MSG_UPDATE = 'Se ha actualizado el registro satisfacoriamente.';
@@ -25,5 +28,9 @@ class Enviroment{
 	public static function GetDate(){
 		$date = getdate();
 		return sprintf('%s-%s-%s', $date['year'], $date['mon'], $date['mday']);
+	}
+	
+	public static function GetCookie(){
+	    return json_decode($_COOKIE[Enviroment::NAME_COOKIE], true);
 	}
 }

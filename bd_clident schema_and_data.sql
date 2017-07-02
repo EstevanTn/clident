@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50505
 Source Host           : 127.0.0.1:3306
-Source Database       : clinica
+Source Database       : clident
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-17 02:46:39
+Date: 2017-07-01 11:03:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -446,11 +446,12 @@ CREATE TABLE `personal` (
   KEY `FK_personal_persona` (`ID_PERSONA`),
   CONSTRAINT `FK_personal_area` FOREIGN KEY (`ID_AREA`) REFERENCES `area` (`ID_AREA`),
   CONSTRAINT `FK_personal_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of personal
 -- ----------------------------
+INSERT INTO `personal` VALUES ('1', '1', '1', '7', '2017-07-01 08:31:30', null, null, null, 'ADMIN', '', '2017-07-01 08:31:39', null, '1', null);
 
 -- ----------------------------
 -- Table structure for proveedor
@@ -476,6 +477,21 @@ CREATE TABLE `proveedor` (
 -- ----------------------------
 -- Records of proveedor
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for rol
+-- ----------------------------
+DROP TABLE IF EXISTS `rol`;
+CREATE TABLE `rol` (
+  `ID_ROL` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE_ROL` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`ID_ROL`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rol
+-- ----------------------------
+INSERT INTO `rol` VALUES ('1', 'ADMINISTRADOR');
 
 -- ----------------------------
 -- Table structure for tipo
@@ -577,9 +593,10 @@ CREATE TABLE `unidad_medida` (
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_PERSONAL` int(11) NOT NULL,
-  `USERNAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `PASSWORD` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `ID_PERSONA` int(11) NOT NULL,
+  `ID_ROL` int(11) DEFAULT NULL,
+  `USERNAME` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `PASSWORD` varchar(51) COLLATE utf8_unicode_ci NOT NULL,
   `ESTADO` int(11) NOT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
@@ -587,10 +604,13 @@ CREATE TABLE `usuario` (
   `FECHA_MODIFICACION` datetime DEFAULT NULL,
   `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_USUARIO`),
-  KEY `FK_usuario_personal` (`ID_PERSONAL`),
-  CONSTRAINT `FK_usuario_personal` FOREIGN KEY (`ID_PERSONAL`) REFERENCES `personal` (`ID_PERSONAL`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `FK_usuario_personal` (`ID_PERSONA`),
+  KEY `FK_usuario_rol` (`ID_ROL`),
+  CONSTRAINT `FK_usuario_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`),
+  CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
+INSERT INTO `usuario` VALUES ('1', '1', '1', 'ADMIN', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '', '2017-07-01 08:30:13', '1', null, null);

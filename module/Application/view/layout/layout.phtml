@@ -1,5 +1,8 @@
-<?= $this->doctype() ?>
-
+<?php
+use Application\Model\Entity\Enviroment;
+$this->doctype();
+$cookie = Enviroment::GetCookie();
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -59,6 +62,7 @@
     <body class="hold-transition skin-red sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
+
                 <a href="<?=$this->basePath('/')?>" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>CLI</b>DENT</span>
@@ -75,12 +79,12 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs"><?=$cookie['NOMBRE']?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
                                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                        <p>Alexander Pierce - Web Developer<small>Member since Nov. 2012</small></p>
+                                        <p><?=$cookie['NOMBRE'].' '.$cookie['APELLIDOS']?> <small><?=$cookie['USERNAME']?></small></p>
                                     </li>
                                     <li class="user-body">
 
@@ -90,7 +94,7 @@
                                             <a class="btn btn-default btn-flat">Citas</a>
                                         </div>
                                         <div class="pull-right">
-                                            <a class="btn btn-danger btn-flat"><i class="fa fa-sign-out"></i> Salir</a>
+                                            <a href="<?=$this->url('auth', array('action'=>'logout'));?>" class="btn btn-danger btn-flat"><i class="fa fa-sign-out"></i> Salir</a>
                                         </div>
                                     </li>
                                 </ul>

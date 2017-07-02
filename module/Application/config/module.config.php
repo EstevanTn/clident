@@ -34,6 +34,16 @@ return [
                     ],
                 ],
             ],
+            'auth' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/auth[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'area' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -101,6 +111,7 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/empty'           => __DIR__ . '/../view/layout/empty.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',

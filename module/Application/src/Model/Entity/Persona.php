@@ -1,8 +1,6 @@
 <?php
 namespace Application\Model\Entity;
 
-use Enviroment;
-
 class Persona {
     var $ID_PERSONA;
     var $NUMERO_DOCUMENTO;

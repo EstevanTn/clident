@@ -7,11 +7,17 @@
 
 namespace Application;
 
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\EventManager\EventInterface as Event;
+use Zend\Session\SessionManager;
+use Application\Model\Entity\Enviroment;
+use Application\Controller\AuthController;
+use Application\Model\Entity\Usuario;
+//use Application\Service\AuthAdapter;
+//use Zend\Authentication\Storage\Session;
+//use Zend\Authentication\AuthenticationService;
 
 class Module implements ConfigProviderInterface
 {
@@ -85,6 +91,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Tratamiento());
                     return new TableGateway('tratamiento', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\UsuarioTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Usuario());
+                    return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\UsuarioTable::class => function($container){
+                    $tableGateway = $container->get(Model\UsuarioTableGateway::class);
+                    return new Model\UsuarioTable($tableGateway);
+                },
             ] 
         ];
     }
@@ -126,21 +142,59 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\TratamientoTable::class)
                     );
                 },
+                Controller\AuthController::class => function($container){
+                    return new Controller\AuthController(
+                        $container->get(Model\UsuarioTable::class)
+                    );
+                }
             ],
         ];
     }
     
     public function onBootstrap(Event $e)
     {
-//        $e->getApplication()->getServiceManager()->get('translator');
-//        $e->getApplication()->getServiceManager()->get('viewhelpermanager')->setFactory('controllerName', function($sm) use ($e) {
-//            $viewHelper = new View\Helper\ControllerName($e->getRouteMatch());
-//            return $viewHelper;
-//        });
-//
-//        $eventManager        = $e->getApplication()->getEventManager();
-//        $moduleRouteListener = new ModuleRouteListener();
-//        $moduleRouteListener->attach($eventManager);
+        session_start();
+        $em = $e->getApplication()->getEventManager();
+        $em->attach('route', array($this, 'verificateSession'));
+        //$em->attach('route', array($this, 'checkSession'));
+    }
+    
+    public function verificateSession(Event $e){
+        $sm = $e->getApplication()->getServiceManager();
+        if(!isset($_COOKIE[Enviroment::NAME_COOKIE])){
+            $controller = $e->getRouteMatch()->getParam('controller');
+            if ($controller != AuthController::class) {
+                return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
+                    $controller = $e->getTarget();
+                    $controller->redirect()->toRoute('auth');
+                }, -11);
+            }
+        }else{
+            $controller = $e->getRouteMatch()->getParam('controller');
+            if($controller == AuthController::class){
+                return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
+                    $controller = $e->getTarget();
+                    $controller->redirect()->toRoute('home');
+                }, -11);
+            }
+        }
+    }
+        
+    public function checkSession(Event $e)
+    {
+        $sm = $e->getApplication()->getServiceManager();
+        $nameService = 'AuthService';
+        if ( ! $sm->get($nameService)->getStorage()->getSessionManager()
+            ->getSaveHandler()
+            ->read($sm->get($nameService)->getStorage()->getSessionId())) {
+                $controller = $e->getRouteMatch()->getParam('controller');
+                if ($controller != 'Auth') {
+                    return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
+                        $controller = $e->getTarget();
+                        $controller->redirect()->toRoute('auth');
+                    }, -11);
+                }
+            }
     }
     
     public function getViewHelperConfig()
