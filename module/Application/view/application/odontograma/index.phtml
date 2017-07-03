@@ -3,24 +3,67 @@
 <link rel="stylesheet" href="<?=$this->basePath()?>/js/odontograma/css/odontograma.css">
 <script src="<?=$this->basePath()?>/js/odontograma/js/modernizr-2.0.6.min.js"></script>
 
-<div id="container-odontograma">
+<div class="overlay" id="container-odontograma">
     <section class="content-header">
         <h1>Control de odontogramas</h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-solid">
+                <div class="box box-solid box-default">
                     <div class="box-body">
                         <div class="input-group">
                             <span class="input-group-addon">PACIENTE</span>
-                            <input type="text" class="form-control" id="txtbuscarpaciente" name="txtbuscarpaciente" list="lstpaciente"/>
-                            <input type="hidden" id="txtbuscarpaciente-hidden" name="txtbuscarpaciente-hidden" list=""/>
-                            <span class="input-group-btn">
-                                <button data-toggle="tooltip" class="btn btn-default btn-flat" id="btn-limpiar-paciente" title="Limpiar"><i class="fa fa-paint-brush"></i></button>
-                                <button data-toggle="tooltip" title="Mostrar Odontograma" class="btn btn-default btn-flat" id="btn-mostrar-odontograma"><i class="fa fa-eye"></i></button>
-                            </span>
-                            <datalist id="lstpaciente"></datalist>
+                            <select id="cbolstpacientes" class="form-control select2">
+                            </select>
+                            <div class="input-group-btn">
+                                <button id="btn-mostrar-odontograma" type="button" class="btn btn-default bg-teal"><i class="fa fa-eye"></i> VER ODONTOGRAMA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="box-persona">
+            <div class="col-xs-12">
+                <div class="box box-solid box-warning">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-user"></i> Información del paciente</h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="remove" class="btn btn-box-tool"><i class="fa fa-remove"></i></button>
+                            <button data-widget="collapse" class="btn btn-box-tool"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">N° DOCUMENTO</span>
+                                    <input type="text" class="form-control text-center" id="txtnumerodocumento" readonly="readonly" />
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon">NOMBRE Y APELLIDOS</span>
+                                    <input class="form-control text-center" type="text" id="txtnombreapellidos" />
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">CÓD. ODONTOGRAMA</span>
+                                    <input type="text" class="form-control text-center" name="txtcodigoodontograma" id="txtcodigoodontograma" readonly="readonly" />
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">CÓD. PACIENTE</span>
+                                    <input type="text" class="form-control text-center" id="txtcodigopaciente" readonly="readonly" />
+                                </div>
+                                <br/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,7 +71,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-solid" >
+                <div class="box box-solid box-success" >
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-object-group"></i> Odontograma</h3>
                         <div class="box-tools">
@@ -44,24 +87,19 @@
                                 </div> 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <table class="table table-bordered table-striped table-hover" id="datatble-detalle-odontograma">
-                                    <thead>
-                                        <tr>
-                                            <th>NÚMERO DIENTE</th>
-                                            <th>TRATAMIENTO</th>
-                                            <th>DESCRIPCIÓN</th>
-                                            <th>FECHA</th>
-                                            <th>ACCIONES</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
                     </div>
-                    <div class="box-footer">
-
+                    <div class="box-footer no-padding">
+                        <table class="table table-striped table-hover" id="datatble-detalle-odontograma">
+                            <thead>
+                                <tr>
+                                    <th>NÚMERO DIENTE</th>
+                                    <th>TRATAMIENTO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>FECHA</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -148,4 +186,4 @@
 <script src="<?=$this->basePath()?>/js/odontograma/js/knockout-2.0.0.js"></script>
 <script src="<?=$this->basePath()?>/js/odontograma/js/jquery.svg.min.js"></script>  
 <script src="<?=$this->basePath()?>/js/odontograma/js/jquery.svggraph.min.js"></script>  
-<script src="<?=$this->basePath()?>/js/odontograma/js/odontogramDrawing.js"></script>
+<script src="<?=$this->basePath()?>/js/odontograma/js/odontograma.TnqSoft.js"></script>

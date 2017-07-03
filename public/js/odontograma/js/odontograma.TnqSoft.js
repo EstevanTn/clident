@@ -287,7 +287,18 @@ AppOdontograma.prototype.selectClear = function(key, color){
 	self.fill(self.selected.carasDiente[key],color);
 }
 
-AppOdontograma.Init = function(selectorId, options){
+AppOdontograma.prototype.Load = function() {
+	var self = this;
+	var onLoad = self.onLoad;
+	self = AppOdontograma.Init(self.selectorId, self.options, self.onLoad);
+	if(typeof(onLoad)==='function'){
+		onLoad(self);
+	}
+	return self;
+}
+
+AppOdontograma.Init = function(selectorId, options, fnCallback){
+	AppOdontograma.prototype.onLoad = fnCallback;
 	var _appOdontograma = new AppOdontograma(selectorId, options);
 	return _appOdontograma.Init();
 }

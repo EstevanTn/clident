@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="<?=$this->basePath('plugins/bootstrap-switch/bootstrap-switch.min.css')?>" />
+<section class="content-header">
+    <h1 class="title">Gestión de tratamientos</h1>   
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li class="active">Gestión de tratamientos</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="box box-default box-solid">
+                <div class="box-body">
+                    <div class="input-group">
+                        <span class="input-group-addon">TRATAMIENTO</span>
+                        <input type="text" class="form-control" id="txtnombre-buscar" name="txtnombre-buscar" placeholder="Ingrese nombre de tratamiento" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-list"></i> Lista de tratamientos</h3>
+                    <div class="box-tools pull-right">
+                        <button id="btnagregar-tratamiento" class="btn btn-box-tool btn-flat label-success"><i class="fa fa-plus"></i> AGREGAR</button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-hover" id="datatable-tratamiento">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Aplica cara</th>
+                                <th>Aplica diente</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" role="dialog" id="modal-tratamiento">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form-tratamiento">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" id="txtidtratamiento" name="txtidtratamiento" />
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Nombre</label>
+                                <input class="form-control" type="text" letras="true" id="txtnombre" name="txtnombre" required="required" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Descripción</label>
+                                <textarea class="form-control"id="txtdescripcion" name="txtdescripcion" required="required"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label">Precio</label>
+                                <input type="text" class="form-control"id="txtprecio" name="txtprecio" />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label btn-block">Aplica cara</label>
+                                <input type="checkbox" id="chkaplica-cara" name="chkaplica-cara" data-role="bstSwitch" style="height: 34px;"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label class="control-label btn-block">Aplica diente</label>
+                                <input type="checkbox" id="chkaplica-diente" name="chkaplica-diente" data-role="bstSwitch" style="height: 34px;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="<?=$this->basePath('plugins/bootstrap-switch/bootstrap-switch.min.js')?>"></script>

@@ -15,8 +15,8 @@ var tipo = {
                 { data : 'VALOR', sClass: 'text-center', sWidth:'20%' },
                 {
                     data : function(row, type, set, meta){
-                        var html = '<a href=\'#\' onclick=\'BasePage.GetTipo('+row.ID_TIPO+')\' tile=\'Editar\' data-toggle=\'tooltip\' class=\'btn btn-link btn-sm btn-flat\'><i class=\'fa fa-edit\'></i></a>';
-                        html += '<a href=\'#\' onclick=\'BasePage.DeleteTipo('+row.ID_TIPO+')\' tile=\'Eliminar\' data-toggle=\'tooltip\' class=\'btn btn-link btn-sm btn-flat\'><i class=\'fa fa-remove\'></i></a>';
+                        var html = '<a href=\'#\' onclick=\'BasePage.GetTipo('+row.ID_TIPO+')\' tile=\'Editar\' data-toggle=\'tooltip\' class=\'btn btn-link btn-flat\'><i class=\'fa fa-edit\'></i></a>';
+                        html += '<a href=\'#\' onclick=\'BasePage.DeleteTipo('+row.ID_TIPO+')\' tile=\'Eliminar\' data-toggle=\'tooltip\' class=\'btn btn-link btn-flat\'><i class=\'fa fa-remove\'></i></a>';
                         return html;
                     } , sClass: 'text-center btn-group', sWidth: '10%', orderable: false
                 },

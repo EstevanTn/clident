@@ -5,8 +5,8 @@ var paciente = {
         { data : 'APELLIDOS', sWidth: '30%'},
         { data : 'DIRECCION', sWidth: '20%'},
         { data : function(row, type, set, meta){
-            var html = '<a class=\'btn btn-link btn-sm btn-flat\' href=\'#\' onclick=\'BasePage.Get('+row.ID_PACIENTE+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class="fa fa-edit"></i></a>';
-            html += '<a class=\'btn btn-link btn-sm btn-flat\' href=\'#\' onclick=\'BasePage.Delete('+row.ID_PACIENTE+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class="fa fa-remove"></i></a>';
+            var html = '<a class=\'btn btn-link btn-flat\' href=\'#\' onclick=\'BasePage.Get('+row.ID_PACIENTE+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class="fa fa-edit"></i></a>';
+            html += '<a class=\'btn btn-link btn-flat\' href=\'#\' onclick=\'BasePage.Delete('+row.ID_PACIENTE+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class="fa fa-remove"></i></a>';
             return html;
           }, sWidth: '10%', sClass:'text-center btn-group', orderable: false
         }

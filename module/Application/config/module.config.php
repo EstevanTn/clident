@@ -94,6 +94,16 @@ return [
                     ],
                 ],
             ],
+            'tratamiento' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/tratamiento[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\TratamientoController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 //    'controllers' => [

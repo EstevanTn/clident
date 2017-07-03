@@ -18,8 +18,8 @@ var area = {
 				{ data: 'NOMBRE', sWidth: '40%' },
 				{ data: 'DESCRIPCION', sWidth: '50%' },
 				{ data: function(row, type, set, meta){
-					var html = '<a class=\'btn btn-link btn-sm btn-flat\' onclick=\'BasePage.Get('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
-					html += '<a class=\'btn btn-link btn-sm btn-flat\' onclick=\'BasePage.Delete('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
+					var html = '<a class=\'btn btn-link btn-flat\' onclick=\'BasePage.Get('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
+					html += '<a class=\'btn btn-link btn-flat\' onclick=\'BasePage.Delete('+row.ID_AREA+')\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
 					return html;
 				}, sClass:'text-center btn-group', sWidth: '10%', orderable: false }
 			],

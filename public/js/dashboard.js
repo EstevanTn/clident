@@ -113,7 +113,10 @@
             ],*/
             fixedColumns: true,
             drawCallback: function (data){
-              $('a.btn-link').addClass('btn-sm').addClass('btn-flat').parent().addClass('btn-group').addClass('no-padding');
+              $('a.btn-link').addClass('btn-flat')
+                .attr('data-toggle','tooltip').parent()
+                .addClass('btn-group').addClass('no-padding')
+                .addClass('text-center');
             },
           }
     };

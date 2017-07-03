@@ -15,8 +15,10 @@ $cookie = Enviroment::GetCookie();
 
         <!-- Le styles -->
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/dist/img/diente.png'])
+            ->prependStylesheet($this->basePath('dist/css/style.css'))
             ->prependStylesheet($this->basePath('dist/css/skins/_all-skins.min.css'))
             ->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
+            ->prependStylesheet($this->basePath('plugins/select2/select2.min.css'))
             ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
             ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
             ->prependStylesheet($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'))
@@ -27,39 +29,16 @@ $cookie = Enviroment::GetCookie();
             ->prependStylesheet($this->basePath('plugins/datepicker/datepicker3.css'))
             ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
         ?>
-
         <!-- Scripts -->
 
         <?= $this->headScript()->
             appendFile($this->basePath('plugins/jQuery/jquery-2.2.3.min.js'))->
             //appendFile('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js')
             appendFile($this->basePath('plugins/jQueryValidate/jquery.validate.js'))
+            ->appendFile($this->basePath('plugins/select2/select2.full.min.js'))
         ?>
-        <style>
-            label.control-label {
-                text-transform: capitalize;
-            }
-            table > thead > tr th {
-                text-transform: uppercase;
-            }
-            *[class*="title"] {
-                text-transform: uppercase;
-            }
-            .content-header > h1 {
-                text-transform: uppercase;
-            }
-            .zoom {
-              -webkit-transform:scale(1.3);
-              transform:scale(1.3);
-            }
-            @media screen and (max-width: 767px){
-              div.dataTables_wrapper > div.row > div{
-                text-align: left;
-              }
-            }
-        </style>
     </head>
-    <body class="hold-transition skin-red sidebar-mini">
+    <body class="hold-transition skin-red sidebar-mini overlay">
         <div class="wrapper">
             <header class="main-header">
 
@@ -117,6 +96,7 @@ $cookie = Enviroment::GetCookie();
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?=$this->basePath()?>/tipo"><i class="fa fa-indent"></i> Tipo</a></li>
+                                <li><a href="<?=$this->basePath()?>/usuario"><i class="fa fa-users"></i> Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="treeview" data-controllers="area,paciente,tratamiento,personal">

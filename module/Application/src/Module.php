@@ -146,7 +146,8 @@ class Module implements ConfigProviderInterface
                     return new Controller\AuthController(
                         $container->get(Model\UsuarioTable::class)
                     );
-                }
+                },
+                
             ],
         ];
     }

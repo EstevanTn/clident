@@ -6,8 +6,13 @@ use Zend\Db\TableGateway\TableGatewayInterface;
 use Application\Model\BaseTable;
 use Zend\Db\Sql\Select;
 
-class OdontogramaTable {
-    public function __construct(TableGatewayInterface $tableGateway){
-        $this->tableGateway = $tableGateway;
+class OdontogramaTable extends BaseTable{
+    
+    public function __construct(TableGatewayInterface $tableGatewayInterface){
+        $this->tableGateway = $tableGatewayInterface;
+    }
+
+    public function save($userId, $data){
+        
     }
 }

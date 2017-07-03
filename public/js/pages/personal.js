@@ -14,8 +14,8 @@ var personal = {
           { data: 'DIRECCION', sWidth: '10%', },
           { data: 'EMAIL', sWidth: '10%', },
           { data: function(row, type, set, meta){
-            var html = '<a onclick=\'BasePage.Get('+row.ID_PERSONAL+');\' class=\'btn btn-link btn-sm\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
-            html += '<a onclick=\'BasePage.Delete('+row.ID_PERSONAL+');\' class=\'btn btn-link btn-sm\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
+            var html = '<a onclick=\'BasePage.Get('+row.ID_PERSONAL+');\' class=\'btn btn-link\' data-toggle=\'tooltip\' title=\'Editar\'><i class=\'fa fa-edit\'></i></a>';
+            html += '<a onclick=\'BasePage.Delete('+row.ID_PERSONAL+');\' class=\'btn btn-link\' data-toggle=\'tooltip\' title=\'Eliminar\'><i class=\'fa fa-remove\'></i></a>';
             return html;
           }, orderable: false, sClass: 'text-center'
           },
