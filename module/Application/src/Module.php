@@ -7,14 +7,16 @@
 
 namespace Application;
 
+use Application\Controller\AuthController;
+use Application\Controller\SiteController;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\EventManager\EventInterface as Event;
-use Zend\Session\SessionManager;
+//
 use Application\Model\Entity\Enviroment;
-use Application\Controller\AuthController;
-use Application\Model\Entity\Usuario;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
 //use Application\Service\AuthAdapter;
 //use Zend\Authentication\Storage\Session;
 //use Zend\Authentication\AuthenticationService;
@@ -147,7 +149,7 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\UsuarioTable::class)
                     );
                 },
-                
+                Controller\SiteController::class => InvokableFactory::class,
             ],
         ];
     }
@@ -164,15 +166,15 @@ class Module implements ConfigProviderInterface
         $sm = $e->getApplication()->getServiceManager();
         if(!isset($_COOKIE[Enviroment::NAME_COOKIE])){
             $controller = $e->getRouteMatch()->getParam('controller');
-            if ($controller != AuthController::class) {
+            if ($controller != SiteController::class && $controller != AuthController::class) {
                 return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
                     $controller = $e->getTarget();
-                    $controller->redirect()->toRoute('auth');
+                    $controller->redirect()->toRoute('site');
                 }, -11);
             }
         }else{
             $controller = $e->getRouteMatch()->getParam('controller');
-            if($controller == AuthController::class){
+            if($controller == SiteController::class || $controller == AuthController::class){
                 return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
                     $controller = $e->getTarget();
                     $controller->redirect()->toRoute('home');

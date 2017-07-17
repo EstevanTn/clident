@@ -104,6 +104,16 @@ return [
                     ],
                 ],
             ],
+            'site' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/site[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\SiteController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 //    'controllers' => [
@@ -122,6 +132,7 @@ return [
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'layout/empty'           => __DIR__ . '/../view/layout/empty.phtml',
+            'layout/public'           => __DIR__ . '/../view/layout/public.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',

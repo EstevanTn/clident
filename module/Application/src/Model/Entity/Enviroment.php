@@ -15,7 +15,7 @@ class Enviroment{
 	//Default AJAX RESPONSE jQuery
 	const AJAX_RESPONSE = [
 			'success' =>  false,
-			'message' => 'No tiene los permisos para acceder a la informacion de esta pagina.'
+			'message' => 'No tiene los permisos para acceder a la información de esta pagina.'
 		];
 
 	const AJAX_TABLE = [
@@ -31,6 +31,10 @@ class Enviroment{
 	}
 	
 	public static function GetCookie(){
-	    return json_decode($_COOKIE[Enviroment::NAME_COOKIE], true);
+	    if(isset($_COOKIE[Enviroment::NAME_COOKIE]))
+        {
+            return json_decode($_COOKIE[Enviroment::NAME_COOKIE], true);
+        }
+        return null;
 	}
 }

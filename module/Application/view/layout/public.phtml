@@ -1,0 +1,155 @@
+<?php
+/**
+ * Apps TunaquiSoft (http://apps-tnqsoft.azurewebsites.net/)
+ * -------------------------------------------------------------------------------
+ * This file is part of the clident project.
+ *
+ * @autor @EstevanTn
+ * @email tunaqui@outlook.es
+ * @copyright Copyright © 2017 - TunaquiSoft
+ * @website http://apps-tnqsoft.azurewebsites.net/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * Date: 17/07/2017 - 7:46
+ **/
+?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Clínica dental Trujillo')->setSeparator(' - ')->setAutoEscape(false) ?>
+    
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+    
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/dist/img/diente.png'])?>
+        
+        <meta name="keywords" content="Dental Clinic Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <link href="<?=$this->basePath('fsite/css/bootstrap.css')?>" rel="stylesheet" type="text/css" media="all" />
+        <link href="<?=$this->basePath('fsite/css/style.css')?>" rel="stylesheet" type="text/css" media="all" />
+        <script src="<?=$this->basePath('fsite/js/jquery-1.11.1.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->basePath('fsite/js/move-top.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->basePath('fsite/js/easing.js')?>"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $(".scroll").click(function(event){
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="logo">
+                    <a href="<?=$this->basePath().'/site'?>">Clinica Dental Trujillo</a>
+                </div>
+                <div class="header-icons">
+                    <ul>
+                        <li><a href="#" class="facebook"> </a></li>
+                        <li><a href="#" class="twitter"> </a></li>
+                        <li><a href="#" class="in"> </a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-bottom-right">
+                    <ul>
+                        <li class="phone"><span> </span></li>
+                        <li class="num">(43) 32-2553</li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+        <div class="banner">
+            <div class="container">
+                <div class="banner-nav">
+                    <nav class="navbar navbar-default">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="<?=$this->url('site')?>">Inicio</a></li>
+                                <li><a href="<?=$this->url('site', ['action'=>'about'])?>">Acerca de Nosotros</a></li>
+                                <li><a href="<?=$this->url('site', ['action'=>'services'])?>">Servicios</a></li>
+                                <li><a href="<?=$this->url('site', ['action'=>'gallery'])?>">Galeria</a></li>
+                                <!--<li><a href="cases.html">Cases</a></li>-->
+                                <li><a href="<?=$this->url('site', ['action'=>'contact'])?>">Contactanos</a></li>
+                                <li><a href="<?=$this->url('site', ['action'=>'reservation'])?>">Reservas Online</a></li>
+                                <li><a href="<?=$this->url('auth', ['action'=>'index'])?>">Intranet</a></li>
+                            </ul>
+
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                    <!-- Slider-starts-Here -->
+                    <script src="<?=$this->basePath('fsite/js/responsiveslides.min.js')?>"></script>
+                    <!--//End-slider-script -->
+                    <div id="banners-container"></div>
+                </div>
+            </div>
+        </div>
+        
+        <?=$this->content?>
+        
+        <div class="footer">
+            <div class="container">
+                <div class="footer-grds">
+                    <ul>
+                        <li><a href="#">Politicas de Privacidad |</a></li>
+                        <li><a href="contact.html">Mapa de sitio |</a></li>
+                        <li><a href="#">Terminos de uso</a></li>
+                    </ul>
+                    <p>Copyright © 2015 Clinica Dental Trujillo. Todos los derechos reservados | diseñado por <a href="">JDCM</a></p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $().UItoTop({ easingType: 'easeOutQuart' });
+        
+            });
+        </script>
+        <script src="<?=$this->basePath('fsite/js/bootstrap.js')?>"> </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var html = $('#content-nav').html();
+                $('#banners-container').html(html);
+                $('#content-nav').remove();
+                $("#slider3").responsiveSlides({
+                    auto: true,
+                    pager: true,
+                    nav: false,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                    },
+                    after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
