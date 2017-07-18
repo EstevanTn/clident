@@ -1,3 +1,9 @@
+String.prototype.capitalize = function() {
+    return this.replace(/(^|\s)([a-z])/g, function(m, p1, p2) {
+        return p1 + p2.toUpperCase();
+    });
+};
+
 (function(w, j){
     'use strict';
 
@@ -275,13 +281,13 @@
         },
         CustomThemeStyles: function(){
             jQuery('input[type=\'text\'], input[type=\'email\'], textarea').each(function(){
-                jQuery(this).css({'text-transform':'uppercase'});
+                jQuery(this).css({'text-transform':'capitalize'});
             });
             jQuery('.btn, button, a.btn').each(function(){
                 jQuery(this).addClass('btn-flat');
             });
-            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('keyup', function(){
-                jQuery(this).val(this.value.toUpperCase());
+            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('focusout keyup', function(){
+                jQuery(this).val(this.value.capitalize());
             });
         },
         GridSetup: function(options){

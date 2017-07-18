@@ -42,3 +42,13 @@ appUtils.prototype.ComboResponse = function(options){
         }
     });
 }
+appUtils.prototype.Checked = function (target, val) {
+    val = parseInt(val);
+    var role = $(target).attr('data-role');
+    if(role==='bstSwitch'){
+        $(target).bootstrapSwitch('state', val===1);
+    }else {
+        $(target).prop("checked", val==1);
+    }
+    
+}

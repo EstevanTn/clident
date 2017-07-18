@@ -1,9 +1,3 @@
-/*--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
---*/
 html, body{
     font-size: 100%;
 	background:	#fff;
@@ -1374,22 +1368,22 @@ ul.sint {
 	font-size: 15px;
 	margin: 0;
 	font-style: normal;
-	}
+}
 .tom-right p.lorem{
 	color:#999;
 	font-size:14px;
 	margin:0;
 	line-height:1.8em;
 	font-style: normal;
-	}
+}
 .Hardy{
 	float:left;
-	}
+}
 .reply{
 	float:left;
 	margin-left:20em;
 	margin-top: .5em;
-	}
+}
 .reply a{
 	padding: 10px 22px;
 	color: #fff;
