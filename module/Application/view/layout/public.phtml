@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul class="nav navbar-nav">
                                 <li><a href="<?=$this->url('site')?>">Inicio</a></li>
                                 <li><a href="<?=$this->url('site', ['action'=>'about'])?>">Acerca de Nosotros</a></li>
-                                <li><a href="<?=$this->url('site', ['action'=>'services'])?>">Servicios</a></li>
+                                <li><a href="<?=$this->url('site', ['action'=>'service'])?>">Servicios</a></li>
                                 <li><a href="<?=$this->url('site', ['action'=>'gallery'])?>">Galeria</a></li>
                                 <!--<li><a href="cases.html">Cases</a></li>-->
                                 <li><a href="<?=$this->url('site', ['action'=>'contact'])?>">Contactanos</a></li>
@@ -136,19 +136,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 var html = $('#content-nav').html();
                 $('#banners-container').html(html);
                 $('#content-nav').remove();
-                $("#slider3").responsiveSlides({
-                    auto: true,
-                    pager: true,
-                    nav: false,
-                    speed: 500,
-                    namespace: "callbacks",
-                    before: function () {
-                        $('.events').append("<li>before event fired.</li>");
-                    },
-                    after: function () {
-                        $('.events').append("<li>after event fired.</li>");
-                    }
-                });
+                if($('#slider3').length)
+                {
+                    $("#slider3").responsiveSlides({
+                        auto: true,
+                        pager: true,
+                        nav: false,
+                        speed: 500,
+                        namespace: "callbacks",
+                        before: function () {
+                            $('.events').append("<li>before event fired.</li>");
+                        },
+                        after: function () {
+                            $('.events').append("<li>after event fired.</li>");
+                        }
+                    });
+                }
             });
         </script>
     </body>
