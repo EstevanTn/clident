@@ -37,8 +37,22 @@ $cookie = Enviroment::GetCookie();
             appendFile($this->basePath('plugins/jQueryValidate/jquery.validate.js'))
             ->appendFile($this->basePath('plugins/select2/select2.full.min.js'))
         ?>
+        <style>
+            .skin-blue-light .main-header .navbar{
+                background: #001f3f !important;
+            }
+            .skin-blue-light .main-header .logo{
+                background: #001f3f !important;
+            }
+            .skin-blue-light .main-header .navbar .sidebar-toggle:hover{
+                background: #024E9F;
+            }
+            .skin-blue-light .main-header li.user-header{
+                background: #024E9F;
+            }
+        </style>
     </head>
-    <body class="hold-transition skin-red sidebar-mini overlay">
+    <body class="hold-transition skin-blue-light sidebar-mini overlay">
         <div class="wrapper">
             <header class="main-header">
 
