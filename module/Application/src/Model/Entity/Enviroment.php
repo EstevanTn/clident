@@ -19,7 +19,7 @@ class Enviroment{
 		];
 
 	const AJAX_TABLE = [
-		'data'	=>	[]
+		'data'	=>	[],
 	];
 
 	//Settings Plugin Datatable jQuery

@@ -81,6 +81,21 @@ var odontograma = {
                 });
             }
         });
+        BasePage.AppUtils.ComboResponse({
+            target: '#cbotratamiento',
+            action: 'getAll',
+            controller: 'tratamiento',
+            keys: {
+                value: 'ID_TRATAMIENTO',
+                text: 'NOMBRE',
+                title: 'DESCRIPCION'
+            }
+        });
+        $('#btnGuardarDetalleOdontograma').on('click', function () {
+            if($('#form-detalle-odontograma').valid()){
+                odontograma.SaveDetalleOdontograma();
+            }
+        });
     },
     GetCaraDiente: function(data){
         BasePage.ShowModal({
@@ -110,9 +125,35 @@ var odontograma = {
                     data: { id: response.ID_PACIENTE },
                     success: function (response2) {
                         $('#txtcodigoodontograma').val(response2.ID_ODONTOGRAMA);
+                        odontograma.GetDetalleOdontograma(response2.ID_ODONTOGRAMA);
                     }
                 });
             }
         });
+    },
+    GetDetalleOdontograma: function (IdOdontograma) {
+        console.info('Cargando detalle de odontograma: N°'+IdOdontograma);
+        BasePage.GridSetup({
+            name: 'detalle-odontograma',
+            columns: [
+                { data: 'NUMERO_DIENTE', },
+                { data: 'NOMBRE', },
+                { data: 'DESCRIPCION', },
+                { data: 'FECHA_APLICACION', sClass: 'text-center' },
+                { data: function (row, type, set, meta) {
+                    return '';
+                }, orderable: false },
+            ],
+            ajax: {
+                type: 'POST',
+                url: BasePage.StringFormat('{0}/odontograma/getAll', BasePage.basePath),
+                data: {
+                   id: IdOdontograma,
+                }
+            }
+        });
+    },
+    SaveDetalleOdontograma: function () {
+        
     }
 };

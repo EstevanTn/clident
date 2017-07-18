@@ -25,9 +25,10 @@ appUtils.prototype.ComboResponse = function(options){
         url: BasePage.StringFormat('{0}/{1}/{2}', BasePage.basePath, options.controller,options.action),
         data: options.data?options.data:{},
         success: function(response){
+            var defaultText = typeof (options.defaultText) === 'string' ? options.defaultText : '<< SELECCIONE >>';
             $(options.target)
             .empty()
-            .append($('<option/>',{ value: 0, text: '<< SELECCIONE >>'}));
+            .append($('<option/>',{ value: 0, text: defaultText }));
             $(response.data).each(function(i,e){
                 var args = new Object();
                 Object.keys(options.keys).map(function(k){
@@ -35,7 +36,8 @@ appUtils.prototype.ComboResponse = function(options){
                 });
                 args['data-toggle'] = 'tooltip';
                 $(options.target).append($('<option/>', args));
-            })
+            });
+            $(options.target).css({'width':'100%'}).select2();
             if($.isFunction(options.callback)){
                 options.callback($(options.target), response);
             }

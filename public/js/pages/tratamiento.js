@@ -93,7 +93,6 @@ var tratamiento = {
            url: BasePage.StringFormat('{0}/tratamiento/guardar', BasePage.basePath) ,
             data: request,
             success: function (response) {
-               console.dir(response);
                 BasePage.Notify(response, function () {
                     $('#datatable-tratamiento').dataTable()._fnAjaxUpdate();
                     $('#modal-tratamiento').modal('hide');
