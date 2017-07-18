@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-18 12:01:34
+Date: 2017-07-18 12:01:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,10 +37,6 @@ CREATE TABLE `almacen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of almacen
--- ----------------------------
-
--- ----------------------------
 -- Table structure for area
 -- ----------------------------
 DROP TABLE IF EXISTS `area`;
@@ -59,16 +55,6 @@ CREATE TABLE `area` (
   KEY `FK_area_area` (`ID_PARENT_AREA`),
   CONSTRAINT `FK_area_area` FOREIGN KEY (`ID_PARENT_AREA`) REFERENCES `area` (`ID_AREA`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of area
--- ----------------------------
-INSERT INTO `area` VALUES ('1', null, 'CIRUJIA', 'CIRUJIA DENTAL', '1', '', '2017-06-16 00:00:00', '2017-06-16 00:00:00', '1', '1');
-INSERT INTO `area` VALUES ('2', null, 'RAYOS  X', '', '1', '', '2017-06-16 00:00:00', null, '1', null);
-INSERT INTO `area` VALUES ('3', null, 'CIRUJIA', 'CIRUJIA DENTAL PRUEBA', '1', '\0', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `area` VALUES ('4', null, 'CIRUJIA', 'CIRUJIA DENTAL', '1', '\0', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `area` VALUES ('5', null, 'GERENCIA GENERAL', '', '1', '', '2017-06-16 00:00:00', null, '1', null);
-INSERT INTO `area` VALUES ('6', '5', 'GERENCIA FINANCIERA', '', '1', '', '2017-06-16 00:00:00', '2017-06-16 00:00:00', '1', '1');
 
 -- ----------------------------
 -- Table structure for articulo
@@ -97,10 +83,6 @@ CREATE TABLE `articulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of articulo
--- ----------------------------
-
--- ----------------------------
 -- Table structure for categoria
 -- ----------------------------
 DROP TABLE IF EXISTS `categoria`;
@@ -113,10 +95,6 @@ CREATE TABLE `categoria` (
   KEY `FK_categoria_categoria` (`ID_PARENT_CATGORIA`),
   CONSTRAINT `FK_categoria_categoria` FOREIGN KEY (`ID_PARENT_CATGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of categoria
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for cita
@@ -145,10 +123,6 @@ CREATE TABLE `cita` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of cita
--- ----------------------------
-
--- ----------------------------
 -- Table structure for detalle_almacen
 -- ----------------------------
 DROP TABLE IF EXISTS `detalle_almacen`;
@@ -171,10 +145,6 @@ CREATE TABLE `detalle_almacen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of detalle_almacen
--- ----------------------------
-
--- ----------------------------
 -- Table structure for detalle_horario
 -- ----------------------------
 DROP TABLE IF EXISTS `detalle_horario`;
@@ -193,10 +163,6 @@ CREATE TABLE `detalle_horario` (
   KEY `FK_horario_detalle_horario` (`ID_HORARIO`),
   CONSTRAINT `FK_horario_detalle_horario` FOREIGN KEY (`ID_HORARIO`) REFERENCES `horario` (`ID_HORARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of detalle_horario
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for detalle_medicacion
@@ -222,10 +188,6 @@ CREATE TABLE `detalle_medicacion` (
   CONSTRAINT `FK_detalle_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`),
   CONSTRAINT `FK_detalle_medicacion_unidad_medida` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `unidad_medida` (`ID_UNIDAD_MEDIDA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of detalle_medicacion
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for detalle_odontograma
@@ -255,10 +217,6 @@ CREATE TABLE `detalle_odontograma` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of detalle_odontograma
--- ----------------------------
-
--- ----------------------------
 -- Table structure for horario
 -- ----------------------------
 DROP TABLE IF EXISTS `horario`;
@@ -278,10 +236,6 @@ CREATE TABLE `horario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of horario
--- ----------------------------
-
--- ----------------------------
 -- Table structure for marca
 -- ----------------------------
 DROP TABLE IF EXISTS `marca`;
@@ -295,10 +249,6 @@ CREATE TABLE `marca` (
   `USUARIO_MODIFICACION` int(11) NOT NULL,
   PRIMARY KEY (`ID_MARCA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of marca
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for medicacion
@@ -316,10 +266,6 @@ CREATE TABLE `medicacion` (
   KEY `FK_medicacion_detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
   CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of medicacion
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for medicamento
@@ -341,10 +287,6 @@ CREATE TABLE `medicamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of medicamento
--- ----------------------------
-
--- ----------------------------
 -- Table structure for odontograma
 -- ----------------------------
 DROP TABLE IF EXISTS `odontograma`;
@@ -359,14 +301,6 @@ CREATE TABLE `odontograma` (
   KEY `FK_odontograma_paciente` (`ID_PACIENTE`),
   CONSTRAINT `FK_odontograma_paciente` FOREIGN KEY (`ID_PACIENTE`) REFERENCES `paciente` (`ID_PACIENTE`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of odontograma
--- ----------------------------
-INSERT INTO `odontograma` VALUES ('1', '1', '2017-07-02 05:17:24', null, '1', null);
-INSERT INTO `odontograma` VALUES ('2', '2', '2017-07-02 05:18:10', null, '1', null);
-INSERT INTO `odontograma` VALUES ('3', '3', '2017-07-02 05:18:30', null, '1', null);
-INSERT INTO `odontograma` VALUES ('4', '4', '2017-07-02 05:19:00', null, '1', null);
 
 -- ----------------------------
 -- Table structure for paciente
@@ -384,14 +318,6 @@ CREATE TABLE `paciente` (
   KEY `FK_paciente_persona` (`ID_PERSONA`),
   CONSTRAINT `FK_paciente_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of paciente
--- ----------------------------
-INSERT INTO `paciente` VALUES ('1', '1', '', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('2', '2', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('3', '3', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('4', '4', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
 
 -- ----------------------------
 -- Table structure for persona
@@ -417,14 +343,6 @@ CREATE TABLE `persona` (
   KEY `fk_persona_tipo` (`TIPO_DOCUMENTO`),
   CONSTRAINT `fk_persona_tipo` FOREIGN KEY (`TIPO_DOCUMENTO`) REFERENCES `tipo` (`ID_TIPO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of persona
--- ----------------------------
-INSERT INTO `persona` VALUES ('1', '1', '70129676', 'ALEXANDER ESTEVAN', 'TUME NAQUICHE', 'AMP. NUEVA GENERACION MZ B LT 3', 'TUMENAQUICHE@GMAIL.COM', '923721402', '', '1994-10-05', '', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('2', '1', '05623412', 'ALEXANDER ', 'MARTINEZ RODRIGUEZ', '', 'AMARTINEZRODRIGUEZ@HOTMAIL.COM', '', '', '1995-10-02', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('3', '1', '89712871', 'ALICIA', 'GARCIA MENDEZ', '', 'ALICIA.G.M@GMAIL.COM', '', '', '1995-09-12', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('4', '1', '01275323', 'STEFANY', 'ALVARADO GAMBOA', 'ENRRIQUE PALACIOS', '', '', '', '1995-06-09', '', '2017-06-17 00:00:00', null, '1', null);
 
 -- ----------------------------
 -- Table structure for personal
@@ -453,11 +371,6 @@ CREATE TABLE `personal` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of personal
--- ----------------------------
-INSERT INTO `personal` VALUES ('1', '1', '1', '7', '2017-07-01 08:31:30', null, null, null, 'ADMIN', '', '2017-07-01 08:31:39', null, '1', null);
-
--- ----------------------------
 -- Table structure for proveedor
 -- ----------------------------
 DROP TABLE IF EXISTS `proveedor`;
@@ -479,10 +392,6 @@ CREATE TABLE `proveedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of proveedor
--- ----------------------------
-
--- ----------------------------
 -- Table structure for rol
 -- ----------------------------
 DROP TABLE IF EXISTS `rol`;
@@ -491,11 +400,6 @@ CREATE TABLE `rol` (
   `NOMBRE_ROL` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`ID_ROL`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of rol
--- ----------------------------
-INSERT INTO `rol` VALUES ('1', 'ADMINISTRADOR');
 
 -- ----------------------------
 -- Table structure for tipo
@@ -518,19 +422,6 @@ CREATE TABLE `tipo` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of tipo
--- ----------------------------
-INSERT INTO `tipo` VALUES ('1', '1', 'DOCUMENTO NACIONAL DE IDENTIDAD', '8', 'DNI', '', '2017-06-16 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('2', '1', 'CARNET DE EXTRANJERIA', '20', 'CE', '', '2017-06-16 06:06:24', '1', '2017-06-17 00:00:00', '1');
-INSERT INTO `tipo` VALUES ('3', '1', 'LIBRETA ELECTORAL', '10', 'LE', '', '2017-06-16 06:07:09', '1', '2017-06-17 00:00:00', '1');
-INSERT INTO `tipo` VALUES ('4', '1', 'REGISTRO ÚNICO DE CONTRIBUYENTE', '12', 'RUC', '', '2017-06-17 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('5', '2', 'CITA', '', '', '', '2017-06-17 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('6', '2', 'PRE CITA', '', '', '', '2017-06-17 00:00:00', '1', '2017-06-17 00:00:00', '1');
-INSERT INTO `tipo` VALUES ('7', '3', 'ADMINISTRATIVO', '', 'ADMIN', '', '2017-06-17 00:00:00', '1', '2017-06-17 00:00:00', '1');
-INSERT INTO `tipo` VALUES ('8', '3', 'DENTISTA', '', 'DSTA', '', '2017-06-17 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('9', '3', 'PERSONAL', '', 'PRSNL', '', '2017-06-17 00:00:00', '1', null, null);
-
--- ----------------------------
 -- Table structure for tipo_grupo
 -- ----------------------------
 DROP TABLE IF EXISTS `tipo_grupo`;
@@ -540,14 +431,6 @@ CREATE TABLE `tipo_grupo` (
   `DESCRIPCION_GRUPO` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID_GRUPO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of tipo_grupo
--- ----------------------------
-INSERT INTO `tipo_grupo` VALUES ('1', 'TIPO DOCUMENTO', 'DNI, CE, LE');
-INSERT INTO `tipo_grupo` VALUES ('2', 'TIPO CITA', 'CITA, PRE-CITAS');
-INSERT INTO `tipo_grupo` VALUES ('3', 'TIPO PERSONAL', 'ADMINISTRATIVO, DENTISTA, PERSONAL');
-INSERT INTO `tipo_grupo` VALUES ('4', 'TIPO MEDICAMENTO', '');
 
 -- ----------------------------
 -- Table structure for tratamiento
@@ -569,15 +452,6 @@ CREATE TABLE `tratamiento` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of tratamiento
--- ----------------------------
-INSERT INTO `tratamiento` VALUES ('1', 'Obturación C/ Amalgama', 'Cavidad Simple - Solo Cara', '', '\0', '34', '', '2017-07-02 20:57:12', '2017-07-18 00:00:00', '1', '1');
-INSERT INTO `tratamiento` VALUES ('2', 'Obturación C/ Amalgama - Solo Diente', 'Cavidad Compuesta - Solo Diente', '\0', '', '40', '', '2017-07-02 21:23:58', '2017-07-18 18:48:13', '1', '1');
-INSERT INTO `tratamiento` VALUES ('3', 'Obturacion C/resinas Acrilicas: Cavidad', 'Obturacion C/resinas Acrilicas: Cavidad', '', '', '90.8', '', '2017-07-18 00:00:00', '2017-07-18 00:00:00', '1', '1');
-INSERT INTO `tratamiento` VALUES ('4', 'Obt.con Ionómero Cav.simple', 'Obt.con Ionómero Cav.simple - Sin Cara Y Sin Diente', '\0', '\0', '40.9', '', '2017-07-18 00:00:00', '2017-07-18 18:28:24', '1', '1');
-INSERT INTO `tratamiento` VALUES ('5', 'Lampara Luz Halógena', 'Lampara Luz Halógena', '', '', '30', '', '2017-07-18 18:30:42', '2017-07-18 18:39:03', '1', '1');
-
--- ----------------------------
 -- Table structure for unidad_medida
 -- ----------------------------
 DROP TABLE IF EXISTS `unidad_medida`;
@@ -591,10 +465,6 @@ CREATE TABLE `unidad_medida` (
   `USUARIO_MODIFICACION` int(11) NOT NULL,
   PRIMARY KEY (`ID_UNIDAD_MEDIDA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of unidad_medida
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for usuario
@@ -618,11 +488,6 @@ CREATE TABLE `usuario` (
   CONSTRAINT `FK_usuario_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`),
   CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of usuario
--- ----------------------------
-INSERT INTO `usuario` VALUES ('1', '1', '1', 'ADMIN', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '', '2017-07-01 08:30:13', '1', null, null);
 
 -- ----------------------------
 -- Function structure for CAP_FIRST
