@@ -103,7 +103,18 @@ class Module implements ConfigProviderInterface
                     $tableGateway = $container->get(Model\UsuarioTableGateway::class);
                     return new Model\UsuarioTable($tableGateway);
                 },
-            ] 
+                Model\CitaTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Cita());
+                    return new TableGateway('cita', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\CitaTable::class => function($container){
+                    $tableGateway = $container->get(Model\CitaTableGateway::class);
+                    return new Model\CitaTable($tableGateway);
+                },
+                
+            ]
         ];
     }
     
@@ -148,6 +159,11 @@ class Module implements ConfigProviderInterface
                     return new Controller\AuthController(
                         $container->get(Model\UsuarioTable::class)
                     );
+                },
+                Controller\CitaController::class => function($container){
+                  return new Controller\CitaController(
+                      $container->get(Model\CitaTable::class)
+                  );
                 },
                 Controller\SiteController::class => InvokableFactory::class,
             ],

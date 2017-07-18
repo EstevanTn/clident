@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+use Application\Model\Entity\Enviroment;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
@@ -25,4 +26,16 @@ class OdontogramaController extends AbstractActionController {
         return new JsonModel($response);
     }
 
+    public function getAllAction(){
+        $response = Enviroment::AJAX_TABLE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = [
+                'data' => $this->table->fetchAll([
+                    'detalle_odontograma.ACTIVE'=>true,
+                    'detalle_odontograma.ID_ODONTOGRAMA' => $this->getRequest()->getPost('id', 0)
+                ])
+            ];
+        }
+        return new JsonModel($response);
+    }
 }

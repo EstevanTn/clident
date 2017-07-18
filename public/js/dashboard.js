@@ -1,3 +1,9 @@
+String.prototype.capitalize = function() {
+    return this.replace(/(^|\s)([a-z])/g, function(m, p1, p2) {
+        return p1 + p2.toUpperCase();
+    });
+};
+
 (function(w, j){
     'use strict';
 
@@ -101,6 +107,11 @@
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
             },
+            sServerMethod: 'POST',
+            //sAjaxSource: '${pageContext.request.contextPath}/',
+            iDisplayLength: 100,
+            iDisplayStart : 0,
+            aLengthMenu: [[100, 200, 300], [100, 200, 300]],
             initComplete: function(data, settings){
                 console.info('Se ha cargado los datos a la tabla: ', data.sTableId);
             },
@@ -111,6 +122,11 @@
             /*columnDefs: [
                 { width: 200, targets: 0 }
             ],*/
+            columnDefs: [{
+                targets: -1,
+                data: null,
+                defaultContent: "<button>Click!</button>"
+            }],
             fixedColumns: true,
             drawCallback: function (data){
               $('a.btn-link').addClass('btn-flat')
@@ -275,19 +291,20 @@
         },
         CustomThemeStyles: function(){
             jQuery('input[type=\'text\'], input[type=\'email\'], textarea').each(function(){
-                jQuery(this).css({'text-transform':'uppercase'});
+                jQuery(this).css({'text-transform':'capitalize'});
             });
             jQuery('.btn, button, a.btn').each(function(){
                 jQuery(this).addClass('btn-flat');
             });
-            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('keyup', function(){
-                jQuery(this).val(this.value.toUpperCase());
+            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('focusout keyup', function(){
+                jQuery(this).val(this.value.capitalize());
             });
         },
         GridSetup: function(options){
-            options[name] = typeof options[name] === 'string'?options[name]:this.ControllerName;
+            options['name'] = typeof options['name'] === 'string'?options['name']:this.ControllerName;
             options = ReplaceObjectPropierty(this.defaults.datatable, options);
-            jQuery(this.StringFormat('#datatable-{0}', options[name])).DataTable(options);
+            var name = this.StringFormat('#datatable-{0}', options['name']);
+            jQuery(name).DataTable(options);
         },
         StringFormat: function(){
             var args = new Array();

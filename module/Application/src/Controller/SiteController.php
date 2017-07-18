@@ -34,7 +34,7 @@ class SiteController extends AbstractActionController
         return new ViewModel();
     }
     
-    public function servicesAction(){
+    public function serviceAction(){
         $this->layout('layout/public');
         return new ViewModel();
     }

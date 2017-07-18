@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model\Entity;
 
-class Odontograma {
+class Odontograma extends IEntity {
 
     var $ID_PACIENTE;
     var $ID_ODONTOGRAMA;
@@ -10,7 +10,7 @@ class Odontograma {
     var $USUARIO_CREACION;
     var $USUARIO_MODIFICACION;
 
-    public function exchangeArray($data) {
+    public function exchangeArray(array $data) {
         $this->ID_ODONTOGRAMA = isset($data['ID_ODONTOGRAMA']) ? $data['ID_ODONTOGRAMA'] : 0;
         $this->ID_PACIENTE = isset($data['ID_PACIENTE']) ? $data['ID_PACIENTE'] : 0;
         $this->FECHA_CREACION = isset($data['FECHA_CREACION']) ? $data['FECHA_CREACION'] :  Enviroment::GetDate();
@@ -22,5 +22,12 @@ class Odontograma {
     public function getArrayCopy(){
         return get_object_vars($this);
     }
-
+    
+    public function getColumnNames()
+    {
+        return [
+          'ID_ODONTOGRAMA',
+            'ID_PACIENTE',
+        ];
+    }
 }

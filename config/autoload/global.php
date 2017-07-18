@@ -21,7 +21,11 @@ return [
         'username'  =>  'root',
         'password'  =>  '',
         'driver'    =>  'Pdo',
+<<<<<<< HEAD
         'dsn'       =>  'mysql:dbname=db_clident;host=localhost',
+=======
+        'dsn'       =>  'mysql:dbname=clident;host=127.0.0.1',
+>>>>>>> af9e969501b99e3a379514d0bc20eb86cd3c9a8f
         'driver_options'    =>  [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         ]

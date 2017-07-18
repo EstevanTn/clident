@@ -3,6 +3,7 @@ namespace Application\Model;
 
 use Application\Model\Entity\Enviroment;
 use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 
 abstract class BaseTable {
 
@@ -43,7 +44,11 @@ abstract class BaseTable {
     }
 
     public function Join($table, $condition, $columns, $where, $typeEntries=false){
-        $actualTable = $this->tableGateway->getTable();
+        return $this->JoinBase($this->tableGateway, $table, $condition, $columns, $where, $typeEntries);
+    }
+    
+    public function JoinBase($tableGateway, $table, $condition, $columns, $where, $typeEntries=false){
+        $actualTable = $tableGateway->getTable();
         $select = new Select($actualTable);
         $select->join(
             $table,
@@ -51,7 +56,7 @@ abstract class BaseTable {
             $columns,
             Select::JOIN_INNER
         )->where($where);
-        $resultSet = $this->tableGateway->selectWith($select);
+        $resultSet = $tableGateway->selectWith($select);
         if($typeEntries){
             $entries = array();
             foreach ($resultSet as $row) {

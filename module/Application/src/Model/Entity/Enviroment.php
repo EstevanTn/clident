@@ -19,7 +19,7 @@ class Enviroment{
 		];
 
 	const AJAX_TABLE = [
-		'data'	=>	[]
+		'data'	=>	[],
 	];
 
 	//Settings Plugin Datatable jQuery
@@ -27,7 +27,7 @@ class Enviroment{
 
 	public static function GetDate(){
 		$date = getdate();
-		return sprintf('%s-%s-%s', $date['year'], $date['mon'], $date['mday']);
+		return sprintf('%s-%s-%s %s:%s:%s', $date['year'], $date['mon'], $date['mday'], $date['hours'], $date['minutes'], $date['seconds']);
 	}
 	
 	public static function GetCookie(){
@@ -37,4 +37,9 @@ class Enviroment{
         }
         return null;
 	}
+	public static function GetCookieValue($key){
+	    $cookie = Enviroment::GetCookie();
+	    $value = $cookie[$key];
+	    return $value;
+    }
 }

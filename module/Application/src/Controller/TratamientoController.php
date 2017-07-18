@@ -1,11 +1,16 @@
 <?php
 namespace Application\Controller;
 
+use Application\Model\Entity\Enviroment;
+use Application\Model\TratamientoTable;
+use const false;
+use Zend\View\Model\JsonModel;
+
 class TratamientoController extends \Zend\Mvc\Controller\AbstractActionController {
 
     var $table;
 
-    public function __construct(\Application\Model\TratamientoTable $table){
+    public function __construct(TratamientoTable $table){
         $this->table = $table;
     }
 
@@ -15,25 +20,45 @@ class TratamientoController extends \Zend\Mvc\Controller\AbstractActionControlle
     }
 
     public function getAllAction(){
-        $response = \Application\Model\Entity\Enviroment::AJAX_TABLE;
+        $response = Enviroment::AJAX_TABLE;
         if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
             $response = [
                 'data'  => $this->table->fetchAll(),
             ];
         }
-        return new \Zend\View\Model\JsonModel($response);
+        return new JsonModel($response);
     }
 
     public function guardarAction(){
-        return new \Zend\View\Model\JsonModel();
+        $response = Enviroment::AJAX_RESPONSE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $data = [
+                'ID_TRATAMIENTO' => $this->getRequest()->getPost('id', 0),
+                'NOMBRE' => $this->getRequest()->getPost('nombre',''),
+                'DESCRIPCION' => $this->getRequest()->getPost('descripcion',''),
+                'APLICA_CARA' => $this->getRequest()->getPost('aplicaCara', 0),
+                'APLICA_DIENTE' => $this->getRequest()->getPost('aplicaDiente', 0),
+                'PRECIO' => $this->getRequest()->getPost('precio', 0)
+            ];
+            $response = $this->table->save(Enviroment::GetCookieValue('ID_USUARIO'), $data);
+        }
+        return new JsonModel($response);
     }
 
     public function getAction(){
-        return new \Zend\View\Model\JsonModel();
+        $response = Enviroment::AJAX_RESPONSE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = $this->table->get('ID_TRATAMIENTO', $this->getRequest()->getPost('id', 0));
+        }
+        return new JsonModel($response);
     }
 
     public function eliminarAction(){
-        return new \Zend\View\Model\JsonModel();
+        $response = Enviroment::AJAX_RESPONSE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = $this->table->delete(Enviroment::GetCookieValue('ID_USUARIO'), 'ID_TRATAMIENTO', $this->getRequest()->getPost('id', 0));
+        }
+        return new JsonModel($response);
     }
     
 }

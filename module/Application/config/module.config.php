@@ -104,6 +104,16 @@ return [
                     ],
                 ],
             ],
+            'cita' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/cita[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\CitaController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'site' => [
                 'type'    => Segment::class,
                 'options' => [

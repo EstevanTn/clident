@@ -134,7 +134,7 @@ class AuthController extends AbstractActionController {
         session_destroy();
         unset($_COOKIE[Enviroment::NAME_COOKIE]);
         setcookie(Enviroment::NAME_COOKIE, '', time()-5000, '/');
-        return $this->redirect()->toRoute('auth');
+        return $this->redirect()->toRoute('site');
     }
     
     public function login($email, $password, $rememberMe)
