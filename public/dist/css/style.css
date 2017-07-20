@@ -83,3 +83,20 @@ div::-webkit-scrollbar-thumb,
 .bootstrap-switch-container { 
     max-height: 35px; 
 }
+
+.skin-blue-light .main-header .navbar{
+    background: #001f3f !important;
+}
+.skin-blue-light .main-header .logo{
+    background: #001f3f !important;
+}
+.skin-blue-light .main-header .navbar .sidebar-toggle:hover{
+    background: #024E9F;
+}
+.skin-blue-light .main-header li.user-header{
+    background: #024E9F;
+}
+.has-error > .select2-container--default .select2-selection--single,
+.has-error > .select2-selection .select2-selection--single{
+    border: 1px solid #dd4b39;
+}

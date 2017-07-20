@@ -18,6 +18,8 @@ $cookie = Enviroment::GetCookie();
             ->prependStylesheet($this->basePath('dist/css/style.css'))
             ->prependStylesheet($this->basePath('dist/css/skins/_all-skins.min.css'))
             ->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
+            ->prependStylesheet($this->basePath('plugins/fullcalendar/fullcalendar.print.css'), 'print', true,['id'=>'printStyles'])
+            ->prependStylesheet($this->basePath('plugins/fullcalendar/fullcalendar.css'))
             ->prependStylesheet($this->basePath('plugins/select2/select2.min.css'))
             ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')
             ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
@@ -29,6 +31,7 @@ $cookie = Enviroment::GetCookie();
             ->prependStylesheet($this->basePath('plugins/datepicker/datepicker3.css'))
             ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
         ?>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <!-- Scripts -->
 
         <?= $this->headScript()->
@@ -37,20 +40,6 @@ $cookie = Enviroment::GetCookie();
             appendFile($this->basePath('plugins/jQueryValidate/jquery.validate.js'))
             ->appendFile($this->basePath('plugins/select2/select2.full.min.js'))
         ?>
-        <style>
-            .skin-blue-light .main-header .navbar{
-                background: #001f3f !important;
-            }
-            .skin-blue-light .main-header .logo{
-                background: #001f3f !important;
-            }
-            .skin-blue-light .main-header .navbar .sidebar-toggle:hover{
-                background: #024E9F;
-            }
-            .skin-blue-light .main-header li.user-header{
-                background: #024E9F;
-            }
-        </style>
     </head>
     <body class="hold-transition skin-blue-light sidebar-mini overlay">
         <div class="wrapper">
@@ -159,6 +148,8 @@ $cookie = Enviroment::GetCookie();
             appendFile($this->basePath('bootstrap/js/bootstrap.min.js'))->
             appendFile($this->basePath('plugins/knob/jquery.knob.js'))->
             appendFile('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')->
+            appendFile($this->basePath('plugins/fullcalendar/fullcalendar.min.js'))->
+            appendFile($this->basePath('plugins/fullcalendar/locale/es.js'))->
             appendFile($this->basePath('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'))->
             appendFile($this->basePath('plugins/slimScroll/jquery.slimscroll.min.js'))->
             appendFile($this->basePath('plugins/fastclick/fastclick.js'))->

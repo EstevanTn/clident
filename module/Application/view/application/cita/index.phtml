@@ -2,5 +2,104 @@
     <h1>Gestión de citas</h1>
 </section>
 <section class="content">
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            <div class="box box-solid box-widget">
+                <div class="box-header with-border">
+                    <div class="box-title">Hoy</div>
+                </div>
+                <div class="box-body">
 
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-xs-12">
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <div class="box-title">Calendario de citas</div>
+                    <div class="box-tools pull-right">
+                        <button onclick="cita.createCita()" class="btn btn-box-tool"><i class="fa fa-plus"></i> Agregar</button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<div id="modal-cita" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="form-cita" method="post">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Paciente</label>
+                                <select class="form-control" name="cbopaciente" id="cbopaciente" required="true" min="1"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Nota</label>
+                                <textarea name="txtdescripcion" id="txtdescripcion" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="text" class="form-control" id="txtfecha" name="txtfecha" />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label>Hora Inicio</label>
+                                <input required class="form-control" id="txthorainicio" name="txthorainicio" />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <label>Hora Fin</label>
+                                <input required class="form-control" id="txthorafin" name="txthorafin" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <select class="form-control" name="cboestado" id="cboestado" min="1">
+                                    <option value="0"><< SELECCIONE >></option>
+                                    <option value="1">Activo</option>
+                                    <option value="2">Pendiente</option>
+                                    <option value="3">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" id="btnguardar-cita"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+$(document).ready(function() {
+  
+});
+JS;
+$this->inlineScript()->captureEnd();
