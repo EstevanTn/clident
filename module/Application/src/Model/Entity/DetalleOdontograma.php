@@ -18,7 +18,7 @@
 namespace Application\Model\Entity;
 
 
-class DetalleOdontograma extends IEntity
+class DetalleOdontograma extends Tratamiento
 {
     var $ID_DETALLE_ODONTOGRAMA;
     var $ID_ODONTOGRAMA;
@@ -38,6 +38,7 @@ class DetalleOdontograma extends IEntity
     
     public function exchangeArray(array $data)
     {
+        parent::exchangeArray($data);
         $this->ID_DETALLE_ODONTOGRAMA = !empty($data['ID_DETALLE_ODONTOGRAMA']) ? $data['ID_DETALLE_ODONTOGRAMA'] : null;
         $this->ID_ODONTOGRAMA = !empty($data['ID_ODONTOGRAMA']) ? $data['ID_ODONTOGRAMA'] : null;
         $this->ID_TRATAMIENTO = !empty($data['ID_TRATAMIENTO']) ? $data['ID_TRATAMIENTO'] : null;

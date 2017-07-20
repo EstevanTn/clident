@@ -38,7 +38,7 @@ AppOdontograma.prototype.fn = {
 			y = diente.y || 0;
 		
 		var defaultPolygon = $.extend(true, {}, self.options.defaultPolygon, { diente: diente.id });
-		var dienteGroup = svg.group(parentGroup, {transform: 'translate(' + x + ',' + y + ')', });
+		var dienteGroup = svg.group(parentGroup, { transform: 'translate(' + x + ',' + y + ')', });
 
 		var caraSuperior = svg.polygon(dienteGroup,
 			[[0,0],[20,0],[15,5],[5,5]],  
@@ -63,7 +63,7 @@ AppOdontograma.prototype.fn = {
 		var caraCentral = svg.polygon(dienteGroup,
 			[[5,5],[15,5],[15,15],[5,15]],  
 			defaultPolygon);	
-		caraCentral = $(caraCentral).data('cara', 'C');		    
+		caraCentral = $(caraCentral).data('cara', 'C');
 		
 		var defaultText = $.extend(true, {}, self.options.defaultText, { diente: diente.id});
 		var caraCompleto = svg.text(dienteGroup, 6, 30, diente.id.toString(), defaultText);
@@ -123,10 +123,10 @@ AppOdontograma.prototype.fn = {
 			dientes.push(new dienteModel(18 - i, i * 25, 0));	
 		}
 		for(var i = 3; i < 8; i++){
-			dientes.push(new dienteModel(55 - i, i * 25, 1 * 40));	
+			dientes.push(new dienteModel(58 - i, i * 25, 1 * 40));
 		}
 		for(var i = 3; i < 8; i++){
-			dientes.push(new dienteModel(85 - i, i * 25, 2 * 40));	
+			dientes.push(new dienteModel(88 - i, i * 25, 2 * 40));
 		}
 		for(var i = 0; i < 8; i++){
 			dientes.push(new dienteModel(48 - i, i * 25, 3 * 40));	
@@ -263,15 +263,24 @@ AppOdontograma.prototype.call = function(fnCallback){
 }
 
 AppOdontograma.prototype.createContextMenu = function(fnCallback){
-	fnCallback.call(this.contextmenu);
-	return this;
+    var self = this;
+    console.dir(self.contextmenu);
+	fnCallback.call(self.contextmenu);
+	return self;
 }
 
-AppOdontograma.prototype.fill = function(poligon, color){
+AppOdontograma.prototype.fill = function(polygon, color){
 	var self = this;
 	color = typeof(color)==='string' ? color : self.options.colors.selected;
-	$(poligon).attr('fill', color);
+	$(polygon).attr('fill', color);
 	return self;
+}
+
+AppOdontograma.prototype.paintTooth = function (diente, cara, color) {
+    var polygon = $('[diente=\''+diente+'\'][cara=\''+cara+'\']');
+    var self = this;
+    self.fill(polygon, color);
+    return self;
 }
 
 AppOdontograma.prototype.select = function(key, color){
@@ -279,6 +288,7 @@ AppOdontograma.prototype.select = function(key, color){
 	color = typeof(color)==='string' ? color : self.options.colors.selected;
 	self.fill(self.selected.carasDiente[key],color);
 }
+
 AppOdontograma.prototype.selectClear = function(key, color){
 	var self = this;
 	color = typeof(color)==='string' ? color : self.options.colors.selected;
@@ -288,6 +298,7 @@ AppOdontograma.prototype.selectClear = function(key, color){
 }
 
 AppOdontograma.prototype.Load = function() {
+    $('#ctxmenuOdontograma').remove();
 	var self = this;
 	var onLoad = self.onLoad;
 	self = AppOdontograma.Init(self.selectorId, self.options, self.onLoad);

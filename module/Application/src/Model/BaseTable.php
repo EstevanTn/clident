@@ -31,16 +31,23 @@ abstract class BaseTable {
     }
 
     public function delete($userId, $nameKey, $id){
-        $id = (int) $id;
-        $row = array();
-        $row['ACTIVE'] = false;
-        $row['FECHA_MODIFICACION'] = Enviroment::GetDate();
-        $row['USUARIO_MODIFICACION'] = $userId;
-        $this->tableGateway->update($row, [ $nameKey => $id ]);
-        return [
-            'success'   =>  true,
-            'message'   =>  Enviroment::MSG_DELETE,
-        ];
+        try{
+            $id = (int) $id;
+            $row = array();
+            $row['ACTIVE'] = false;
+            $row['FECHA_MODIFICACION'] = Enviroment::GetDate();
+            $row['USUARIO_MODIFICACION'] = $userId;
+            $this->tableGateway->update($row, [ $nameKey => $id ]);
+            return [
+                'success'   =>  true,
+                'message'   =>  Enviroment::MSG_DELETE,
+            ];
+        }catch (\Exception $ex){
+            return [
+                'success' => false,
+                'message' => Enviroment::MSG_ERROR.': '.$ex->getMessage()
+            ];
+        }
     }
 
     public function Join($table, $condition, $columns, $where, $typeEntries=false){

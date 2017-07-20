@@ -18,15 +18,15 @@ class OdontogramaTable extends BaseTable{
     public function __construct(TableGatewayInterface $tableGatewayInterface){
         $this->tableGateway = $tableGatewayInterface;
 
-        $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new DetalleOdontograma());
+        $resultSetPrototype1 = new ResultSet();
+        $resultSetPrototype1->setArrayObjectPrototype(new DetalleOdontograma());
         $this->tableGatewayDetalle = new TableGateway('detalle_odontograma',
-            $this->tableGateway->getAdapter(), null, $resultSetPrototype);
+            $this->tableGateway->getAdapter(), null, $resultSetPrototype1);
         
-        $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Tratamiento());
+        $resultSetPrototype2 = new ResultSet();
+        $resultSetPrototype2->setArrayObjectPrototype(new Tratamiento());
         $this->tableGatewayTratamiento = new TableGateway('tratamiento',
-            $this->tableGateway->getAdapter(), null, $resultSetPrototype);
+            $this->tableGateway->getAdapter(), null, $resultSetPrototype2);
     }
 
     public function save($userId, $data){
@@ -50,6 +50,7 @@ class OdontogramaTable extends BaseTable{
                 return [
                     'success' => true,
                     'message' => Enviroment::MSG_SAVE,
+                    'id' => $this->tableGatewayDetalle->getLastInsertValue()
                 ];
             }else{
                 $dataQuery['USUARIO_MODIFICACION'] = $userId;
@@ -74,4 +75,40 @@ class OdontogramaTable extends BaseTable{
             'detalle_odontograma.ID_TRATAMIENTO=tratamiento.ID_TRATAMIENTO',
             Tratamiento::getColumnNames(), $where, true);
     }
+
+    public function delete($userId, $nameKey, $id)
+    {
+        try{
+            $id = (int) $id;
+            $row = array();
+            $row['ACTIVE'] = false;
+            $row['FECHA_MODIFICACION'] = Enviroment::GetDate();
+            $row['USUARIO_MODIFICACION'] = $userId;
+            $this->tableGatewayDetalle->update($row, [ $nameKey => $id ]);
+            return [
+                'success'   =>  true,
+                'message'   =>  Enviroment::MSG_DELETE,
+            ];
+        }catch (\Exception $ex){
+            return [
+                'success' => false,
+                'message' => Enviroment::MSG_ERROR.': '.$ex->getMessage()
+            ];
+        }
+    }
+
+    public function getDetalle($id){
+        try{
+            $id  = (int) $id;
+            $rowset = $this->tableGatewayDetalle->select([ 'ID_DETALLE_ODONTOGRAMA' => $id ]);
+            $row = $rowset->current();
+            if (!$row) {
+                throw new \Exception(Enviroment::NOT_FIND);
+            }
+            return get_object_vars($row);
+        }catch (\Exception $ex){
+            return null;
+        }
+    }
+
 }

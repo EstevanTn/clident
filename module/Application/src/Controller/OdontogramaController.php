@@ -59,13 +59,22 @@ class OdontogramaController extends AbstractActionController {
         return new JsonModel($response);
     }
 
-    public function fetchAllAction(){
-        $response = [
-            'data' => $this->table->fetchAll([
-                'detalle_odontograma.ACTIVE' => true,
-                'detalle_odontograma.ID_ODONTOGRAMA' => $_GET['id']
-            ])
-        ];
+    public function eliminarAction(){
+        $response = Enviroment::AJAX_RESPONSE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = $this->table->delete(Enviroment::GetCookieValue('ID_USUARIO'),
+                'ID_DETALLE_ODONTOGRAMA',
+                $this->getRequest()->getPost('id', 0));
+        }
         return new JsonModel($response);
     }
+
+    public function getDetalleAction(){
+        $response = Enviroment::AJAX_RESPONSE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = $this->table->getDetalle($this->getRequest()->getPost('id', 0));
+        }
+        return new JsonModel($response);
+    }
+
 }

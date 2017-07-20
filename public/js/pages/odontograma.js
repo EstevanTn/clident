@@ -3,8 +3,16 @@ var odontograma = {
         $('#odontograma').empty();
         AppOdontograma.Init('#odontograma',{}, function(self){
             self.bind('click', function(){
-                var data = $(this).data('self');
-                BasePage.GetCaraDiente(data);
+                var idpaciente = parseInt($('#cbolstpacientes').val());
+                if(idpaciente>0){
+                    var data = $(this).data('self');
+                    BasePage.GetCaraDiente(data);
+                }else{
+                    BasePage.Notify({
+                        success: 'Seleccione',
+                        message: 'Primero debe seleccionar un paciente.'
+                    });
+                }
             }).createContextMenu(function(){
                 var menu = $('<ul/>',{ class : 'list-group' });
                 var itemCopy = $('<li/>',{ class : 'list-group-item', text: '@Tunaqui - Corpyright © '+new Date().getFullYear() });
@@ -136,16 +144,32 @@ var odontograma = {
         BasePage.GridSetup({
             name: 'detalle-odontograma',
             columns: [
-                { data: 'NUMERO_DIENTE', },
-                { data: 'NOMBRE', },
-                { data: 'DESCRIPCION', },
-                { data: 'FECHA_APLICACION', sClass: 'text-center' },
+                { data: 'NUMERO_DIENTE', sWidth: '7%', sClass: 'text-center' },
                 { data: function (row, type, set, meta) {
-                    console.dir(row);
-                    var html = '<a title=\'Editar\' data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-edit\'></i></a>';
-                    html += '<a title=\'Eliminar\' data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-remove\'></i></a>';
+                    var caraText = '-';
+                    if(row.CARA_DIENTE==='S'){
+                        caraText = 'Superior';
+                    }else if(row.CARA_DIENTE==='I'){
+                        caraText = 'Inferior';
+                    }else if(row.CARA_DIENTE==='Z'){
+                        caraText = 'Izquierdo';
+                    }else if(row.CARA_DIENTE==='C'){
+                        caraText = 'Centro';
+                    }else if(row.CARA_DIENTE==='X'){
+                        caraText = 'Completo';
+                    }else if(row.CARA_DIENTE==='D'){
+                        caraText = 'Derecho';
+                    }
+                    return caraText;
+                }, sWidth: '12%' },
+                { data: 'NOMBRE', sWidth: '20%' },
+                { data: 'DESCRIPCION', sWidth: '36%' },
+                { data: 'FECHA_APLICACION', sClass: 'text-center', sWidth: '15%' },
+                { data: function (row, type, set, meta) {
+                    var html = '<a title=\'Editar\' onclick=\'BasePage.GetItemDetalleOdontograma('+row.ID_DETALLE_ODONTOGRAMA+')\') data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-edit\'></i></a>';
+                    html += '<a title=\'Eliminar\' data-toggle=\'tooltip\' onclick=\'BasePage.Delete('+row.ID_DETALLE_ODONTOGRAMA+')\' class=\'btn btn-link\'><i class=\'fa fa-remove\'></i></a>';
                     return html;
-                }, orderable: false },
+                }, orderable: false, sWidth: '10%' },
             ],
             ajax: {
                 type: 'POST',
@@ -153,6 +177,35 @@ var odontograma = {
                 data: {
                    id: IdOdontograma,
                 }
+            },
+            initComplete: function (settings, data) {
+                data = data.data;
+                for(var i=0; i<data.length; i++){
+                    var item = data[i];
+                    AppOdontograma.paintTooth(item.NUMERO_DIENTE, item.CARA_DIENTE, 'red');
+                }
+            }
+        });
+    },
+    GetItemDetalleOdontograma: function (id_detalle_odontograma) {
+        BasePage.ShowModal({
+            name: 'detalle-odontograma' ,
+            title: '<i class=\'fa fa-edit\'></i> Editar Detalle',
+            callback: function () {
+                $.ajax({
+                    url: BasePage.StringFormat('{0}/getDetalle', BasePage.requestPath),
+                    data: { id: id_detalle_odontograma },
+                    success: function (response) {
+                        AppOdontograma
+                            .createSingle('#diente-draw', response.NUMERO_DIENTE)
+                            .select(response.CARA_DIENTE);
+                        $('#txtiddetalleodontograma').val(response.ID_DETALLE_ODONTOGRAMA);
+                        $('#txtnrodetalle').val(response.NUMERO_DIENTE);
+                        $('#cbocaradetalle').val(response.CARA_DIENTE).trigger('change');
+                        $('#cbotratamiento').val(response.ID_TRATAMIENTO).trigger('change');
+                        $('#txtdescripciondetalle').val(response.DESCRIPCION);
+                    }
+                });
             }
         });
     },
@@ -170,10 +223,23 @@ var odontograma = {
            data: request,
            success: function (response) {
                BasePage.Notify(response, function () {
-                  $('#datatable-detalle-odontograma').dataTable()._fnAjaxUpdate();
+                   $('#btn-mostrar-odontograma').trigger('click');
+                  //$('#datatable-detalle-odontograma').dataTable()._fnAjaxUpdate();
                   $('#modal-detalle-odontograma').modal('hide');
                });
            }
+        });
+    },
+    fnDelete: function (id_detalle_odontograma) {
+        $.ajax({
+            url: BasePage.StringFormat('{0}/eliminar', BasePage.requestPath) ,
+            data: { id: id_detalle_odontograma },
+            success: function (response) {
+                BasePage.Notify(response, function () {
+                    //$('#datatable-detalle-odontograma').dataTable()._fnAjaxUpdate();
+                    $('#btn-mostrar-odontograma').trigger('click');
+                });
+            }
         });
     }
 };
