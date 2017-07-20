@@ -7,7 +7,7 @@ use Zend\Db\TableGateway\TableGateway;
 
 abstract class BaseTable {
 
-    protected $tableGateway = null;
+    var $tableGateway = null;
 
     abstract protected function save($userId, $data);
 
@@ -47,7 +47,7 @@ abstract class BaseTable {
         return $this->JoinBase($this->tableGateway, $table, $condition, $columns, $where, $typeEntries);
     }
     
-    public function JoinBase($tableGateway, $table, $condition, $columns, $where, $typeEntries=false){
+    public function JoinBase(TableGateway $tableGateway, $table, $condition, $columns, $where, $typeEntries=false){
         $actualTable = $tableGateway->getTable();
         $select = new Select($actualTable);
         $select->join(

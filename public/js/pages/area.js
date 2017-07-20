@@ -11,7 +11,7 @@ var area = {
 		this.GetAreas();
 		this.GridSetup({
 			ajax: {
-				url: this.StringFormat('{0}/getAll', this.requestPath),
+				url: BasePage.StringFormat('{0}/getAll', this.requestPath),
 				type: 'POST',
 			},
 			columns: [
@@ -38,7 +38,7 @@ var area = {
 	},
 	GetAreas: function(){
 		$.ajax({
-			url: this.StringFormat('{0}/getAll', this.requestPath),
+			url: BasePage.StringFormat('{0}/getAll', this.requestPath),
 			type: 'POST',
 			success: function(response){
 				$('#cboArea').empty();

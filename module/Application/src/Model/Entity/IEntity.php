@@ -23,7 +23,7 @@ use function get_object_vars;
 abstract class IEntity
 {
     public abstract function exchangeArray(array $data);
-    public abstract function getColumnNames();
+    public static abstract function getColumnNames();
     public function getArrayCopy(){
         return get_object_vars($this);
     }

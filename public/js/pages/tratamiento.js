@@ -88,7 +88,6 @@ var tratamiento = {
         request.precio = parseFloat($('#txtprecio').val());
         request.aplicaCara = $('#chkaplica-cara').prop('checked')?1:0;
         request.aplicaDiente = $('#chkaplica-diente').prop('checked')?1:0;
-        console.log(request);
         $.ajax({
            url: BasePage.StringFormat('{0}/tratamiento/guardar', BasePage.basePath) ,
             data: request,

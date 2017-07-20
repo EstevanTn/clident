@@ -16,14 +16,14 @@ class Odontograma extends IEntity {
         $this->FECHA_CREACION = isset($data['FECHA_CREACION']) ? $data['FECHA_CREACION'] :  Enviroment::GetDate();
         $this->FECHA_MODIFICACION = isset($data['FECHA_MODIFICACION']) ? $data['FECHA_MODIFICACION'] : null;
         $this->USUARIO_CREACION = isset($data['USUARIO_CREACION']) ? $data['USUARIO_CREACION'] : 1;
-        $this->USUARION_MODIFICACION = isset($data['USUARION_MODIFICACION']) ? $data['USUARION_MODIFICACION'] : null;
+        $this->USUARIO_MODIFICACION = isset($data['USUARION_MODIFICACION']) ? $data['USUARION_MODIFICACION'] : null;
     }
 
     public function getArrayCopy(){
         return get_object_vars($this);
     }
     
-    public function getColumnNames()
+    public static function getColumnNames()
     {
         return [
           'ID_ODONTOGRAMA',

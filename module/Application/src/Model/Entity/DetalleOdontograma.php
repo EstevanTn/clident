@@ -51,10 +51,10 @@ class DetalleOdontograma extends IEntity
         $this->FECHA_CREACION = isset($data['FECHA_CREACION']) ? $data['FECHA_CREACION'] :  Enviroment::GetDate();
         $this->FECHA_MODIFICACION = isset($data['FECHA_MODIFICACION']) ? $data['FECHA_MODIFICACION'] : null;
         $this->USUARIO_CREACION = isset($data['USUARIO_CREACION']) ? $data['USUARIO_CREACION'] : Enviroment::GetCookieValue('ID_USUARIO');
-        $this->USUARION_MODIFICACION = isset($data['USUARION_MODIFICACION']) ? $data['USUARION_MODIFICACION'] : null;
+        $this->USUARIO_MODIFICACION = isset($data['USUARION_MODIFICACION']) ? $data['USUARION_MODIFICACION'] : null;
     }
     
-    public function getColumnNames()
+    public static function getColumnNames()
     {
         return [
             'ID_DETALLE_ODONTOGRAMA',

@@ -1,12 +1,13 @@
 <?php
 namespace Application\Controller;
 
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Application\Model\PersonalTable;
 use Application\Model\Entity\Enviroment;
 
-class PersonalController extends \Zend\Mvc\Controller\AbstractActionController {
+class PersonalController extends AbstractActionController {
     var $table = null;
 
     public function __construct(PersonalTable $table){

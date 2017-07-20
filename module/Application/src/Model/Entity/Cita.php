@@ -53,7 +53,7 @@ class Cita extends IEntity
         $this->USUARIO_MODIFICACION = !empty($data['USUARIO_MODIFICACION']) ? $data['USUARIO_MODIFICACION'] : null;
     }
     
-    public function getColumnNames()
+    public static function getColumnNames()
     {
         return [
         

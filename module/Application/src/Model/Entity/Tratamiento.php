@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model\Entity;
 
-class Tratamiento {
+class Tratamiento extends IEntity {
     var $ID_TRATAMIENTO;
     var $NOMBRE;
     var $DESCRIPCION;
@@ -14,7 +14,7 @@ class Tratamiento {
     var $USUARIO_CREACION;
     var $USUARIO_MODIFICACION;
     
-    public function exchangeArray($data){
+    public function exchangeArray(array $data){
         $this->ID_TRATAMIENTO = isset($data['ID_TRATAMIENTO']) ? $data['ID_TRATAMIENTO'] : 0 ;
         $this->NOMBRE = isset($data['NOMBRE']) ? $data['NOMBRE'] : '';
         $this->DESCRIPCION = isset($data['DESCRIPCION']) ? $data['DESCRIPCION']: '';
@@ -28,8 +28,15 @@ class Tratamiento {
         $this->USUARIO_MODIFICACION = isset($data['USUARIO_MODIFICACION']) ? $data['USUARIO_MODIFICACION']: null;
     }
 
-    public function getArrayCopy(){
-        return get_object_vars($this);
+    public static function getColumnNames()
+    {
+        return [
+            'ID_TRATAMIENTO',
+            'NOMBRE',
+            //'DESCRIPCION',
+            'APLICA_CARA',
+            'APLICA_DIENTE',
+            'PRECIO'
+        ];
     }
-
 }

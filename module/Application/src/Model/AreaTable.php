@@ -15,7 +15,6 @@ class AreaTable extends BaseTable{
 
     public function save($userId, $arrData){
         try {
-            $result = 0;
             $arrData['ID_AREA'] = (int) $arrData['ID_AREA'];
             $arrData['ID_PARENT_AREA'] = ((int)$arrData['ID_PARENT_AREA']) == 0? null : ((int)$arrData['ID_PARENT_AREA']);
             if (((int)$arrData['ID_AREA'])===0) {
@@ -23,17 +22,17 @@ class AreaTable extends BaseTable{
                 $arrData['USUARIO_CREACION'] = $userId;
                 $arrData['ACTIVE'] = true;
                 $arrData['ESTADO'] = 1;
-                $result = $this->tableGateway->insert($arrData);
+                $this->tableGateway->insert($arrData);
                 return [
                     'success'   =>  true,
                     'message'   =>  Enviroment::MSG_SAVE,
                     'id'    =>  $this->tableGateway->getLastInsertValue()
                 ];
             }else{
-                if ($this->get($arrData['ID_AREA'])) {
+                if ($this->get('ID_AREA',$arrData['ID_AREA'])) {
                     $arrData['FECHA_MODIFICACION'] = Enviroment::GetDate();
                     $arrData['USUARIO_MODIFICACION'] = $userId;
-                    $result = $this->tableGateway->update($arrData, ['ID_AREA'=> $arrData['ID_AREA']]);
+                    $this->tableGateway->update($arrData, ['ID_AREA'=> $arrData['ID_AREA']]);
                     return [
                         'success'   =>  true,
                         'message'   =>  Enviroment::MSG_UPDATE

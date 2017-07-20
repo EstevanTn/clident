@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+use Application\Model\Entity\Enviroment;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
@@ -19,7 +20,7 @@ class PacienteController extends AbstractActionController
         return new ViewModel();
     }
     public function guardarAction(){
-        $response = \Application\Model\Entity\Enviroment::AJAX_RESPONSE;
+        $response = Enviroment::AJAX_RESPONSE;
     	if ($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()) {
             $data = [
                 'ID_PERSONA'    =>  $this->getRequest()->getPost('ID_PERSONA', 0),

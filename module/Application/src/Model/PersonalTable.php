@@ -1,8 +1,9 @@
 <?php
 namespace Application\Model;
 
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\TableGatewayInterface;
-use Application\Model\BaseTable;
 use Application\Model\Entity\Persona;
 use Application\Model\Entity\Enviroment;
 
@@ -11,9 +12,9 @@ class PersonalTable extends BaseTable {
 
     public function __construct(TableGatewayInterface $tableGatewayInterface){
         $this->tableGateway = $tableGatewayInterface;
-        $resultSetPrototype = new \Zend\Db\ResultSet\ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new \Application\Model\Entity\Persona());
-        $this->tableGatewayPersona = new \Zend\Db\TableGateway\TableGateway('persona', $this->tableGateway->getAdapter(), null, $resultSetPrototype);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Persona());
+        $this->tableGatewayPersona = new TableGateway('persona', $this->tableGateway->getAdapter(), null, $resultSetPrototype);
     }
 
     public function save($userId, $data){
@@ -92,13 +93,13 @@ class PersonalTable extends BaseTable {
     }
 
     public function get($key, $id){
-       $result = $this->Join(
+        $result = $this->Join(
             'persona',
             'personal.ID_PERSONA=persona.ID_PERSONA',
             Persona::getVarNames(),
             ['personal.ACTIVE'=>true, 'personal.ID_PERSONAL'  =>  $id]);
-      $entity = $result->current();
-      return get_object_vars($entity);
+        $entity = $result->current();
+        return get_object_vars($entity);
     }
 
 }

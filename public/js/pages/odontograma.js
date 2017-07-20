@@ -141,7 +141,10 @@ var odontograma = {
                 { data: 'DESCRIPCION', },
                 { data: 'FECHA_APLICACION', sClass: 'text-center' },
                 { data: function (row, type, set, meta) {
-                    return '';
+                    console.dir(row);
+                    var html = '<a title=\'Editar\' data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-edit\'></i></a>';
+                    html += '<a title=\'Eliminar\' data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-remove\'></i></a>';
+                    return html;
                 }, orderable: false },
             ],
             ajax: {
@@ -154,6 +157,23 @@ var odontograma = {
         });
     },
     SaveDetalleOdontograma: function () {
-        
+        var request = new Object();
+        request.id = $('#txtiddetalleodontograma').val();
+        request.id_odontograma = $('#txtcodigoodontograma').val();
+        request.numero_diente = $('#txtnrodetalle').val();
+        request.cara_diente = $('#cbocaradetalle').val();
+        request.id_tratamiento = $('#cbotratamiento').val();
+        request.descripcion = $('#txtdescripciondetalle').val();
+        request.estado = 1;
+        $.ajax({
+           url: BasePage.StringFormat('{0}/odontograma/guardarDetalle', BasePage.basePath),
+           data: request,
+           success: function (response) {
+               BasePage.Notify(response, function () {
+                  $('#datatable-detalle-odontograma').dataTable()._fnAjaxUpdate();
+                  $('#modal-detalle-odontograma').modal('hide');
+               });
+           }
+        });
     }
 };

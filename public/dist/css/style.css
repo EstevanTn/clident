@@ -5,10 +5,10 @@ table > thead > tr th {
     text-transform: uppercase;
 }
 *[class*="title"] {
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 .content-header > h1 {
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 .zoom {
     -webkit-transform:scale(1.3);

@@ -131,7 +131,8 @@ String.prototype.capitalize = function() {
             drawCallback: function (data){
               $('a.btn-link').addClass('btn-flat')
                 .attr('data-toggle','tooltip').parent()
-                .addClass('btn-group').addClass('no-padding')
+                //.addClass('btn-group')
+                .addClass('no-padding')
                 .addClass('text-center');
             },
           }
@@ -145,9 +146,10 @@ String.prototype.capitalize = function() {
     var BasePage = function(controllerName){
         if(controllerName !==undefined && controllerName !== null ){
             var protocol = w.location.protocol;
+            var port = w.location.port===''?':80':':'+w.location.port;
             this.ControllerName = controllerName?controllerName:'index';
-            this.basePath = StrFormat('{0}//{1}/clident/public', [protocol, w.location.hostname]);
-            this.requestPath = StrFormat('{0}//{1}{2}', [protocol,w.location.hostname, w.location.pathname]);
+            this.basePath = StrFormat('{0}//{1}{2}/clident/public', [protocol, w.location.hostname, port]);
+            this.requestPath = StrFormat('{0}//{1}{2}{3}', [protocol,w.location.hostname, port, w.location.pathname]);
             this.Instance.call(this);
         }
     };
@@ -296,7 +298,7 @@ String.prototype.capitalize = function() {
             jQuery('.btn, button, a.btn').each(function(){
                 jQuery(this).addClass('btn-flat');
             });
-            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('focusout keyup', function(){
+            jQuery('input[type=\'text\'], input[type=\'email\'], textarea').on('focusout', function(){
                 jQuery(this).val(this.value.capitalize());
             });
         },
