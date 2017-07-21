@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-20 19:38:34
+Date: 2017-07-21 03:52:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -217,35 +217,6 @@ CREATE TABLE `detalle_horario` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for detalle_medicacion
--- ----------------------------
-DROP TABLE IF EXISTS `detalle_medicacion`;
-CREATE TABLE `detalle_medicacion` (
-  `ID_DETALLE_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_MEDICACION` int(11) NOT NULL,
-  `ID_MEDICAMENTO` int(11) NOT NULL,
-  `ID_UNIDAD_MEDIDA` int(11) NOT NULL,
-  `CANTIDAD` float(4,2) DEFAULT NULL,
-  `DESCRIPCION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ACTIVE` int(11) DEFAULT NULL,
-  `FECHA_CREACION` datetime DEFAULT NULL,
-  `USUARIO_CREACION` int(11) DEFAULT NULL,
-  `FECHA_MODIFICACION` datetime DEFAULT NULL,
-  `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID_DETALLE_MEDICACION`),
-  KEY `FK_detalle_medicacion_medicacion` (`ID_MEDICACION`),
-  KEY `FK_detalle_medicacion_medicamento` (`ID_MEDICAMENTO`),
-  KEY `FK_detalle_medicacion_unidad_medida` (`ID_UNIDAD_MEDIDA`),
-  CONSTRAINT `FK_detalle_medicacion_medicacion` FOREIGN KEY (`ID_MEDICACION`) REFERENCES `medicacion` (`ID_MEDICACION`),
-  CONSTRAINT `FK_detalle_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`),
-  CONSTRAINT `FK_detalle_medicacion_unidad_medida` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `unidad_medida` (`ID_UNIDAD_MEDIDA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of detalle_medicacion
--- ----------------------------
-
--- ----------------------------
 -- Table structure for detalle_odontograma
 -- ----------------------------
 DROP TABLE IF EXISTS `detalle_odontograma`;
@@ -336,9 +307,11 @@ INSERT INTO `marca` VALUES ('1', 'GENERAL', '', '2017-07-20 18:38:40', '1', '00
 DROP TABLE IF EXISTS `medicacion`;
 CREATE TABLE `medicacion` (
   `ID_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MEDICAMENTO` int(255) DEFAULT NULL,
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL,
-  `ID_MEDICAMENTO` int(11) DEFAULT NULL,
+  `ID_UNIDAD_MEDIDA` int(11) DEFAULT NULL,
   `DESCRIPCION_MEDICACION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CANTIDAD` decimal(4,2) DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
@@ -347,14 +320,17 @@ CREATE TABLE `medicacion` (
   PRIMARY KEY (`ID_MEDICACION`),
   KEY `FK_medicacion_detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
   KEY `FK_medicacion_medicamento` (`ID_MEDICAMENTO`),
+  KEY `FK_medicacion_unidad` (`ID_UNIDAD_MEDIDA`),
   CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
-  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`),
+  CONSTRAINT `FK_medicacion_unidad` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `unidad_medida` (`ID_UNIDAD_MEDIDA`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of medicacion
 -- ----------------------------
-INSERT INTO `medicacion` VALUES ('1', '1', '1', 'Aplicación de una dosis de anestesia general', '', '2017-07-20 18:40:05', '1', null, null);
+INSERT INTO `medicacion` VALUES ('1', '1', '1', '1', 'Aplicación De Anestecia General Una Dosis De 3.0 Mililitros.', '3.00', '', '2017-07-20 18:40:05', '1', '2017-07-21 10:15:51', '1');
+INSERT INTO `medicacion` VALUES ('2', '1', '1', '3', 'Sdsd', '4.00', '', '2017-07-21 10:50:53', '1', null, null);
 
 -- ----------------------------
 -- Table structure for medicamento
@@ -678,18 +654,22 @@ INSERT INTO `tratamiento` VALUES ('5', 'Lampara Luz Halógena', 'Lampara Luz Hal
 DROP TABLE IF EXISTS `unidad_medida`;
 CREATE TABLE `unidad_medida` (
   `ID_UNIDAD_MEDIDA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `SIGLAS_UNIDAD` char(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) DEFAULT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
   `USUARIO_REGISTRO` int(11) NOT NULL,
-  `FECHA_MODIFICACION` datetime NOT NULL,
-  `USUARIO_MODIFICACION` int(11) NOT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
+  `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_UNIDAD_MEDIDA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of unidad_medida
 -- ----------------------------
+INSERT INTO `unidad_medida` VALUES ('1', 'Onzas', 'ONZ.', '', '2017-07-21 00:52:40', '1', '0000-00-00 00:00:00', null);
+INSERT INTO `unidad_medida` VALUES ('2', 'Unidades', 'UNID.', '', '2017-07-21 03:18:05', '1', null, null);
+INSERT INTO `unidad_medida` VALUES ('3', 'Mililitros', 'MTROS', '', '2017-07-21 03:18:38', '1', null, null);
 
 -- ----------------------------
 -- Table structure for usuario

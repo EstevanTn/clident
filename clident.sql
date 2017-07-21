@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-20 19:38:44
+Date: 2017-07-21 03:53:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -177,31 +177,6 @@ CREATE TABLE `detalle_horario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Table structure for detalle_medicacion
--- ----------------------------
-DROP TABLE IF EXISTS `detalle_medicacion`;
-CREATE TABLE `detalle_medicacion` (
-  `ID_DETALLE_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_MEDICACION` int(11) NOT NULL,
-  `ID_MEDICAMENTO` int(11) NOT NULL,
-  `ID_UNIDAD_MEDIDA` int(11) NOT NULL,
-  `CANTIDAD` float(4,2) DEFAULT NULL,
-  `DESCRIPCION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ACTIVE` int(11) DEFAULT NULL,
-  `FECHA_CREACION` datetime DEFAULT NULL,
-  `USUARIO_CREACION` int(11) DEFAULT NULL,
-  `FECHA_MODIFICACION` datetime DEFAULT NULL,
-  `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID_DETALLE_MEDICACION`),
-  KEY `FK_detalle_medicacion_medicacion` (`ID_MEDICACION`),
-  KEY `FK_detalle_medicacion_medicamento` (`ID_MEDICAMENTO`),
-  KEY `FK_detalle_medicacion_unidad_medida` (`ID_UNIDAD_MEDIDA`),
-  CONSTRAINT `FK_detalle_medicacion_medicacion` FOREIGN KEY (`ID_MEDICACION`) REFERENCES `medicacion` (`ID_MEDICACION`),
-  CONSTRAINT `FK_detalle_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`),
-  CONSTRAINT `FK_detalle_medicacion_unidad_medida` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `unidad_medida` (`ID_UNIDAD_MEDIDA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
 -- Table structure for detalle_odontograma
 -- ----------------------------
 DROP TABLE IF EXISTS `detalle_odontograma`;
@@ -269,9 +244,11 @@ CREATE TABLE `marca` (
 DROP TABLE IF EXISTS `medicacion`;
 CREATE TABLE `medicacion` (
   `ID_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MEDICAMENTO` int(255) DEFAULT NULL,
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL,
-  `ID_MEDICAMENTO` int(11) DEFAULT NULL,
+  `ID_UNIDAD_MEDIDA` int(11) DEFAULT NULL,
   `DESCRIPCION_MEDICACION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CANTIDAD` decimal(4,2) DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
@@ -280,9 +257,11 @@ CREATE TABLE `medicacion` (
   PRIMARY KEY (`ID_MEDICACION`),
   KEY `FK_medicacion_detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
   KEY `FK_medicacion_medicamento` (`ID_MEDICAMENTO`),
+  KEY `FK_medicacion_unidad` (`ID_UNIDAD_MEDIDA`),
   CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
-  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`),
+  CONSTRAINT `FK_medicacion_unidad` FOREIGN KEY (`ID_UNIDAD_MEDIDA`) REFERENCES `unidad_medida` (`ID_UNIDAD_MEDIDA`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for medicamento
@@ -510,14 +489,15 @@ CREATE TABLE `tratamiento` (
 DROP TABLE IF EXISTS `unidad_medida`;
 CREATE TABLE `unidad_medida` (
   `ID_UNIDAD_MEDIDA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `SIGLAS_UNIDAD` char(5) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) DEFAULT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
   `USUARIO_REGISTRO` int(11) NOT NULL,
-  `FECHA_MODIFICACION` datetime NOT NULL,
-  `USUARIO_MODIFICACION` int(11) NOT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
+  `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_UNIDAD_MEDIDA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for usuario
