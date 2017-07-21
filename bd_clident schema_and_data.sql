@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-18 12:01:34
+Date: 2017-07-20 19:38:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ajustes
+-- ----------------------------
+DROP TABLE IF EXISTS `ajustes`;
+CREATE TABLE `ajustes` (
+  `ID_AJUSTE` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(50) NOT NULL,
+  `VALOR` varchar(250) NOT NULL,
+  PRIMARY KEY (`ID_AJUSTE`),
+  UNIQUE KEY `IX_NOMBRE_SETTINGS` (`NOMBRE`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ajustes
+-- ----------------------------
+INSERT INTO `ajustes` VALUES ('1', 'KEY_PERSONAL_DENTISTA', '8');
+INSERT INTO `ajustes` VALUES ('2', 'KEY_PRE_CITA', '');
 
 -- ----------------------------
 -- Table structure for almacen
@@ -63,12 +81,12 @@ CREATE TABLE `area` (
 -- ----------------------------
 -- Records of area
 -- ----------------------------
-INSERT INTO `area` VALUES ('1', null, 'CIRUJIA', 'CIRUJIA DENTAL', '1', '', '2017-06-16 00:00:00', '2017-06-16 00:00:00', '1', '1');
-INSERT INTO `area` VALUES ('2', null, 'RAYOS  X', '', '1', '', '2017-06-16 00:00:00', null, '1', null);
+INSERT INTO `area` VALUES ('1', null, 'Cirujia', 'CIRUJIA DENTAL', '1', '', '2017-06-16 00:00:00', '2017-07-19 22:59:19', '1', '1');
+INSERT INTO `area` VALUES ('2', null, 'Rayos X', 'Rayos X', '1', '', '2017-06-16 00:00:00', '2017-07-19 22:59:40', '1', '1');
 INSERT INTO `area` VALUES ('3', null, 'CIRUJIA', 'CIRUJIA DENTAL PRUEBA', '1', '\0', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
 INSERT INTO `area` VALUES ('4', null, 'CIRUJIA', 'CIRUJIA DENTAL', '1', '\0', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `area` VALUES ('5', null, 'GERENCIA GENERAL', '', '1', '', '2017-06-16 00:00:00', null, '1', null);
-INSERT INTO `area` VALUES ('6', '5', 'GERENCIA FINANCIERA', '', '1', '', '2017-06-16 00:00:00', '2017-06-16 00:00:00', '1', '1');
+INSERT INTO `area` VALUES ('5', null, 'Gerencia General', '', '1', '', '2017-06-16 00:00:00', '2017-07-19 22:59:30', '1', '1');
+INSERT INTO `area` VALUES ('6', '5', 'Gerencia Financiera', '', '1', '', '2017-06-16 00:00:00', '2017-07-19 22:55:55', '1', '1');
 
 -- ----------------------------
 -- Table structure for articulo
@@ -235,6 +253,7 @@ CREATE TABLE `detalle_odontograma` (
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL AUTO_INCREMENT,
   `ID_ODONTOGRAMA` int(11) NOT NULL,
   `NUMERO_DIENTE` int(11) NOT NULL,
+  `CARA_DIENTE` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ID_TRATAMIENTO` int(11) NOT NULL,
   `ID_DENTISTA` int(11) NOT NULL,
   `DESCRIPCION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -252,11 +271,21 @@ CREATE TABLE `detalle_odontograma` (
   CONSTRAINT `FK_detalle_odontograma_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_detalle_odontograma_odontograma` FOREIGN KEY (`ID_ODONTOGRAMA`) REFERENCES `odontograma` (`ID_ODONTOGRAMA`),
   CONSTRAINT `FK_detalle_odontograma_tratamiento` FOREIGN KEY (`ID_TRATAMIENTO`) REFERENCES `tratamiento` (`ID_TRATAMIENTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of detalle_odontograma
 -- ----------------------------
+INSERT INTO `detalle_odontograma` VALUES ('1', '2', '44', 'X', '1', '1', 'Obturación Con Amalgama....', '2017-07-20 20:46:28', '1', '', '2017-07-20 00:09:38', '2017-07-20 20:46:28', '1', '1');
+INSERT INTO `detalle_odontograma` VALUES ('3', '4', '14', 'Z', '3', '1', 'Adfggf Sdsd', '2017-07-19 17:15:32', '1', '', '2017-07-20 00:12:32', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('4', '1', '47', 'C', '1', '1', 'Fgf Dftr', '2017-07-20 05:13:07', '1', '', '2017-07-20 05:13:07', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('5', '2', '44', 'Z', '4', '1', 'Obt. Con Ionomero Cavidad Simple', '2017-07-20 19:58:40', '1', '', '2017-07-20 19:58:40', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('6', '2', '46', 'S', '1', '1', 'Obturación Con Amalgama.', '2017-07-20 21:08:22', '1', '', '2017-07-20 20:01:39', '2017-07-20 21:08:22', '1', '1');
+INSERT INTO `detalle_odontograma` VALUES ('7', '2', '48', 'D', '5', '1', 'Aplicación De Lampara Luz Alógena.', '2017-07-20 21:08:04', '1', '', '2017-07-20 20:03:26', '2017-07-20 21:08:04', '1', '1');
+INSERT INTO `detalle_odontograma` VALUES ('10', '2', '43', 'C', '2', '1', 'Tratamiento', '2017-07-20 21:09:21', '1', '', '2017-07-20 21:09:21', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('11', '1', '45', 'S', '2', '1', 'Mmm', '2017-07-20 22:01:24', '1', '', '2017-07-20 22:01:24', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('12', '1', '71', 'X', '5', '1', 'Lampara Luz Halógena', '2017-07-20 22:04:07', '1', '', '2017-07-20 22:04:07', null, '1', null);
+INSERT INTO `detalle_odontograma` VALUES ('13', '2', '55', 'C', '4', '1', 'Obtención Con Ionómero Cavidad Simple', '2017-07-20 23:20:30', '1', '', '2017-07-20 22:56:03', '2017-07-20 23:20:30', '1', '1');
 
 -- ----------------------------
 -- Table structure for horario
@@ -287,18 +316,19 @@ CREATE TABLE `horario` (
 DROP TABLE IF EXISTS `marca`;
 CREATE TABLE `marca` (
   `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NOMBRE_MARCA` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) DEFAULT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
   `USUARIO_REGISTRO` int(11) NOT NULL,
   `FECHA_MODIFICACION` datetime NOT NULL,
   `USUARIO_MODIFICACION` int(11) NOT NULL,
   PRIMARY KEY (`ID_MARCA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of marca
 -- ----------------------------
+INSERT INTO `marca` VALUES ('1', 'GENERAL', '', '2017-07-20 18:38:40', '1', '0000-00-00 00:00:00', '0');
 
 -- ----------------------------
 -- Table structure for medicacion
@@ -307,6 +337,8 @@ DROP TABLE IF EXISTS `medicacion`;
 CREATE TABLE `medicacion` (
   `ID_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL,
+  `ID_MEDICAMENTO` int(11) DEFAULT NULL,
+  `DESCRIPCION_MEDICACION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
@@ -314,12 +346,15 @@ CREATE TABLE `medicacion` (
   `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_MEDICACION`),
   KEY `FK_medicacion_detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
-  CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `FK_medicacion_medicamento` (`ID_MEDICAMENTO`),
+  CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
+  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of medicacion
 -- ----------------------------
+INSERT INTO `medicacion` VALUES ('1', '1', '1', 'Aplicación de una dosis de anestesia general', '', '2017-07-20 18:40:05', '1', null, null);
 
 -- ----------------------------
 -- Table structure for medicamento
@@ -338,11 +373,70 @@ CREATE TABLE `medicamento` (
   PRIMARY KEY (`ID_MEDICAMENTO`),
   KEY `FK_medicamento_marca` (`ID_MARCA`),
   CONSTRAINT `FK_medicamento_marca` FOREIGN KEY (`ID_MARCA`) REFERENCES `marca` (`ID_MARCA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of medicamento
 -- ----------------------------
+INSERT INTO `medicamento` VALUES ('1', '1', 'ANESTECIA', 'ANESTECIA GENERICA', '', '2017-07-20 18:39:06', '1', null, null);
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `ID_MENU` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PARENT_MENU` int(11) DEFAULT NULL,
+  `ICONO` varchar(15) NOT NULL,
+  `NOMBRE` varchar(30) NOT NULL,
+  `DESCRIPCION` varchar(255) DEFAULT NULL,
+  `URL` varchar(250) DEFAULT '#',
+  `ESTADO` char(1) DEFAULT NULL,
+  `ACTIVE` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`ID_MENU`),
+  KEY `FK_menu_submenu` (`ID_PARENT_MENU`),
+  CONSTRAINT `FK_menu_submenu` FOREIGN KEY (`ID_PARENT_MENU`) REFERENCES `menu` (`ID_MENU`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of menu
+-- ----------------------------
+INSERT INTO `menu` VALUES ('1', null, 'fa fa-gear', 'Configuración', null, '#', null, '');
+INSERT INTO `menu` VALUES ('2', null, 'fa fa-gears', 'Mantenimiento', null, '#', null, '');
+INSERT INTO `menu` VALUES ('3', null, 'fa fa-navicon', 'Procesos', null, '#', null, '');
+INSERT INTO `menu` VALUES ('4', '1', 'fa fa-indent', 'Tipo', null, 'tipo', null, '');
+INSERT INTO `menu` VALUES ('5', '1', 'fa fa-users', 'Usuarios', null, 'usuario', null, '');
+INSERT INTO `menu` VALUES ('6', '2', 'fa fa-check', 'Áreas', null, 'area', null, '');
+INSERT INTO `menu` VALUES ('7', '2', 'fa fa-child', 'Personal', null, 'persona', null, '');
+INSERT INTO `menu` VALUES ('8', '2', 'fa fa-user-plus', 'Pacientes', null, 'paciente', null, '');
+INSERT INTO `menu` VALUES ('9', '2', 'fa fa-tint', 'Tratamientos', null, 'tratamiento', null, '');
+INSERT INTO `menu` VALUES ('10', '3', 'fa fa-calendar', 'Odontograma', null, 'odontograma', null, '');
+INSERT INTO `menu` VALUES ('11', '3', 'fa fa-group', 'Citas', null, 'cita', null, '');
+
+-- ----------------------------
+-- Table structure for menu_rol
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_rol`;
+CREATE TABLE `menu_rol` (
+  `ID_MENU_ROL` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MENU` int(11) DEFAULT NULL,
+  `ID_ROL` int(11) DEFAULT NULL,
+  `ACTIVE` bit(1) DEFAULT NULL,
+  `FECHA_CREACION` datetime DEFAULT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID_MENU_ROL`),
+  KEY `FK_menu_menu` (`ID_MENU`),
+  KEY `FK_menu_rol` (`ID_ROL`),
+  CONSTRAINT `FK_menu_menu` FOREIGN KEY (`ID_MENU`) REFERENCES `menu` (`ID_MENU`),
+  CONSTRAINT `FK_menu_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of menu_rol
+-- ----------------------------
+INSERT INTO `menu_rol` VALUES ('1', '1', '1', '', '2017-07-19 07:34:39', null);
+INSERT INTO `menu_rol` VALUES ('2', '2', '1', '', '2017-07-19 07:37:16', null);
+INSERT INTO `menu_rol` VALUES ('3', '3', '1', '', '2017-07-19 07:37:28', null);
 
 -- ----------------------------
 -- Table structure for odontograma
@@ -389,9 +483,9 @@ CREATE TABLE `paciente` (
 -- Records of paciente
 -- ----------------------------
 INSERT INTO `paciente` VALUES ('1', '1', '', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('2', '2', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('3', '3', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `paciente` VALUES ('4', '4', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
+INSERT INTO `paciente` VALUES ('2', '2', '', '2017-06-17 00:00:00', '2017-07-20 04:05:26', '1', '1');
+INSERT INTO `paciente` VALUES ('3', '3', '', '2017-06-17 00:00:00', '2017-07-19 23:06:13', '1', '1');
+INSERT INTO `paciente` VALUES ('4', '4', '', '2017-06-17 00:00:00', '2017-07-19 23:05:05', '1', '1');
 
 -- ----------------------------
 -- Table structure for persona
@@ -421,10 +515,10 @@ CREATE TABLE `persona` (
 -- ----------------------------
 -- Records of persona
 -- ----------------------------
-INSERT INTO `persona` VALUES ('1', '1', '70129676', 'ALEXANDER ESTEVAN', 'TUME NAQUICHE', 'AMP. NUEVA GENERACION MZ B LT 3', 'TUMENAQUICHE@GMAIL.COM', '923721402', '', '1994-10-05', '', '2017-06-16 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('2', '1', '05623412', 'ALEXANDER ', 'MARTINEZ RODRIGUEZ', '', 'AMARTINEZRODRIGUEZ@HOTMAIL.COM', '', '', '1995-10-02', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('3', '1', '89712871', 'ALICIA', 'GARCIA MENDEZ', '', 'ALICIA.G.M@GMAIL.COM', '', '', '1995-09-12', '', '2017-06-17 00:00:00', '2017-06-17 00:00:00', '1', '1');
-INSERT INTO `persona` VALUES ('4', '1', '01275323', 'STEFANY', 'ALVARADO GAMBOA', 'ENRRIQUE PALACIOS', '', '', '', '1995-06-09', '', '2017-06-17 00:00:00', null, '1', null);
+INSERT INTO `persona` VALUES ('1', '1', '70129676', 'Alexander Estevan', 'Tume Naquiche', 'AMP. NUEVA GENERACION MZ B LT 3', 'TUMENAQUICHE@GMAIL.COM', '', '', '1994-10-05', '', '2017-06-16 00:00:00', '2017-07-19 23:07:18', '1', '1');
+INSERT INTO `persona` VALUES ('2', '1', '05623412', 'Alexander', 'Martinez Rodriguez', '', 'AMARTINEZRODRIGUEZ@HOTMAIL.COM', '', '', '1995-10-02', '', '2017-06-17 00:00:00', '2017-07-20 04:05:26', '1', '1');
+INSERT INTO `persona` VALUES ('3', '1', '89712871', 'Alicia ', 'Garcia Mendez', '', 'ALICIA.G.M@GMAIL.COM', '', '', '1995-09-12', '', '2017-06-17 00:00:00', '2017-07-19 23:06:13', '1', '1');
+INSERT INTO `persona` VALUES ('4', '1', '01275323', 'Stefany Bricyit', 'Alvarado Gamboa', 'Enrrique Palacios #155', '', '', '', '1995-06-09', '', '2017-06-17 00:00:00', '2017-07-19 23:05:05', '1', '1');
 
 -- ----------------------------
 -- Table structure for personal
@@ -438,7 +532,7 @@ CREATE TABLE `personal` (
   `FECHA_INGRESO` datetime NOT NULL,
   `FECHA_CONTRATO_INICIO` datetime DEFAULT NULL,
   `FECHA_CONTRATO_FIN` datetime DEFAULT NULL,
-  `ESPECILIDAD` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ESPECIALIDAD` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CARGO` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
@@ -455,7 +549,7 @@ CREATE TABLE `personal` (
 -- ----------------------------
 -- Records of personal
 -- ----------------------------
-INSERT INTO `personal` VALUES ('1', '1', '1', '7', '2017-07-01 08:31:30', null, null, null, 'ADMIN', '', '2017-07-01 08:31:39', null, '1', null);
+INSERT INTO `personal` VALUES ('1', '1', '1', '8', '2017-07-01 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'Admin', '', '2017-07-01 08:31:39', '2017-07-19 23:07:18', '1', '1');
 
 -- ----------------------------
 -- Table structure for proveedor
@@ -490,12 +584,13 @@ CREATE TABLE `rol` (
   `ID_ROL` int(11) NOT NULL AUTO_INCREMENT,
   `NOMBRE_ROL` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rol
 -- ----------------------------
 INSERT INTO `rol` VALUES ('1', 'ADMINISTRADOR');
+INSERT INTO `rol` VALUES ('2', 'DENTISTA');
 
 -- ----------------------------
 -- Table structure for tipo
@@ -521,11 +616,11 @@ CREATE TABLE `tipo` (
 -- Records of tipo
 -- ----------------------------
 INSERT INTO `tipo` VALUES ('1', '1', 'DOCUMENTO NACIONAL DE IDENTIDAD', '8', 'DNI', '', '2017-06-16 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('2', '1', 'CARNET DE EXTRANJERIA', '20', 'CE', '', '2017-06-16 06:06:24', '1', '2017-06-17 00:00:00', '1');
-INSERT INTO `tipo` VALUES ('3', '1', 'LIBRETA ELECTORAL', '10', 'LE', '', '2017-06-16 06:07:09', '1', '2017-06-17 00:00:00', '1');
+INSERT INTO `tipo` VALUES ('2', '1', 'CARNET DE EXTRANJERIA', '20', 'CE', '', '2017-06-16 06:06:24', '1', '2017-07-19 22:47:30', '1');
+INSERT INTO `tipo` VALUES ('3', '1', 'LIBRETA ELECTORAL', '10', 'LE.', '', '2017-06-16 06:07:09', '1', '2017-07-19 22:47:48', '1');
 INSERT INTO `tipo` VALUES ('4', '1', 'REGISTRO ÚNICO DE CONTRIBUYENTE', '12', 'RUC', '', '2017-06-17 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('5', '2', 'CITA', '', '', '', '2017-06-17 00:00:00', '1', null, null);
-INSERT INTO `tipo` VALUES ('6', '2', 'PRE CITA', '', '', '', '2017-06-17 00:00:00', '1', '2017-06-17 00:00:00', '1');
+INSERT INTO `tipo` VALUES ('5', '2', 'CITA', '', 'Cta', '', '2017-06-17 00:00:00', '1', '2017-07-19 22:48:03', '1');
+INSERT INTO `tipo` VALUES ('6', '2', 'PRE CITA', '', 'PCita', '', '2017-06-17 00:00:00', '1', '2017-07-19 22:48:15', '1');
 INSERT INTO `tipo` VALUES ('7', '3', 'ADMINISTRATIVO', '', 'ADMIN', '', '2017-06-17 00:00:00', '1', '2017-06-17 00:00:00', '1');
 INSERT INTO `tipo` VALUES ('8', '3', 'DENTISTA', '', 'DSTA', '', '2017-06-17 00:00:00', '1', null, null);
 INSERT INTO `tipo` VALUES ('9', '3', 'PERSONAL', '', 'PRSNL', '', '2017-06-17 00:00:00', '1', null, null);
@@ -572,7 +667,7 @@ CREATE TABLE `tratamiento` (
 -- Records of tratamiento
 -- ----------------------------
 INSERT INTO `tratamiento` VALUES ('1', 'Obturación C/ Amalgama', 'Cavidad Simple - Solo Cara', '', '\0', '34', '', '2017-07-02 20:57:12', '2017-07-18 00:00:00', '1', '1');
-INSERT INTO `tratamiento` VALUES ('2', 'Obturación C/ Amalgama - Solo Diente', 'Cavidad Compuesta - Solo Diente', '\0', '', '40', '', '2017-07-02 21:23:58', '2017-07-18 18:48:13', '1', '1');
+INSERT INTO `tratamiento` VALUES ('2', 'Obturación C/ Amalgama - Solo Diente', 'Cavidad Compuesta - Solo Diente', '\0', '', '40', '', '2017-07-02 21:23:58', '2017-07-19 23:07:46', '1', '1');
 INSERT INTO `tratamiento` VALUES ('3', 'Obturacion C/resinas Acrilicas: Cavidad', 'Obturacion C/resinas Acrilicas: Cavidad', '', '', '90.8', '', '2017-07-18 00:00:00', '2017-07-18 00:00:00', '1', '1');
 INSERT INTO `tratamiento` VALUES ('4', 'Obt.con Ionómero Cav.simple', 'Obt.con Ionómero Cav.simple - Sin Cara Y Sin Diente', '\0', '\0', '40.9', '', '2017-07-18 00:00:00', '2017-07-18 18:28:24', '1', '1');
 INSERT INTO `tratamiento` VALUES ('5', 'Lampara Luz Halógena', 'Lampara Luz Halógena', '', '', '30', '', '2017-07-18 18:30:42', '2017-07-18 18:39:03', '1', '1');

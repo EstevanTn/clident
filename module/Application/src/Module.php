@@ -8,7 +8,9 @@
 namespace Application;
 
 use Application\Controller\AuthController;
+use Application\Controller\MedicamentoController;
 use Application\Controller\SiteController;
+use Application\View\Helper\ControllerName;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -109,6 +111,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Cita());
                     return new TableGateway('cita', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\MedicamentoTable::class => function($container){
+                    $tableGateway = $container->get(Model\MedicamentoTableGateway::class);
+                    return new Model\MedicamentoTable($tableGateway);
+                },
+                Model\MedicamentoTableGateway::class => function($container){
+                    $dbAdapter = $container->get(\Zend\Db\Adapter\AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Entity\Medicamento());
+                    return new TableGateway('medicamento', $dbAdapter, null, $resultSetPrototype);
+                },
                 Model\CitaTable::class => function($container){
                     $tableGateway = $container->get(Model\CitaTableGateway::class);
                     return new Model\CitaTable($tableGateway);
@@ -164,6 +176,9 @@ class Module implements ConfigProviderInterface
                   return new Controller\CitaController(
                       $container->get(Model\CitaTable::class)
                   );
+                },
+                Controller\MedicamentoController::class => function($container){
+                    return new MedicamentoController($container->get(Model\MedicamentoTable::class));
                 },
                 Controller\SiteController::class => InvokableFactory::class,
             ],
@@ -222,7 +237,7 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 'ControllerName' => function ($sm) {
                     $match = $sm->get('application')->getMvcEvent()->getRouteMatch();
-                    return new \Application\View\Helper\ControllerName($match);
+                    return new ControllerName($match);
                 },
             ],
        ];

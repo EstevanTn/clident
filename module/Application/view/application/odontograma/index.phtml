@@ -25,59 +25,45 @@
             </div>
         </div>
         <div class="row" id="box-persona">
-            <div class="col-xs-12">
-                <div class="box box-solid box-warning">
-                    <div class="box-header">
+            <div class="col-xs-12 col-sm-4">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-user"></i> Información del paciente</h3>
-                        <div class="box-tools pull-right">
-                            <button data-widget="remove" class="btn btn-box-tool"><i class="fa fa-remove"></i></button>
-                            <button data-widget="collapse" class="btn btn-box-tool"><i class="fa fa-minus"></i></button>
-                        </div>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="min-height: 270px;">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">N° DOCUMENTO</span>
-                                    <input type="text" class="form-control text-center" id="txtnumerodocumento" readonly="readonly" />
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">N° Documento</label>
+                                    <input class="form-control text-center" id="txtnumerodocumento" readonly="readonly" />
                                 </div>
-                                <br/>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-8">
-                                <div class="input-group">
-                                    <span class="input-group-addon">NOMBRE Y APELLIDOS</span>
-                                    <input class="form-control text-center" type="text" id="txtnombreapellidos" />
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre y Apellidos</label>
+                                    <input class="form-control text-center" readonly="true" id="txtnombreapellidos" />
                                 </div>
-                                <br/>
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon">CÓD. ODONTOGRAMA</span>
-                                    <input type="text" class="form-control text-center" name="txtcodigoodontograma" id="txtcodigoodontograma" readonly="readonly" />
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Código Odontograma</label>
+                                    <input class="form-control text-center" name="txtcodigoodontograma" id="txtcodigoodontograma" readonly="readonly" />
                                 </div>
-                                <br/>
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon">CÓD. PACIENTE</span>
-                                    <input type="text" class="form-control text-center" id="txtcodigopaciente" readonly="readonly" />
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Código Paciente</label>
+                                    <input class="form-control text-center" id="txtcodigopaciente" readonly="readonly" />
                                 </div>
-                                <br/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-solid box-success" >
+            <div class="col-xs-12 col-sm-8">
+                <div class="box box-widget box-success" >
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-object-group"></i> Odontograma</h3>
-                        <div class="box-tools">
-                            <button class="btn btn-default btn-sm btn-flat" type="button" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-default btn-sm btn-flat" type="button" data-toggle="tooltip" data-widget="fullscreen" title="Pantalla completa"><i class="fa fa-expand"></i></button>
-                        </div>
                     </div>
                     <div class="box-body">
                         <div class="row">
@@ -88,17 +74,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-footer">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">Historial de Odontograma</h3>
+                    </div>
+                    <div class="box-body no-padding">
                         <table class="table table-striped table-hover" id="datatable-detalle-odontograma">
                             <thead>
-                                <tr>
-                                    <th>DIENTE</th>
-                                    <th>CARA</th>
-                                    <th>TRATAMIENTO</th>
-                                    <th>DESCRIPCIÓN</th>
-                                    <th>FECHA</th>
-                                    <th>ACCIONES</th>
-                                </tr>
+                            <tr>
+                                <th>DIENTE</th>
+                                <th>CARA</th>
+                                <th>TRATAMIENTO</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>FECHA</th>
+                                <th>ACCIONES</th>
+                            </tr>
                             </thead>
                         </table>
                     </div>
@@ -169,6 +164,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box box-widget">
+                                    <div class="box-header">
+                                        <div class="box-title">Detalle de Medicación</div>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool label-success" id="btnagregar-medicacion"><i class="fa fa-plus"></i> Agregar</button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <table class="table" id="datatable-medicacion">
+                                            <thead>
+                                            <tr>
+                                                <th>Medicamento</th>
+                                                <th>Marca</th>
+                                                <th>Descripción</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
@@ -179,6 +198,41 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-medicacion">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="form-medicacion">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" type="button" class="close">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="txtidmedicamento" name="txtidmedicamento" />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Medicamento</label>
+                                    <select class="form-control" min="1" name="cbomedicamento" id="cbomedicamento"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>Descripción de Medicación</label>
+                                    <textarea class="form-control" name="txtdescripcionmedicacion" id="txtdescripcionmedicacion"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default">Cancelar</button>
+                        <button id="btnguardar-medicacion" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!--<script src="<?=$this->basePath()?>/js/odontograma/js/jquery-1.7.1.min.js"></script>-->

@@ -104,6 +104,12 @@ var odontograma = {
                 odontograma.SaveDetalleOdontograma();
             }
         });
+        $('#btnagregar-medicacion').on('click', function (e) {
+            BasePage.ShowModal({
+                name: 'medicacion',
+                title: '<i class=\'fa fa-plus\'></i> Nueva Medicación'
+            });
+        });
     },
     GetCaraDiente: function(data){
         BasePage.ShowModal({
@@ -204,6 +210,7 @@ var odontograma = {
                         $('#cbocaradetalle').val(response.CARA_DIENTE).trigger('change');
                         $('#cbotratamiento').val(response.ID_TRATAMIENTO).trigger('change');
                         $('#txtdescripciondetalle').val(response.DESCRIPCION);
+                        odontograma.GetAllMedicacionItemDetalle(response.ID_DETALLE_ODONTOGRAMA);
                     }
                 });
             }
@@ -241,5 +248,33 @@ var odontograma = {
                 });
             }
         });
+    },
+    GetAllMedicacionItemDetalle: function (id_detalle) {
+        BasePage.GridSetup({
+            name: 'medicacion',
+            columns: [
+                { data: 'NOMBRE' , sWidth: '22%', },
+                { data: 'NOMBRE_MARCA' , sWidth: '20%', },
+                { data: function (row, type, set, meta) {
+                    var text = row.DESCRIPCION_MEDICACION.length > 50 ? row.DESCRIPCION_MEDICACION.substring(0,47)+'...' : row.DESCRIPCION_MEDICACION;
+                    return text;
+                } , sWidth: '50%', },
+                { data: function (row, type, set, meta) {
+                    var html = '<a onclick="odontograma.GetMedicacion('+row.ID_MEDICACION+')" href="#" data-toggle="tooltip" title="Editar" class="btn btn-link"><i class="fa fa-edit"></i></a>';
+                    html += '<a onclick="odontograma.deleteMedicacion('+row.ID_MEDICACION+')" href="#" data-toggle="tooltip" title="Eliminar" class="btn btn-link"><i class="fa fa-remove"></i></a>';
+                    return html;
+                }, sWidth: '8%', },
+            ],
+            ajax: {
+                url: BasePage.StringFormat('{0}/getAllMedicacion', BasePage.requestPath),
+                data: { id_detalle: id_detalle}
+            },
+        });
+    },
+    GetMedicacion: function (id_medicacion) {
+
+    },
+    deleteMedicacion: function (if_medicacion) {
+
     }
 };

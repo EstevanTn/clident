@@ -10,10 +10,22 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-18 12:01:47
+Date: 2017-07-20 19:38:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ajustes
+-- ----------------------------
+DROP TABLE IF EXISTS `ajustes`;
+CREATE TABLE `ajustes` (
+  `ID_AJUSTE` int(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(50) NOT NULL,
+  `VALOR` varchar(250) NOT NULL,
+  PRIMARY KEY (`ID_AJUSTE`),
+  UNIQUE KEY `IX_NOMBRE_SETTINGS` (`NOMBRE`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for almacen
@@ -197,6 +209,7 @@ CREATE TABLE `detalle_odontograma` (
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL AUTO_INCREMENT,
   `ID_ODONTOGRAMA` int(11) NOT NULL,
   `NUMERO_DIENTE` int(11) NOT NULL,
+  `CARA_DIENTE` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ID_TRATAMIENTO` int(11) NOT NULL,
   `ID_DENTISTA` int(11) NOT NULL,
   `DESCRIPCION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -214,7 +227,7 @@ CREATE TABLE `detalle_odontograma` (
   CONSTRAINT `FK_detalle_odontograma_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_detalle_odontograma_odontograma` FOREIGN KEY (`ID_ODONTOGRAMA`) REFERENCES `odontograma` (`ID_ODONTOGRAMA`),
   CONSTRAINT `FK_detalle_odontograma_tratamiento` FOREIGN KEY (`ID_TRATAMIENTO`) REFERENCES `tratamiento` (`ID_TRATAMIENTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for horario
@@ -241,14 +254,14 @@ CREATE TABLE `horario` (
 DROP TABLE IF EXISTS `marca`;
 CREATE TABLE `marca` (
   `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `NOMBRE_MARCA` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) DEFAULT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
   `USUARIO_REGISTRO` int(11) NOT NULL,
   `FECHA_MODIFICACION` datetime NOT NULL,
   `USUARIO_MODIFICACION` int(11) NOT NULL,
   PRIMARY KEY (`ID_MARCA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for medicacion
@@ -257,6 +270,8 @@ DROP TABLE IF EXISTS `medicacion`;
 CREATE TABLE `medicacion` (
   `ID_MEDICACION` int(11) NOT NULL AUTO_INCREMENT,
   `ID_DETALLE_ODONTOGRAMA` int(11) NOT NULL,
+  `ID_MEDICAMENTO` int(11) DEFAULT NULL,
+  `DESCRIPCION_MEDICACION` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
@@ -264,8 +279,10 @@ CREATE TABLE `medicacion` (
   `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_MEDICACION`),
   KEY `FK_medicacion_detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
-  CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `FK_medicacion_medicamento` (`ID_MEDICAMENTO`),
+  CONSTRAINT `FK_medicacion_detalle_odontograma` FOREIGN KEY (`ID_DETALLE_ODONTOGRAMA`) REFERENCES `detalle_odontograma` (`ID_DETALLE_ODONTOGRAMA`),
+  CONSTRAINT `FK_medicacion_medicamento` FOREIGN KEY (`ID_MEDICAMENTO`) REFERENCES `medicamento` (`ID_MEDICAMENTO`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for medicamento
@@ -284,7 +301,43 @@ CREATE TABLE `medicamento` (
   PRIMARY KEY (`ID_MEDICAMENTO`),
   KEY `FK_medicamento_marca` (`ID_MARCA`),
   CONSTRAINT `FK_medicamento_marca` FOREIGN KEY (`ID_MARCA`) REFERENCES `marca` (`ID_MARCA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `ID_MENU` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PARENT_MENU` int(11) DEFAULT NULL,
+  `ICONO` varchar(15) NOT NULL,
+  `NOMBRE` varchar(30) NOT NULL,
+  `DESCRIPCION` varchar(255) DEFAULT NULL,
+  `URL` varchar(250) DEFAULT '#',
+  `ESTADO` char(1) DEFAULT NULL,
+  `ACTIVE` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`ID_MENU`),
+  KEY `FK_menu_submenu` (`ID_PARENT_MENU`),
+  CONSTRAINT `FK_menu_submenu` FOREIGN KEY (`ID_PARENT_MENU`) REFERENCES `menu` (`ID_MENU`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for menu_rol
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_rol`;
+CREATE TABLE `menu_rol` (
+  `ID_MENU_ROL` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_MENU` int(11) DEFAULT NULL,
+  `ID_ROL` int(11) DEFAULT NULL,
+  `ACTIVE` bit(1) DEFAULT NULL,
+  `FECHA_CREACION` datetime DEFAULT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID_MENU_ROL`),
+  KEY `FK_menu_menu` (`ID_MENU`),
+  KEY `FK_menu_rol` (`ID_ROL`),
+  CONSTRAINT `FK_menu_menu` FOREIGN KEY (`ID_MENU`) REFERENCES `menu` (`ID_MENU`),
+  CONSTRAINT `FK_menu_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for odontograma
@@ -356,7 +409,7 @@ CREATE TABLE `personal` (
   `FECHA_INGRESO` datetime NOT NULL,
   `FECHA_CONTRATO_INICIO` datetime DEFAULT NULL,
   `FECHA_CONTRATO_FIN` datetime DEFAULT NULL,
-  `ESPECILIDAD` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ESPECIALIDAD` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CARGO` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
@@ -399,7 +452,7 @@ CREATE TABLE `rol` (
   `ID_ROL` int(11) NOT NULL AUTO_INCREMENT,
   `NOMBRE_ROL` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tipo

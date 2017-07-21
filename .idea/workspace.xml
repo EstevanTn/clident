@@ -2,15 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bac0578f-158a-4055-921b-e6505c2a4b14" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Controller/MedicamentoController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Marca.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Medicacion.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Medicamento.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/MedicamentoTable.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/db_clident.sql" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Tunaqui.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Tunaqui.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bd_clident schema_and_data.sql" afterPath="$PROJECT_DIR$/bd_clident schema_and_data.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clident.sql" afterPath="$PROJECT_DIR$/clident.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/config/module.config.php" afterPath="$PROJECT_DIR$/module/Application/config/module.config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php" afterPath="$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/BaseTable.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/BaseTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/Entity/DetalleOdontograma.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/DetalleOdontograma.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/Entity/Odontograma.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Odontograma.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Module.php" afterPath="$PROJECT_DIR$/module/Application/src/Module.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" afterPath="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/dashboard.js" afterPath="$PROJECT_DIR$/public/js/dashboard.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js" afterPath="$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/pages/odontograma.js" afterPath="$PROJECT_DIR$/public/js/pages/odontograma.js" />
     </list>
@@ -38,13 +46,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OdontogramaTable.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OdontogramaTable.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="52" column="76" lean-forward="false" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
+            <state relative-caret-position="561">
+              <caret line="186" column="14" lean-forward="false" selection-start-line="186" selection-start-column="14" selection-end-line="186" selection-end-column="14" />
               <folding>
                 <element signature="e#36#84#0#PHP" expanded="true" />
+                <element signature="e#1707#2141#0#PHP" expanded="false" />
+                <element signature="e#2151#3206#0#PHP" expanded="false" />
+                <element signature="e#3222#3516#0#PHP" expanded="false" />
+                <element signature="e#4179#4603#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,9 +65,15 @@
       <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="94" column="40" lean-forward="false" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
-              <folding />
+            <state relative-caret-position="67">
+              <caret line="172" column="103" lean-forward="false" selection-start-line="172" selection-start-column="103" selection-end-line="172" selection-end-column="103" />
+              <folding>
+                <element signature="n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#section#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#11199#11206#1#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,18 +81,18 @@
       <file leaf-file-name="OdontogramaController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="72" column="36" lean-forward="false" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+            <state relative-caret-position="231">
+              <caret line="79" column="36" lean-forward="false" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="odontograma.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="odontograma.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/pages/odontograma.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="146" column="75" lean-forward="false" selection-start-line="146" selection-start-column="75" selection-end-line="146" selection-end-column="75" />
+            <state relative-caret-position="144">
+              <caret line="255" column="46" lean-forward="false" selection-start-line="255" selection-start-column="46" selection-end-line="255" selection-end-column="46" />
               <folding>
                 <element signature="n#!!block;n#InitEventOdontograma#0;n#InitEventOdontograma#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
                 <element signature="n#!!block;n#InputEvent#0;n#InputEvent#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
@@ -83,7 +101,18 @@
                 <element signature="e#3788#4051#0" expanded="false" />
                 <element signature="e#4121#4256#0" expanded="false" />
                 <element signature="n#!!block;n#Get#0;n#Get#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#GetDetalleOdontograma#0;n#GetDetalleOdontograma#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CitaTable.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Application/src/Model/CitaTable.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,6 +137,7 @@
       <find>btn-gr</find>
       <find>hasErr</find>
       <find>initC</find>
+      <find>create</find>
       <find>Load</find>
     </findStrings>
   </component>
@@ -117,13 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/module/Site/src/Controller/SkeletonController.php" />
-        <option value="$PROJECT_DIR$/module/Site/config/module.config.php" />
-        <option value="$PROJECT_DIR$/config/modules.config.php" />
-        <option value="$PROJECT_DIR$/client/index.html" />
-        <option value="$PROJECT_DIR$/module/Application/view/application/site/index.phtml" />
-        <option value="$PROJECT_DIR$/../client_clident/about.html" />
-        <option value="$PROJECT_DIR$/module/Application/view/application/site/about.phtml" />
         <option value="$PROJECT_DIR$/../client_clident/contact.html" />
         <option value="$PROJECT_DIR$/module/Application/view/application/site/contact.phtml" />
         <option value="$PROJECT_DIR$/module/Application/view/application/site/services.phtml" />
@@ -140,9 +163,6 @@
         <option value="$PROJECT_DIR$/module/Application/src/Model/TratamientoTable.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/Enviroment.php" />
         <option value="$PROJECT_DIR$/public/js/app.utils.js" />
-        <option value="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" />
-        <option value="$PROJECT_DIR$/module/Application/config/module.config.php" />
-        <option value="$PROJECT_DIR$/module/Application/src/Module.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Controller/CitaController.php" />
         <option value="$PROJECT_DIR$/config/autoload/global.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Controller/PacienteController.php" />
@@ -161,13 +181,23 @@
         <option value="$PROJECT_DIR$/module/Application/view/layout/layout.phtml" />
         <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/Odontograma.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/DetalleOdontograma.php" />
+        <option value="$PROJECT_DIR$/public/js/dashboard.js" />
+        <option value="$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js" />
+        <option value="$PROJECT_DIR$/module/Application/src/Controller/MedicacionController.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/Medicamento.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/Medicacion.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/MedicacionTable.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/MedicamentoTable.php" />
+        <option value="$PROJECT_DIR$/module/Application/config/module.config.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Controller/MedicamentoController.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Module.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Model/BaseTable.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php" />
-        <option value="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" />
-        <option value="$PROJECT_DIR$/public/js/dashboard.js" />
-        <option value="$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php" />
-        <option value="$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/Entity/Marca.php" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" />
         <option value="$PROJECT_DIR$/public/js/pages/odontograma.js" />
+        <option value="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" />
+        <option value="$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php" />
       </list>
     </option>
   </component>
@@ -274,11 +304,6 @@
             <path>
               <item name="clident" type="b2602c69:ProjectViewProjectNode" />
               <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="data" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="clident" type="b2602c69:ProjectViewProjectNode" />
-              <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="module" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -369,28 +394,6 @@
               <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="clident" type="b2602c69:ProjectViewProjectNode" />
-              <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="odontograma" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="clident" type="b2602c69:ProjectViewProjectNode" />
-              <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="odontograma" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="clident" type="b2602c69:ProjectViewProjectNode" />
-              <item name="clident" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pages" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -503,12 +506,12 @@
       <workItem from="1500320888408" duration="3771000" />
       <workItem from="1500335141302" duration="18981000" />
       <workItem from="1500388327642" duration="20891000" />
-      <workItem from="1500513865856" duration="40658000" />
+      <workItem from="1500513865856" duration="52657000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106021000" />
+    <option name="totallyTimeSpent" value="118020000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -550,90 +553,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/module/Application/view/layout/public.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="67" column="16" lean-forward="false" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
-          <folding>
-            <element signature="e#6#512#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/fsite/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2106">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#10#80#0" expanded="false" />
-            <element signature="e#202#292#0" expanded="false" />
-            <element signature="e#295#309#0" expanded="false" />
-            <element signature="e#318#344#0" expanded="false" />
-            <element signature="e#357#383#0" expanded="false" />
-            <element signature="e#409#492#0" expanded="false" />
-            <element signature="e#498#514#0" expanded="false" />
-            <element signature="e#522#738#0" expanded="false" />
-            <element signature="e#34865#35378#0" expanded="false" />
-            <element signature="e#35379#37422#0" expanded="false" />
-            <element signature="e#37423#40714#0" expanded="false" />
-            <element signature="e#40715#41054#0" expanded="false" />
-            <element signature="e#41055#41605#0" expanded="false" />
-            <element signature="e#41606#41818#0" expanded="false" />
-            <element signature="e#41819#47550#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/TipoController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="93" column="90" lean-forward="false" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="36" column="72" lean-forward="false" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="72" />
-          <folding>
-            <element signature="e#1771#4772#0#PHP" expanded="false" />
-            <element signature="e#5028#5999#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/UsuarioTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="42" column="61" lean-forward="false" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/TipoTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#234#2957#0#PHP" expanded="false" />
-            <element signature="e#755#1517#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tratamientos.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/zendframework/zend-stdlib/src/MessageInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -700,14 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/config/module.config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="106" column="15" lean-forward="false" selection-start-line="106" selection-start-column="15" selection-end-line="106" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/PacienteController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-781">
@@ -722,14 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-462">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/CitaTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -763,14 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/PersonalTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="100" column="34" lean-forward="true" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/autoload/global.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -785,23 +685,6 @@
           <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
           <folding>
             <element signature="e#896#2187#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Module.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="111" column="57" lean-forward="true" selection-start-line="111" selection-start-column="57" selection-end-line="111" selection-end-column="57" />
-          <folding>
-            <element signature="e#5184#5563#2#PHP" expanded="false" />
-            <element signature="e#5610#5802#2#PHP" expanded="false" />
-            <element signature="e#5853#6226#2#PHP" expanded="false" />
-            <element signature="e#6270#6456#2#PHP" expanded="false" />
-            <element signature="e#6515#8842#0#PHP" expanded="false" />
-            <element signature="e#8060#8259#2#PHP" expanded="false" />
-            <element signature="e#8313#8500#2#PHP" expanded="false" />
-            <element signature="e#8554#8732#2#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -947,28 +830,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/BaseTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="29" selection-end-column="37" />
-          <folding>
-            <element signature="e#36#76#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/Application/src/Model/Entity/Enviroment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="94" column="40" lean-forward="false" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -978,45 +843,6 @@
         <state relative-caret-position="319">
           <caret line="35" column="14" lean-forward="false" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="52" column="76" lean-forward="false" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
-          <folding>
-            <element signature="e#36#84#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="72" column="36" lean-forward="false" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="128" column="43" lean-forward="false" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-          <folding>
-            <element signature="e#5317#6528#0" expanded="false" />
-            <element signature="e#6577#6643#0" expanded="false" />
-            <element signature="e#6721#7267#0" expanded="false" />
-            <element signature="e#7327#7452#0" expanded="false" />
-            <element signature="e#7510#7633#0" expanded="false" />
-            <element signature="e#7684#7800#0" expanded="false" />
-            <element signature="e#7854#7893#0" expanded="false" />
-            <element signature="e#7960#8069#0" expanded="false" />
-            <element signature="e#8340#8479#0" expanded="false" />
-            <element signature="e#8535#8680#0" expanded="false" />
-            <element signature="e#8741#9035#0" expanded="false" />
-            <element signature="e#9372#9518#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1032,10 +858,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/odontograma/js/odontograma.TnqSoft.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="265" column="20" lean-forward="false" selection-start-line="265" selection-start-column="20" selection-end-line="265" selection-end-column="20" />
+          <folding>
+            <element signature="e#5317#6528#0" expanded="false" />
+            <element signature="e#6577#6643#0" expanded="false" />
+            <element signature="e#6721#7267#0" expanded="false" />
+            <element signature="e#7327#7452#0" expanded="false" />
+            <element signature="e#7510#7633#0" expanded="false" />
+            <element signature="e#7684#7800#0" expanded="false" />
+            <element signature="e#7854#7893#0" expanded="false" />
+            <element signature="e#8305#8444#0" expanded="false" />
+            <element signature="e#8500#8645#0" expanded="false" />
+            <element signature="e#8706#9000#0" expanded="false" />
+            <element signature="e#9337#9483#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/PersonalTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2102">
+          <caret line="100" column="34" lean-forward="true" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/MedicacionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/MedicacionTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="28" column="17" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/MedicamentoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="29" column="30" lean-forward="false" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+          <folding>
+            <element signature="e#543#582#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="115" column="53" lean-forward="false" selection-start-line="115" selection-start-column="53" selection-end-line="115" selection-end-column="53" />
+          <folding>
+            <element signature="e#5704#5896#2#PHP" expanded="false" />
+            <element signature="e#5947#6320#2#PHP" expanded="false" />
+            <element signature="e#7060#7246#2#PHP" expanded="false" />
+            <element signature="e#8850#9049#2#PHP" expanded="false" />
+            <element signature="e#9344#9522#2#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/config/module.config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="112" column="34" lean-forward="true" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/BaseTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="15" column="44" lean-forward="false" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+          <folding>
+            <element signature="e#36#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/Entity/Marca.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="38" column="33" lean-forward="false" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <caret line="38" column="68" lean-forward="false" selection-start-line="38" selection-start-column="68" selection-end-line="38" selection-end-column="68" />
+          <caret line="38" column="99" lean-forward="false" selection-start-line="38" selection-start-column="99" selection-end-line="38" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/Entity/Medicamento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/Entity/Medicacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/CitaTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/pages/odontograma.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="146" column="75" lean-forward="false" selection-start-line="146" selection-start-column="75" selection-end-line="146" selection-end-column="75" />
+        <state relative-caret-position="144">
+          <caret line="255" column="46" lean-forward="false" selection-start-line="255" selection-start-column="46" selection-end-line="255" selection-end-column="46" />
           <folding>
             <element signature="n#!!block;n#InitEventOdontograma#0;n#InitEventOdontograma#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#InputEvent#0;n#InputEvent#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
@@ -1044,6 +990,51 @@
             <element signature="e#3788#4051#0" expanded="false" />
             <element signature="e#4121#4256#0" expanded="false" />
             <element signature="n#!!block;n#Get#0;n#Get#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#GetDetalleOdontograma#0;n#GetDetalleOdontograma#0;n#!!block;n#odontograma#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/MedicamentoTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="172" column="103" lean-forward="false" selection-start-line="172" selection-start-column="103" selection-end-line="172" selection-end-column="103" />
+          <folding>
+            <element signature="n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#section#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#11199#11206#1#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="79" column="36" lean-forward="false" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Application/src/Model/OdontogramaTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="186" column="14" lean-forward="false" selection-start-line="186" selection-start-column="14" selection-end-line="186" selection-end-column="14" />
+          <folding>
+            <element signature="e#36#84#0#PHP" expanded="true" />
+            <element signature="e#1707#2141#0#PHP" expanded="false" />
+            <element signature="e#2151#3206#0#PHP" expanded="false" />
+            <element signature="e#3222#3516#0#PHP" expanded="false" />
+            <element signature="e#4179#4603#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

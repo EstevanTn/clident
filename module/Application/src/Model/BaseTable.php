@@ -7,17 +7,13 @@ use Zend\Db\TableGateway\TableGateway;
 
 abstract class BaseTable {
 
-    var $tableGateway = null;
+    public $tableGateway = null;
 
-    abstract protected function save($userId, $data);
+    abstract public function save($userId, $data);
 
     public function fetchAll($where=['ACTIVE'=>true]){
         $resultSet = $this->tableGateway->select($where);
-        $entries = array();
-        foreach ($resultSet as $row) {
-            $entries[] = get_object_vars($row);
-        }
-        return $entries;
+        return $this->toEntries($resultSet);
     }
 
     public function get($nameKey, $id){
@@ -72,5 +68,13 @@ abstract class BaseTable {
             return $entries;
         }
         return $resultSet;
+    }
+
+    public function toEntries($resultSet){
+        $entries = array();
+        foreach ($resultSet as $row) {
+            $entries[] = get_object_vars($row);
+        }
+        return $entries;
     }
 }

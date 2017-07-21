@@ -104,6 +104,16 @@ return [
                     ],
                 ],
             ],
+            'medicamento' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/medicamento[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\MedicamentoController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'cita' => [
                 'type'    => Segment::class,
                 'options' => [

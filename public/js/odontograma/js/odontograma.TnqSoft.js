@@ -264,7 +264,6 @@ AppOdontograma.prototype.call = function(fnCallback){
 
 AppOdontograma.prototype.createContextMenu = function(fnCallback){
     var self = this;
-    console.dir(self.contextmenu);
 	fnCallback.call(self.contextmenu);
 	return self;
 }

@@ -77,4 +77,14 @@ class OdontogramaController extends AbstractActionController {
         return new JsonModel($response);
     }
 
+    public function getAllMedicacionAction(){
+        $response = Enviroment::AJAX_TABLE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = [
+                'data' => $this->table->getAllMedicacionItemDetalle($this->getRequest()->getPost('id_detalle', 0))
+            ];
+        }
+        return new JsonModel($response);
+    }
+
 }
