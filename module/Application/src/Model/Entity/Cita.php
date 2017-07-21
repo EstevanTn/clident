@@ -18,7 +18,7 @@
 namespace Application\Model\Entity;
 
 
-class Cita extends IEntity
+class Cita extends Paciente
 {
     var $ID_CITA;
     var $ID_PACIENTE;
@@ -34,9 +34,12 @@ class Cita extends IEntity
     var $USUARIO_CREACION;
     var $FECHA_MODIFICACION;
     var $USUARIO_MODIFICACION;
+    var $COLOR;
+    var $CSS;
     
     public function exchangeArray(array $data)
     {
+        parent::exchangeArray($data);
         $this->ID_CITA = !empty($data['ID_CITA']) ? $data['ID_CITA'] : null;
         $this->ID_PACIENTE = !empty($data['ID_PACIENTE']) ? $data['ID_PACIENTE'] : null;
         $this->ID_DENTISTA = !empty($data['ID_DENTISTA']) ? $data['ID_DENTISTA'] : null;
@@ -44,13 +47,31 @@ class Cita extends IEntity
         $this->FECHA_CITA = !empty($data['FECHA_CITA']) ? $data['FECHA_CITA'] : null;
         $this->HORA_INICIO = !empty($data['HORA_INICIO']) ? $data['HORA_INICIO'] : null;
         $this->HORA_FIN = !empty($data['HORA_FIN']) ? $data['HORA_FIN'] : null;
-        $this->ESTADO = !empty($data['ESTADO']) ? $data['ESTADO'] : null;
+        $this->ESTADO = !empty($data['ESTADO']) ? (int) $data['ESTADO'] : 0;
         $this->NOTA = !empty($data['NOTA']) ? $data['NOTA'] : null;
         $this->ACTIVE = !empty($data['ACTIVE']) ? $data['ACTIVE'] : null;
         $this->FECHA_CREACION = !empty($data['FECHA_CREACION']) ? $data['FECHA_CREACION'] : null;
         $this->USUARIO_CREACION = !empty($data['USUARIO_CREACION']) ? $data['USUARIO_CREACION'] : null;
         $this->FECHA_MODIFICACION = !empty($data['FECHA_MODIFICACION']) ? $data['FECHA_MODIFICACION'] : null;
         $this->USUARIO_MODIFICACION = !empty($data['USUARIO_MODIFICACION']) ? $data['USUARIO_MODIFICACION'] : null;
+        switch ($this->ESTADO){
+            case 1:
+                $this->COLOR = '#00a65a';
+                $this->CSS = 'bg-green';
+                break;
+            case 2:
+                $this->COLOR = '#0073b7';
+                $this->CSS = 'bg-light-blue';
+                break;
+            case 3:
+                $this->COLOR = '#f39c12';
+                $this->CSS = 'bg-yellow';
+                break;
+            default:
+                $this->COLOR = '#f56954';
+                $this->CSS = 'bg-red';
+                break;
+        }
     }
     
     public static function getColumnNames()

@@ -30,7 +30,7 @@ class Enviroment{
 		return sprintf('%s-%s-%s %s:%s:%s', $date['year'], $date['mon'], $date['mday'], $date['hours'], $date['minutes'], $date['seconds']);
 	}
 	
-	public static function GetCookie(){
+	public static function GetCookieUsuario(){
 	    if(isset($_COOKIE[Enviroment::NAME_COOKIE]))
         {
             return json_decode($_COOKIE[Enviroment::NAME_COOKIE], true);
@@ -38,8 +38,11 @@ class Enviroment{
         return null;
 	}
 	public static function GetCookieValue($key){
-	    $cookie = Enviroment::GetCookie();
+	    $cookie = Enviroment::GetCookieUsuario();
 	    $value = $cookie[$key];
 	    return $value;
+    }
+    public static function GetDentista($key=''){
+	    return 1;
     }
 }

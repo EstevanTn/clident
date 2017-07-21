@@ -21,9 +21,8 @@ var cita = {
 
             },
             eventClick: function(calEvent, jsEvent, view) {
-                console.dir(calEvent);
-                console.dir(jsEvent);
-                console.dir(view);
+                var entity = calEvent.entity;
+                cita.GetCita(entity);
             },
             dayClick: function( date, allDay, jsEvent, view ) {
                 cita.createCita(moment(date).format(), allDay)
@@ -62,12 +61,54 @@ var cita = {
                 cita.SaveCita();
             }
         });
+        cita.GetAllToday();
+        cita.GetAll();
+    },
+    GetAllToday: function () {
+        $.ajax({
+            url: BasePage.StringFormat('{0}/cita/getAllToday', BasePage.basePath),
+            success: function (response) {
+                var target = $('#external-events');
+                $.each(response.data, function (i, e) {
+                    var event = $('<div/>', {
+                        class: 'external-event '+e.CSS,
+                        style: 'cursor: pointer',
+                        text: e.HORA_INICIO+' - '+e.HORA_FIN
+                    });
+                    event.data('entity', e);
+                    event.on('click', function () {
+                        var entity = $(this).data('entity');
+                        cita.GetCita(entity);
+                    });
+                    target.append(event);
+                });
+                $('#box-info-label').text(BasePage.StringFormat('Tiene {0} citas el día de hoy.', response.data.length));
+            }
+        });
+    },
+    GetAll: function () {
+        $.ajax({
+            url: BasePage.StringFormat('{0}/cita/getAll', BasePage.basePath),
+            success: function (response) {
+                $.each(response.data, function (i, e) {
+                    $('#calendar').fullCalendar('renderEvent', {
+                        title: e.NOMBRE+' '+e.APELLIDOS,
+                        start: e.FECHA_CITA+' '+e.HORA_INICIO,
+                        end: e.FECHA_CITA+' '+e.HORA_FIN,
+                        backgroundColor: e.COLOR,
+                        entity: e
+                    });
+                });
+            }
+        });
     },
     createCita: function (date, allDay) {
         BasePage.ShowModal({
             name: 'cita',
             title: '<i class=\'fa fa-plus\'></i> Nueva Cita',
             callback: function () {
+                $('#txthorainicio').val('');
+                $('#txthorafin').val('');
                 if(typeof (date)!==typeof (undefined)){
                     $('#txtfecha').attr('readonly','readonly').val(date);
                 }else{
@@ -77,6 +118,39 @@ var cita = {
         });
     },
     SaveCita: function () {
-
+        var request = new Object();
+        request.id = $('#txtidcita').val();
+        request.id_paciente = $('#cbopaciente').val();
+        request.nota = $('#txtdescripcion').val();
+        request.fecha = $('#txtfecha').val();
+        request.fecha_inicio = $('#txthorainicio').val();
+        request.fecha_fin = $('#txthorafin').val();
+        request.estado = $('#cboestado').val();
+        $.ajax({
+            url: BasePage.StringFormat('{0}/guardarCita', BasePage.requestPath),
+            data: request,
+            success: function (response) {
+                BasePage.Notify(response, function () {
+                    $('#calendar').empty();
+                    $('#external-events').empty();
+                    cita.InitOnReady();
+                });
+            }
+        });
+    },
+    GetCita: function (entity) {
+        BasePage.ShowModal({
+            name: 'cita',
+            title: '<i class=\'fa fa-edit\'></i> Editar Cita',
+            callback: function () {
+                $('#cbopaciente').val(entity.ID_PACIENTE).trigger('change');
+                $('#txtdescripcion').val(entity.NOTA);
+                $('#txtfecha').val(entity.FECHA_CITA);
+                $('#txthorainicio').val(entity.HORA_INICIO);
+                $('#txthorafin').val(entity.HORA_FIN);
+                $('#cboestado').val(entity.ESTADO);
+                $('#txtidcita').val(entity.ID_CITA);
+            }
+        });
     }
 };
