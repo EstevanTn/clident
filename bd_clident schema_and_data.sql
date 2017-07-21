@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-21 03:52:58
+Date: 2017-07-21 13:10:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -152,7 +152,7 @@ CREATE TABLE `cita` (
   `NOTA` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
-  `FECHA_MODIFACION` datetime DEFAULT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
   `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_CITA`),
@@ -160,11 +160,14 @@ CREATE TABLE `cita` (
   KEY `FK_cita_dentista` (`ID_DENTISTA`),
   CONSTRAINT `FK_cita_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_cita_paciente` FOREIGN KEY (`ID_PACIENTE`) REFERENCES `paciente` (`ID_PACIENTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of cita
 -- ----------------------------
+INSERT INTO `cita` VALUES ('1', '2', '1', '2', '2017-07-21', '12:50:00', '13:20:00', '1', '212', '', '2017-07-21 04:19:03', '2017-07-21 20:08:53', '1', '1');
+INSERT INTO `cita` VALUES ('2', '3', '1', '2', '2017-07-26', '15:30:00', '16:00:00', '1', null, '', '2017-07-21 18:35:39', '2017-07-21 20:00:59', '1', '1');
+INSERT INTO `cita` VALUES ('3', '2', '1', '2', '2017-07-29', '11:10:00', '12:40:00', '2', null, '', '2017-07-21 18:37:53', null, '1', null);
 
 -- ----------------------------
 -- Table structure for detalle_almacen

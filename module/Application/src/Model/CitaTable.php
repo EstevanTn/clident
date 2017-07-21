@@ -41,7 +41,8 @@ class CitaTable extends BaseTable
                 'HORA_INICIO' => $data['HORA_INICIO'],
                 'HORA_FIN' => $data['HORA_FIN'],
                 'TIPO_CITA' => $data['TIPO_CITA'],
-                'ESTADO' => $data['ESTADO']
+                'ESTADO' => $data['ESTADO'],
+                'NOTA' => $data['NOTA']
             ];
             if($id===0){
                 $dataX['ACTIVE'] = true;
@@ -64,7 +65,7 @@ class CitaTable extends BaseTable
         }catch (\Exception $ex){
             return [
                 'success' => false,
-                'message' => Enviroment::MSG_ERROR,
+                'message' => Enviroment::MSG_ERROR.': '.$ex->getMessage(),
             ];
         }
     }

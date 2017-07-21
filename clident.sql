@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-21 03:53:07
+Date: 2017-07-21 13:09:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `cita` (
   `NOTA` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ACTIVE` bit(1) NOT NULL,
   `FECHA_CREACION` datetime DEFAULT NULL,
-  `FECHA_MODIFACION` datetime DEFAULT NULL,
+  `FECHA_MODIFICACION` datetime DEFAULT NULL,
   `USUARIO_CREACION` int(11) DEFAULT NULL,
   `USUARIO_MODIFICACION` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_CITA`),
@@ -132,7 +132,7 @@ CREATE TABLE `cita` (
   KEY `FK_cita_dentista` (`ID_DENTISTA`),
   CONSTRAINT `FK_cita_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_cita_paciente` FOREIGN KEY (`ID_PACIENTE`) REFERENCES `paciente` (`ID_PACIENTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for detalle_almacen

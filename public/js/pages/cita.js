@@ -1,5 +1,5 @@
 var cita = {
-    InitOnReady: function () {
+    InitCalendar:function () {
         $('#calendar').fullCalendar({
             //selectable: true,
             //selectHelper: true,
@@ -22,11 +22,22 @@ var cita = {
             },
             eventClick: function(calEvent, jsEvent, view) {
                 var entity = calEvent.entity;
+                $('#btneliminar-cita').data('calEvent', calEvent);
                 cita.GetCita(entity);
             },
             dayClick: function( date, allDay, jsEvent, view ) {
                 cita.createCita(moment(date).format(), allDay)
             },
+            eventRender: function(event, element) {
+                /*var entity = event.entity;
+                element.append( "<span data-toggle='tooltip' title='Eliminar' class='closeon'>&times;</span>" );
+                element.find(".closeon").click(function() {
+                    cita.DeleteCita(entity.ID_CITA, function () {
+                        $('#calendar').fullCalendar('removeEvents',event._id);
+                    });
+                });*/
+            }
+
             /*select: function( startDate, endDate, allDay, jsEvent, view ){
                 console.log('Select: ', startDate);
             }*/
@@ -35,6 +46,18 @@ var cita = {
             title: ' Hola mundo',
             start: new Date(2017, 06, 12)
         }, true)*/
+        cita.GetAllToday();
+        cita.GetAll();
+    },
+    InitOnReady: function () {
+        cita.InitCalendar();
+        $('#btneliminar-cita').on('click', function () {
+            var calEvent = $(this).data('calEvent');
+            cita.DeleteCita(calEvent.entity.ID_CITA, function () {
+                $('#modal-cita').modal('hide');
+                $('#calendar').fullCalendar('removeEvents',calEvent._id);
+            });
+        });
         var cbopaciente = $('#cbopaciente');
         $.ajax({
             url: BasePage.basePath+'/paciente/getAll',
@@ -61,8 +84,6 @@ var cita = {
                 cita.SaveCita();
             }
         });
-        cita.GetAllToday();
-        cita.GetAll();
     },
     GetAllToday: function () {
         $.ajax({
@@ -107,6 +128,7 @@ var cita = {
             name: 'cita',
             title: '<i class=\'fa fa-plus\'></i> Nueva Cita',
             callback: function () {
+                $('#btneliminar-cita').attr('disabled', 'disabled');
                 $('#txthorainicio').val('');
                 $('#txthorafin').val('');
                 if(typeof (date)!==typeof (undefined)){
@@ -119,21 +141,24 @@ var cita = {
     },
     SaveCita: function () {
         var request = new Object();
-        request.id = $('#txtidcita').val();
-        request.id_paciente = $('#cbopaciente').val();
+        request.id = parseInt($('#txtidcita').val());
+        request.idpaciente = $('#cbopaciente').val();
         request.nota = $('#txtdescripcion').val();
         request.fecha = $('#txtfecha').val();
-        request.fecha_inicio = $('#txthorainicio').val();
-        request.fecha_fin = $('#txthorafin').val();
+        request.hora_inicio = $('#txthorainicio').val();
+        request.hora_fin = $('#txthorafin').val();
         request.estado = $('#cboestado').val();
         $.ajax({
             url: BasePage.StringFormat('{0}/guardarCita', BasePage.requestPath),
             data: request,
             success: function (response) {
                 BasePage.Notify(response, function () {
-                    $('#calendar').empty();
-                    $('#external-events').empty();
-                    cita.InitOnReady();
+                    $('#modal-cita').modal('hide');
+                    if(request.id===0){
+                        $('#calendar').fullCalendar('renderEvent', {
+
+                        });
+                    }
                 });
             }
         });
@@ -143,6 +168,7 @@ var cita = {
             name: 'cita',
             title: '<i class=\'fa fa-edit\'></i> Editar Cita',
             callback: function () {
+                $('#btneliminar-cita').removeAttr('disabled');
                 $('#cbopaciente').val(entity.ID_PACIENTE).trigger('change');
                 $('#txtdescripcion').val(entity.NOTA);
                 $('#txtfecha').val(entity.FECHA_CITA);
@@ -150,6 +176,25 @@ var cita = {
                 $('#txthorafin').val(entity.HORA_FIN);
                 $('#cboestado').val(entity.ESTADO);
                 $('#txtidcita').val(entity.ID_CITA);
+            }
+        });
+    },
+    DeleteCita: function (idcita, fnCallback) {
+        BootstrapDialog.confirm({
+            title: 'Confirmación',
+            message: '¿Desea eliminar este registro?',
+            callback: function (result) {
+                if(result){
+                    $.ajax({
+                        url: BasePage.StringFormat('{0}/eliminarCita', BasePage.requestPath),
+                        data: { id: idcita },
+                        success: function (response) {
+                            BasePage.Notify(response, function () {
+                                fnCallback();
+                            });
+                        }
+                    });
+                }
             }
         });
     }
