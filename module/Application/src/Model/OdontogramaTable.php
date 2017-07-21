@@ -121,7 +121,7 @@ class OdontogramaTable extends BaseTable{
         }
     }
 
-    public function getAllMedicacionItemDetalle($id_detalle){
+    public function getAllMedicacionItemDetalle($where){
         $select = new Select('medicacion');
         $select->join('medicamento',
             'medicacion.ID_MEDICAMENTO=medicamento.ID_MEDICAMENTO',
@@ -129,7 +129,7 @@ class OdontogramaTable extends BaseTable{
             ->join('marca',
                 'medicamento.ID_MARCA=marca.ID_MARCA',
                 Marca::getColumnNames())
-            ->where(['ID_DETALLE_ODONTOGRAMA' => $id_detalle]);
+            ->where($where);
         $resultSet = $this->tableGatewayMedicacion->selectWith($select);
         return $this->toEntries($resultSet);
     }
@@ -140,7 +140,10 @@ class OdontogramaTable extends BaseTable{
             $id = (int) $data['ID_MEDICACION'];
             $dataX = [
                 'ID_DETALLE_ODONTOGRAMA' => $data['ID_DETALLE_ODONTOGRAMA'],
-                'ID_MEDICAMENTO' => $data['ID_MEDICAMENTO']
+                'ID_MEDICAMENTO' => $data['ID_MEDICAMENTO'],
+                'ID_UNIDAD_MEDIDA' => $data['ID_UNIDAD_MEDIDA'],
+                'CANTIDAD' => $data['CANTIDAD'],
+                'DESCRIPCION_MEDICACION' => $data['DESCRIPCION_MEDICACION']
             ];
             if($id===0){
                 $dataX['ACTIVE'] = true;
@@ -178,7 +181,7 @@ class OdontogramaTable extends BaseTable{
             $this->tableGatewayMedicacion->update($dataX, [ 'ID_MEDICACION' => $id_medicacion ] );
             return [
                 'success' => true,
-                'message' => Enviroment::MSG_UPDATE
+                'message' => Enviroment::MSG_DELETE
             ];
         }catch (\Exception $ex){
             return [
@@ -186,6 +189,19 @@ class OdontogramaTable extends BaseTable{
                 'message' => Enviroment::MSG_ERROR
             ];
         }
+    }
+
+    public function getMedicacion($id_medicacion){
+        $select = new Select('medicacion');
+        $select->join('medicamento',
+            'medicacion.ID_MEDICAMENTO=medicamento.ID_MEDICAMENTO',
+            Medicamento::getColumnNames())
+            ->join('marca',
+                'medicamento.ID_MARCA=marca.ID_MARCA',
+                Marca::getColumnNames())
+            ->where(['medicacion.ID_MEDICACION' => $id_medicacion]);
+        $resultSet = $this->tableGatewayMedicacion->selectWith($select);
+        return $this->toEntries($resultSet)[0];
     }
 
 }

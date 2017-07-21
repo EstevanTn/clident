@@ -18,17 +18,31 @@
 namespace Application\Model;
 
 
+use Application\Model\Entity\UnidadMedida;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 class MedicamentoTable extends BaseTable
 {
+    var $tableGatewayUnidad;
     public function __construct(TableGatewayInterface $tableGateway)
     {
         $this->tableGateway = $tableGateway;
+
+        $resultSet = new ResultSet();
+        $resultSet->setArrayObjectPrototype(new UnidadMedida());
+        $this->tableGatewayUnidad = new TableGateway('unidad_medida',
+            $this->tableGateway->getAdapter(), null, $resultSet);
     }
 
     public function save($userId, $data)
     {
         // TODO: Implement save() method.
+    }
+
+    public function fetchAllUnidades($where=['ACTIVE'=>true]){
+        $result = $this->tableGatewayUnidad->select($where);
+        return $this->toEntries($result);
     }
 }

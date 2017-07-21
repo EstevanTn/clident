@@ -63,18 +63,6 @@ var odontograma = {
     InitOnReady: function(){
         odontograma.InitEventOdontograma();
         odontograma.InputEvent();
-        $('[data-widget=\'fullscreen\']').on('click', function(e) {
-            var isfull = $(this).attr('data-fullscreen');
-            if(typeof(isfull) !== 'undefined' && isfull==='true'){
-                $('#container-odontograma').css({'overflow': 'hidden'});
-                BasePage.AppUtils.CancelFullScreen();
-                $(this).attr('data-fullscreen', false).html('<i class=\'fa fa-expand\'></i>');
-            }else{
-                $('#container-odontograma').css({'overflow': 'auto'});
-                BasePage.AppUtils.FullScreen('container-odontograma');
-                $(this).attr('data-fullscreen', true).html('<i class=\'fa fa-compress\'></i>');
-            }
-        });
         $('#btn-mostrar-odontograma').on('click', function(e) {
             AppOdontograma.Load();
             var id = parseInt($('#cbolstpacientes').val());
@@ -110,6 +98,46 @@ var odontograma = {
                 title: '<i class=\'fa fa-plus\'></i> Nueva Medicación'
             });
         });
+        $('#btnguardar-medicacion').on('click', function (e) {
+            if($('#form-medicacion').valid()){
+                odontograma.SaveMedicacion();
+            }
+        })
+        //Lista medicamentos
+        $.ajax({
+            url: BasePage.StringFormat('{0}/medicamento/getAll', BasePage.basePath),
+            success: function (response) {
+                var target = $('#cbomedicamento');
+                target.append($('<option/>',{
+                    value: '0',
+                    text: '<< SELECCIONE >>'
+                }));
+                $.each(response.data, function (i, v) {
+                    target.append($('<option/>',{
+                        value: v.ID_MEDICAMENTO,
+                        text: v.NOMBRE
+                    }));
+                });
+            }
+        });
+        //Lista de unidades
+        $.ajax({
+            url: BasePage.StringFormat('{0}/medicamento/getAllUnidades', BasePage.basePath),
+            success: function (response) {
+                var target = $('#cbounidadmedida');
+                target.append($('<option/>',{
+                    value: '0',
+                    text: '<< SELECCIONE >>'
+                }));
+                $.each(response.data, function (i, v) {
+                    target.append($('<option/>',{
+                        value: v.ID_UNIDAD_MEDIDA,
+                        text: v.NOMBRE
+                    }));
+                });
+            }
+        });
+        $('#cbomedicamento, #cbounidadmedida').css({'width':'100%'}).select2();
     },
     GetCaraDiente: function(data){
         BasePage.ShowModal({
@@ -167,15 +195,16 @@ var odontograma = {
                         caraText = 'Derecho';
                     }
                     return caraText;
-                }, sWidth: '12%' },
+                }, sWidth: '9%' },
                 { data: 'NOMBRE', sWidth: '20%' },
                 { data: 'DESCRIPCION', sWidth: '36%' },
                 { data: 'FECHA_APLICACION', sClass: 'text-center', sWidth: '15%' },
                 { data: function (row, type, set, meta) {
                     var html = '<a title=\'Editar\' onclick=\'BasePage.GetItemDetalleOdontograma('+row.ID_DETALLE_ODONTOGRAMA+')\') data-toggle=\'tooltip\' class=\'btn btn-link\'><i class=\'fa fa-edit\'></i></a>';
                     html += '<a title=\'Eliminar\' data-toggle=\'tooltip\' onclick=\'BasePage.Delete('+row.ID_DETALLE_ODONTOGRAMA+')\' class=\'btn btn-link\'><i class=\'fa fa-remove\'></i></a>';
+                    html += '<a title=\'Medicación\' data-toggle=\'tooltip\' onclick=\'BasePage.ShowMedicacion('+row.ID_DETALLE_ODONTOGRAMA+')\' class=\'btn btn-link\'><i class=\'fa fa-medkit\'></i></a>';
                     return html;
-                }, orderable: false, sWidth: '10%' },
+                }, orderable: false, sWidth: '13%' },
             ],
             ajax: {
                 type: 'POST',
@@ -210,7 +239,6 @@ var odontograma = {
                         $('#cbocaradetalle').val(response.CARA_DIENTE).trigger('change');
                         $('#cbotratamiento').val(response.ID_TRATAMIENTO).trigger('change');
                         $('#txtdescripciondetalle').val(response.DESCRIPCION);
-                        odontograma.GetAllMedicacionItemDetalle(response.ID_DETALLE_ODONTOGRAMA);
                     }
                 });
             }
@@ -256,7 +284,8 @@ var odontograma = {
                 { data: 'NOMBRE' , sWidth: '22%', },
                 { data: 'NOMBRE_MARCA' , sWidth: '20%', },
                 { data: function (row, type, set, meta) {
-                    var text = row.DESCRIPCION_MEDICACION.length > 50 ? row.DESCRIPCION_MEDICACION.substring(0,47)+'...' : row.DESCRIPCION_MEDICACION;
+                    var text = typeof (row.DESCRIPCION_MEDICACION) === 'string' && row.DESCRIPCION_MEDICACION.length > 50 ?
+                        row.DESCRIPCION_MEDICACION.substring(0,47)+'...' : row.DESCRIPCION_MEDICACION;
                     return text;
                 } , sWidth: '50%', },
                 { data: function (row, type, set, meta) {
@@ -272,9 +301,71 @@ var odontograma = {
         });
     },
     GetMedicacion: function (id_medicacion) {
-
+        BasePage.ShowModal({
+            name: 'medicacion',
+            title: '<i class=\'fa fa-edit\'></i> Editar Medicación',
+            callback: function () {
+                $.ajax({
+                    url: BasePage.StringFormat('{0}/getMedicacion', BasePage.requestPath),
+                    data: { id_medicacion: id_medicacion },
+                    success: function (response) {
+                        $('#txtidmedicacion').val(response.ID_MEDICACION);
+                        $('#cbomedicamento').val(response.ID_MEDICAMENTO).trigger('change');
+                        $('#cbotratamiento').val(response.ID_TRATAMIENTO).trigger('change');
+                        $('#cbounidadmedida').val(response.ID_UNIDAD_MEDIDA).trigger('change');
+                        $('#txtdescripcionmedicacion').val(response.DESCRIPCION_MEDICACION);
+                        $('#txtcantidadmedicamento').val(response.CANTIDAD);
+                    },
+                });
+            }
+        });
     },
-    deleteMedicacion: function (if_medicacion) {
-
+    deleteMedicacion: function (id_medicacion) {
+        BootstrapDialog.confirm({
+           title: 'Confirmación',
+            message: '¿Deseas eliminar este registro?',
+            callback: function (result) {
+                if(result){
+                    $.ajax({
+                        url: BasePage.StringFormat('{0}/eliminarMedicacion', BasePage.requestPath),
+                        data: { id_medicacion: id_medicacion },
+                        success: function (response) {
+                            BasePage.Notify(response, function () {
+                                $('#datatable-medicacion').dataTable()._fnAjaxUpdate();
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    },
+    SaveMedicacion: function () {
+        var request = new Object();
+        request.id = $('#txtidmedicacion').val();
+        request.id_medicamento = $('#cbomedicamento').val();
+        request.id_detalle = $('#txtiddetalleodontograma').val();
+        request.id_unidad_medida = $('#cbounidadmedida').val();
+        request.cantidad = $('#txtcantidadmedicamento').val();
+        request.descripcion = $('#txtdescripcionmedicacion').val();
+        $.ajax({
+            url: BasePage.StringFormat('{0}/odontograma/guardarMedicacion', BasePage.basePath),
+            data: request,
+            success: function (response) {
+                BasePage.Notify(response, function () {
+                    $('#datatable-medicacion').dataTable()._fnAjaxUpdate();
+                    $('#modal-medicacion').modal('hide');
+                });
+            }
+        });
+    },
+    ShowMedicacion: function (id_detalle) {
+        $('#txtiddetalleodontograma').val(id_detalle);
+        BasePage.ShowModal({
+            name: 'detalle-medicacion',
+            title: '<i class="fa fa-list"></i> Detalle de Medicación',
+            callback: function () {
+                odontograma.GetAllMedicacionItemDetalle(id_detalle);
+            }
+        });
     }
 };

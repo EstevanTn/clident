@@ -18,8 +18,10 @@
 namespace Application\Controller;
 
 
+use Application\Model\Entity\Enviroment;
 use Application\Model\MedicamentoTable;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class MedicamentoController extends AbstractActionController
@@ -33,5 +35,25 @@ class MedicamentoController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel();
+    }
+
+    public function getAllAction(){
+        $response = Enviroment::AJAX_TABLE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = [
+                'data' => $this->table->fetchAll()
+            ];
+        }
+        return new JsonModel($response);
+    }
+
+    public function getAllUnidadesAction(){
+        $response = Enviroment::AJAX_TABLE;
+        if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
+            $response = [
+                'data' => $this->table->fetchAllUnidades()
+            ];
+        }
+        return new JsonModel($response);
     }
 }
