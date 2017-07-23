@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-21 13:10:00
+Date: 2017-07-23 00:28:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,13 +25,15 @@ CREATE TABLE `ajustes` (
   `VALOR` varchar(250) NOT NULL,
   PRIMARY KEY (`ID_AJUSTE`),
   UNIQUE KEY `IX_NOMBRE_SETTINGS` (`NOMBRE`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ajustes
 -- ----------------------------
 INSERT INTO `ajustes` VALUES ('1', 'KEY_PERSONAL_DENTISTA', '8');
-INSERT INTO `ajustes` VALUES ('2', 'KEY_PRE_CITA', '');
+INSERT INTO `ajustes` VALUES ('2', 'KEY_CITA', '5');
+INSERT INTO `ajustes` VALUES ('3', 'KEY_PRE_CITA', '6');
+INSERT INTO `ajustes` VALUES ('4', 'APP_TITLE', 'Sistema clínica dental del pueblo');
 
 -- ----------------------------
 -- Table structure for almacen
@@ -160,7 +162,7 @@ CREATE TABLE `cita` (
   KEY `FK_cita_dentista` (`ID_DENTISTA`),
   CONSTRAINT `FK_cita_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_cita_paciente` FOREIGN KEY (`ID_PACIENTE`) REFERENCES `paciente` (`ID_PACIENTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of cita
@@ -168,6 +170,16 @@ CREATE TABLE `cita` (
 INSERT INTO `cita` VALUES ('1', '2', '1', '2', '2017-07-21', '12:50:00', '13:20:00', '1', '212', '', '2017-07-21 04:19:03', '2017-07-21 20:08:53', '1', '1');
 INSERT INTO `cita` VALUES ('2', '3', '1', '2', '2017-07-26', '15:30:00', '16:00:00', '1', null, '', '2017-07-21 18:35:39', '2017-07-21 20:00:59', '1', '1');
 INSERT INTO `cita` VALUES ('3', '2', '1', '2', '2017-07-29', '11:10:00', '12:40:00', '2', null, '', '2017-07-21 18:37:53', null, '1', null);
+INSERT INTO `cita` VALUES ('4', '4', '2', '2', '2017-07-29', '12:34:56', '15:55:55', '1', 'Nota 1', '', '2017-07-23 06:56:58', null, '2', null);
+INSERT INTO `cita` VALUES ('5', '1', '2', '2', '2017-07-25', '09:10:12', '00:00:00', '1', 'Asass', '', '2017-07-23 07:07:20', null, '2', null);
+INSERT INTO `cita` VALUES ('6', '3', '2', '2', '2017-08-03', '09:12:00', '00:00:00', '2', 'Curación', '\0', '2017-07-23 07:08:20', '2017-07-23 07:18:21', '2', '2');
+INSERT INTO `cita` VALUES ('7', '3', '2', '2', '2017-08-02', '12:40:00', '12:20:00', '2', 'Prueba', '\0', '2017-07-23 07:10:53', '2017-07-23 07:18:04', '2', '2');
+INSERT INTO `cita` VALUES ('8', '3', '2', '2', '2017-08-02', '12:40:00', '12:20:00', '2', 'Prueba', '', '2017-07-23 07:11:56', null, '2', null);
+INSERT INTO `cita` VALUES ('9', '3', '2', '2', '2017-08-02', '12:40:00', '12:20:00', '2', 'Prueba', '\0', '2017-07-23 07:13:00', '2017-07-23 07:18:36', '2', '2');
+INSERT INTO `cita` VALUES ('10', '1', '2', '2', '2017-08-06', '11:11:00', '00:00:12', '3', 'Mm', '', '2017-07-23 07:19:00', null, '2', null);
+INSERT INTO `cita` VALUES ('11', '1', '2', '2', '2017-08-06', '11:11:00', '00:00:12', '3', 'Mm', '', '2017-07-23 07:19:57', null, '2', null);
+INSERT INTO `cita` VALUES ('12', '3', '2', '2', '2017-07-27', '00:00:12', '00:00:13', '3', 'Endodoncia', '', '2017-07-23 07:22:31', null, '2', null);
+INSERT INTO `cita` VALUES ('13', '3', '2', '2', '2017-08-04', '14:20:00', '00:00:16', '1', 'Sd', '', '2017-07-23 07:25:08', null, '2', null);
 
 -- ----------------------------
 -- Table structure for detalle_almacen
@@ -375,22 +387,24 @@ CREATE TABLE `menu` (
   PRIMARY KEY (`ID_MENU`),
   KEY `FK_menu_submenu` (`ID_PARENT_MENU`),
   CONSTRAINT `FK_menu_submenu` FOREIGN KEY (`ID_PARENT_MENU`) REFERENCES `menu` (`ID_MENU`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', null, 'fa fa-gear', 'Configuración', null, '#', null, '');
-INSERT INTO `menu` VALUES ('2', null, 'fa fa-gears', 'Mantenimiento', null, '#', null, '');
-INSERT INTO `menu` VALUES ('3', null, 'fa fa-navicon', 'Procesos', null, '#', null, '');
-INSERT INTO `menu` VALUES ('4', '1', 'fa fa-indent', 'Tipo', null, 'tipo', null, '');
-INSERT INTO `menu` VALUES ('5', '1', 'fa fa-users', 'Usuarios', null, 'usuario', null, '');
-INSERT INTO `menu` VALUES ('6', '2', 'fa fa-check', 'Áreas', null, 'area', null, '');
-INSERT INTO `menu` VALUES ('7', '2', 'fa fa-child', 'Personal', null, 'persona', null, '');
-INSERT INTO `menu` VALUES ('8', '2', 'fa fa-user-plus', 'Pacientes', null, 'paciente', null, '');
-INSERT INTO `menu` VALUES ('9', '2', 'fa fa-tint', 'Tratamientos', null, 'tratamiento', null, '');
-INSERT INTO `menu` VALUES ('10', '3', 'fa fa-calendar', 'Odontograma', null, 'odontograma', null, '');
-INSERT INTO `menu` VALUES ('11', '3', 'fa fa-group', 'Citas', null, 'cita', null, '');
+INSERT INTO `menu` VALUES ('1', null, 'fa fa-gear', 'Configuración', null, '#', '1', '');
+INSERT INTO `menu` VALUES ('2', null, 'fa fa-gears', 'Mantenimiento', null, '#', '1', '');
+INSERT INTO `menu` VALUES ('3', null, 'fa fa-navicon', 'Procesos', null, '#', '1', '');
+INSERT INTO `menu` VALUES ('4', '1', 'fa fa-indent', 'Tipo', null, 'tipo', '1', '');
+INSERT INTO `menu` VALUES ('5', '1', 'fa fa-users', 'Usuarios', null, 'usuario', '1', '');
+INSERT INTO `menu` VALUES ('6', '2', 'fa fa-check', 'Áreas', null, 'area', '1', '');
+INSERT INTO `menu` VALUES ('7', '2', 'fa fa-child', 'Personal', null, 'personal', '1', '');
+INSERT INTO `menu` VALUES ('8', '2', 'fa fa-user-plus', 'Pacientes', null, 'paciente', '1', '');
+INSERT INTO `menu` VALUES ('9', '2', 'fa fa-tint', 'Tratamientos', null, 'tratamiento', '1', '');
+INSERT INTO `menu` VALUES ('10', '3', 'fa fa-calendar', 'Odontograma', null, 'odontograma', '1', '');
+INSERT INTO `menu` VALUES ('11', '3', 'fa fa-group', 'Citas', null, 'cita', '1', '');
+INSERT INTO `menu` VALUES ('13', null, 'fa fa-gears', 'Mantenimiento', null, '#', '1', '');
+INSERT INTO `menu` VALUES ('14', '13', 'fa fa-user-plus', 'Pacientes', null, 'paciente', '1', '');
 
 -- ----------------------------
 -- Table structure for menu_rol
@@ -408,14 +422,15 @@ CREATE TABLE `menu_rol` (
   KEY `FK_menu_rol` (`ID_ROL`),
   CONSTRAINT `FK_menu_menu` FOREIGN KEY (`ID_MENU`) REFERENCES `menu` (`ID_MENU`),
   CONSTRAINT `FK_menu_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu_rol
 -- ----------------------------
 INSERT INTO `menu_rol` VALUES ('1', '1', '1', '', '2017-07-19 07:34:39', null);
 INSERT INTO `menu_rol` VALUES ('2', '2', '1', '', '2017-07-19 07:37:16', null);
-INSERT INTO `menu_rol` VALUES ('3', '3', '1', '', '2017-07-19 07:37:28', null);
+INSERT INTO `menu_rol` VALUES ('3', '3', '2', '', '2017-07-19 07:37:28', null);
+INSERT INTO `menu_rol` VALUES ('4', '13', '2', '', '2017-07-22 22:07:46', null);
 
 -- ----------------------------
 -- Table structure for odontograma
@@ -489,7 +504,7 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`ID_PERSONA`),
   KEY `fk_persona_tipo` (`TIPO_DOCUMENTO`),
   CONSTRAINT `fk_persona_tipo` FOREIGN KEY (`TIPO_DOCUMENTO`) REFERENCES `tipo` (`ID_TIPO`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of persona
@@ -498,6 +513,7 @@ INSERT INTO `persona` VALUES ('1', '1', '70129676', 'Alexander Estevan', 'Tume N
 INSERT INTO `persona` VALUES ('2', '1', '05623412', 'Alexander', 'Martinez Rodriguez', '', 'AMARTINEZRODRIGUEZ@HOTMAIL.COM', '', '', '1995-10-02', '', '2017-06-17 00:00:00', '2017-07-20 04:05:26', '1', '1');
 INSERT INTO `persona` VALUES ('3', '1', '89712871', 'Alicia ', 'Garcia Mendez', '', 'ALICIA.G.M@GMAIL.COM', '', '', '1995-09-12', '', '2017-06-17 00:00:00', '2017-07-19 23:06:13', '1', '1');
 INSERT INTO `persona` VALUES ('4', '1', '01275323', 'Stefany Bricyit', 'Alvarado Gamboa', 'Enrrique Palacios #155', '', '', '', '1995-06-09', '', '2017-06-17 00:00:00', '2017-07-19 23:05:05', '1', '1');
+INSERT INTO `persona` VALUES ('5', '1', '87253232', 'Joel Drimako', 'De la Cruz Mugerza', '----', 'joeldcm@gmail.com', null, null, '1986-03-12', '', '2017-07-22 23:46:21', null, '1', null);
 
 -- ----------------------------
 -- Table structure for personal
@@ -523,12 +539,13 @@ CREATE TABLE `personal` (
   KEY `FK_personal_persona` (`ID_PERSONA`),
   CONSTRAINT `FK_personal_area` FOREIGN KEY (`ID_AREA`) REFERENCES `area` (`ID_AREA`),
   CONSTRAINT `FK_personal_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of personal
 -- ----------------------------
-INSERT INTO `personal` VALUES ('1', '1', '1', '8', '2017-07-01 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'Admin', '', '2017-07-01 08:31:39', '2017-07-19 23:07:18', '1', '1');
+INSERT INTO `personal` VALUES ('1', '1', '1', '7', '2017-07-01 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'Admin', '', '2017-07-01 08:31:39', '2017-07-19 23:07:18', '1', '1');
+INSERT INTO `personal` VALUES ('2', '1', '5', '8', '0000-00-00 00:00:00', null, null, null, 'Dentista', '', '2017-07-22 23:47:03', null, '1', null);
 
 -- ----------------------------
 -- Table structure for proveedor
@@ -695,12 +712,13 @@ CREATE TABLE `usuario` (
   KEY `FK_usuario_rol` (`ID_ROL`),
   CONSTRAINT `FK_usuario_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`),
   CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
 INSERT INTO `usuario` VALUES ('1', '1', '1', 'ADMIN', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '', '2017-07-01 08:30:13', '1', null, null);
+INSERT INTO `usuario` VALUES ('2', '5', '2', 'USER', '7c4a8d09ca3762af61e59520943dc26494f8941b', '1', '', '2017-07-22 23:42:17', '1', null, null);
 
 -- ----------------------------
 -- Function structure for CAP_FIRST

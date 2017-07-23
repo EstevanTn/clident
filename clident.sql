@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-07-21 13:09:49
+Date: 2017-07-23 00:27:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `ajustes` (
   `VALOR` varchar(250) NOT NULL,
   PRIMARY KEY (`ID_AJUSTE`),
   UNIQUE KEY `IX_NOMBRE_SETTINGS` (`NOMBRE`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for almacen
@@ -132,7 +132,7 @@ CREATE TABLE `cita` (
   KEY `FK_cita_dentista` (`ID_DENTISTA`),
   CONSTRAINT `FK_cita_dentista` FOREIGN KEY (`ID_DENTISTA`) REFERENCES `personal` (`ID_PERSONAL`),
   CONSTRAINT `FK_cita_paciente` FOREIGN KEY (`ID_PACIENTE`) REFERENCES `paciente` (`ID_PACIENTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for detalle_almacen
@@ -298,7 +298,7 @@ CREATE TABLE `menu` (
   PRIMARY KEY (`ID_MENU`),
   KEY `FK_menu_submenu` (`ID_PARENT_MENU`),
   CONSTRAINT `FK_menu_submenu` FOREIGN KEY (`ID_PARENT_MENU`) REFERENCES `menu` (`ID_MENU`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for menu_rol
@@ -316,7 +316,7 @@ CREATE TABLE `menu_rol` (
   KEY `FK_menu_rol` (`ID_ROL`),
   CONSTRAINT `FK_menu_menu` FOREIGN KEY (`ID_MENU`) REFERENCES `menu` (`ID_MENU`),
   CONSTRAINT `FK_menu_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for odontograma
@@ -374,7 +374,7 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`ID_PERSONA`),
   KEY `fk_persona_tipo` (`TIPO_DOCUMENTO`),
   CONSTRAINT `fk_persona_tipo` FOREIGN KEY (`TIPO_DOCUMENTO`) REFERENCES `tipo` (`ID_TIPO`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for personal
@@ -400,7 +400,7 @@ CREATE TABLE `personal` (
   KEY `FK_personal_persona` (`ID_PERSONA`),
   CONSTRAINT `FK_personal_area` FOREIGN KEY (`ID_AREA`) REFERENCES `area` (`ID_AREA`),
   CONSTRAINT `FK_personal_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for proveedor
@@ -520,7 +520,7 @@ CREATE TABLE `usuario` (
   KEY `FK_usuario_rol` (`ID_ROL`),
   CONSTRAINT `FK_usuario_persona` FOREIGN KEY (`ID_PERSONA`) REFERENCES `persona` (`ID_PERSONA`),
   CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Function structure for CAP_FIRST

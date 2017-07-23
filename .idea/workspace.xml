@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bac0578f-158a-4055-921b-e6505c2a4b14" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Controller/UsuarioController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Menu.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/MenuRol.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Settings.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/View/Helper/MenuSession.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/view/application/usuario/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Tunaqui.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Tunaqui.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/config/module.config.php" afterPath="$PROJECT_DIR$/module/Application/config/module.config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Controller/CitaController.php" afterPath="$PROJECT_DIR$/module/Application/src/Controller/CitaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php" afterPath="$PROJECT_DIR$/module/Application/src/Controller/OdontogramaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/CitaTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/Entity/Enviroment.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Enviroment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/Entity/Personal.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Personal.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/Entity/Usuario.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/Entity/Usuario.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Model/UsuarioTable.php" afterPath="$PROJECT_DIR$/module/Application/src/Model/UsuarioTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Module.php" afterPath="$PROJECT_DIR$/module/Application/src/Module.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" afterPath="$PROJECT_DIR$/module/Application/view/application/odontograma/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/application/tipo/index.phtml" afterPath="$PROJECT_DIR$/module/Application/view/application/tipo/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/layout/layout.phtml" afterPath="$PROJECT_DIR$/module/Application/view/layout/layout.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/pages/cita.js" afterPath="$PROJECT_DIR$/public/js/pages/cita.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/pages/tipo.js" afterPath="$PROJECT_DIR$/public/js/pages/tipo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/pages/usuario.js" afterPath="$PROJECT_DIR$/public/js/pages/usuario.js" />
-    </list>
+    <list default="true" id="bac0578f-158a-4055-921b-e6505c2a4b14" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -251,7 +227,7 @@
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-uri" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -521,12 +497,12 @@
       <workItem from="1500610774664" duration="21737000" />
       <workItem from="1500638895396" duration="7989000" />
       <workItem from="1500735463679" duration="598000" />
-      <workItem from="1500754223943" duration="24838000" />
+      <workItem from="1500754223943" duration="24920000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173749000" />
+    <option name="totallyTimeSpent" value="173831000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -538,7 +514,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20278184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
