@@ -152,7 +152,7 @@
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label class="control-label">Dentista</label>
-                                    <input type="text" class="form-control" id="txtdentistadetalle" name="txtdentistadetalle" readonly="readonly" />
+                                    <input value="<?=\Application\Model\Entity\Enviroment::GetCookieValue('NOMBRE').' '.\Application\Model\Entity\Enviroment::GetCookieValue('APELLIDOS')?>" class="form-control" id="txtdentistadetalle" name="txtdentistadetalle" readonly="readonly" />
                                 </div>
                             </div>
                         </div>

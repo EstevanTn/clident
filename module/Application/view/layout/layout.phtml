@@ -72,9 +72,15 @@ $cookie = Enviroment::GetCookieUsuario();
 
                                     </li>
                                     <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a class="btn btn-default btn-flat">Citas</a>
-                                        </div>
+                                        <?php
+                                        if(((int)Enviroment::GetCookieValue('TIPO_PERSONAL'))==8){
+                                            ?>
+                                            <div class="pull-left">
+                                                <a href="<?=$this->basePath()?>/cita" class="btn btn-default btn-flat">Citas</a>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                         <div class="pull-right">
                                             <a href="<?=$this->url('auth', array('action'=>'logout'));?>" class="btn btn-danger btn-flat"><i class="fa fa-sign-out"></i> Salir</a>
                                         </div>
@@ -89,47 +95,27 @@ $cookie = Enviroment::GetCookieUsuario();
                 <section class="sidebar">
                     <ul class="sidebar-menu">
                         <li class="header">PANEL DE ADMINISTRACIÓN</li>
-                        <li class="treeview" data-controllers="tipo">
-                            <a href="#">
-                                <i class="fa fa-gear"></i>
-                                <span>Configuración</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?=$this->basePath()?>/tipo"><i class="fa fa-indent"></i> Tipo</a></li>
-                                <li><a href="<?=$this->basePath()?>/usuario"><i class="fa fa-users"></i> Usuarios</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview" data-controllers="area,paciente,tratamiento,personal">
-                            <a href="#">
-                                <i class="fa fa-gears"></i>
-                                <span>Mantenimiento</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?=$this->basePath()?>/area"><i class="fa fa-check"></i> Áreas</a></li>
-                                <li><a href="<?=$this->basePath()?>/personal"><i class="fa fa-child"></i> Personal</a></li>
-                                <li><a href="<?=$this->basePath()?>/paciente"><i class="fa fa-user-plus"></i> Pacientes</a></li>
-                                <li><a href="<?=$this->basePath()?>/tratamiento"><i class="fa fa-tint"></i> Tratamientos</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview" data-controllers="odontograma,cita">
-                            <a href="#">
-                                <i class="fa fa-navicon"></i>
-                                <span>Procesos</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?=$this->basePath()?>/odontograma"><i class="fa fa-history"></i> Odontograma</a></li>
-                                <li><a href="<?=$this->basePath()?>/cita"><i class="fa fa-group"></i> Citas</a></li>
-                            </ul>
-                        </li>
+                        <?php
+                            $lista_menus = $this->MenuSession();
+                            foreach ($lista_menus as $menu):
+                        ?>
+                                <li class="treeview" data-controllers="<?=$menu['controllers']?>">
+                                    <a href="#">
+                                        <i class="<?=$menu['icon']?>"></i>
+                                        <span><?=$menu['label']?></span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-right pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <?php foreach ($menu['pages'] as $page):?>
+                                            <li><a href="<?=$this->basePath()?>/<?=$page['href']?>"><i class="<?=$page['icon']?>"></i> <?=$page['label']?></a></li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                </li>
+                        <?php
+                            endforeach;
+                        ?>
                     </ul>
                 </section>
             </aside>

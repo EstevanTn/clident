@@ -42,7 +42,7 @@ class CitaController extends AbstractActionController
         if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
             $response = [
                 'data' => $this->table->fetchAll(
-                    'cita.ACTIVE=1 AND DATE(cita.FECHA_CITA) = DATE(\''.Enviroment::GetDate().'\') AND cita.ID_DENTISTA='.Enviroment::GetDentista()
+                    'cita.ACTIVE=1 AND DATE(cita.FECHA_CITA) = DATE(\''.Enviroment::GetDate().'\') AND cita.ID_DENTISTA='.Enviroment::GetCookieValue('ID_PERSONAL')
                 )
             ];
         }
@@ -54,7 +54,7 @@ class CitaController extends AbstractActionController
         if($this->getRequest()->isPost() && $this->getRequest()->isXmlHttpRequest()){
             $response = [
                 'data' => $this->table->fetchAll(
-                    'cita.ACTIVE=1 AND cita.ID_DENTISTA='.Enviroment::GetDentista()
+                    'cita.ACTIVE=1 AND cita.ID_DENTISTA='.Enviroment::GetCookieValue('ID_PERSONAL')
                 )
             ];
         }
@@ -67,7 +67,7 @@ class CitaController extends AbstractActionController
             $data = [
                 'ID_CITA' => $this->getRequest()->getPost('id', null),
                 'ID_PACIENTE' => $this->getRequest()->getPost('idpaciente', null),
-                'ID_DENTISTA' => Enviroment::GetDentista(),
+                'ID_DENTISTA' => Enviroment::GetCookieValue('ID_PERSONAL'),
                 'TIPO_CITA' => $this->getRequest()->getPost('tipo_cita', 2),
                 'FECHA_CITA' => $this->getRequest()->getPost('fecha', null),
                 'HORA_INICIO' => $this->getRequest()->getPost('hora_inicio', null),

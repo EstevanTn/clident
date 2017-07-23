@@ -4,7 +4,8 @@ namespace Application\Model\Entity;
 class Enviroment{
     //Session settings
     const NAME_SESSION = 'appTnqSoft';
-    const NAME_COOKIE = 'appTnqSoft';
+    const NAME_COOKIE = 'infoUser';
+
 	//Mensajes
 	const MSG_SAVE = 'Se ha guardado el registro satisfacoriamente.';
 	const MSG_UPDATE = 'Se ha actualizado el registro satisfacoriamente.';
@@ -41,8 +42,5 @@ class Enviroment{
 	    $cookie = Enviroment::GetCookieUsuario();
 	    $value = $cookie[$key];
 	    return $value;
-    }
-    public static function GetDentista($key=''){
-	    return 1;
     }
 }

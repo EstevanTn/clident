@@ -154,9 +154,14 @@ var cita = {
             success: function (response) {
                 BasePage.Notify(response, function () {
                     $('#modal-cita').modal('hide');
+                    var e = response.data;
                     if(request.id===0){
                         $('#calendar').fullCalendar('renderEvent', {
-
+                            title: e.NOMBRE+' '+e.APELLIDOS,
+                            start: e.FECHA_CITA+' '+e.HORA_INICIO,
+                            end: e.FECHA_CITA+' '+e.HORA_FIN,
+                            backgroundColor: e.COLOR,
+                            entity: e
                         });
                     }
                 });

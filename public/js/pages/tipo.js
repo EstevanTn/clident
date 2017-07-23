@@ -10,7 +10,8 @@ var tipo = {
                 }
             },
             columns:[
-                { data : 'NOMBRE', sWidth: '60%' },
+                { data : 'ID_TIPO', sWidth: '10%' },
+                { data : 'NOMBRE', sWidth: '50%' },
                 { data : 'SIGLA', sWidth:'10%' },
                 { data : 'VALOR', sClass: 'text-center', sWidth:'20%' },
                 {

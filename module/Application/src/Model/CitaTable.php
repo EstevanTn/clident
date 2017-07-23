@@ -19,8 +19,11 @@ namespace Application\Model;
 
 
 use Application\Model\Entity\Enviroment;
+use Application\Model\Entity\Paciente;
 use Application\Model\Entity\Persona;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 class CitaTable extends BaseTable
@@ -49,9 +52,13 @@ class CitaTable extends BaseTable
                 $dataX['USUARIO_CREACION'] = Enviroment::GetCookieValue('ID_USUARIO');
                 $dataX['FECHA_CREACION'] =  Enviroment::GetDate() ;
                 $this->tableGateway->insert($dataX);
+                $dataR = $this->fetchAll([
+                    'cita.ID_CITA' => $this->tableGateway->getLastInsertValue()
+                ]);
                 return [
                     'success' => true,
                     'message' => Enviroment::MSG_DELETE,
+                    'data' => $dataR[0]
                 ];
             }else{
                 $dataX['USUARIO_MODIFICACION'] = Enviroment::GetCookieValue('ID_USUARIO');

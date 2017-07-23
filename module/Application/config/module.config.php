@@ -114,6 +114,16 @@ return [
                     ],
                 ],
             ],
+            'usuario' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/usuario[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\UsuarioController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'cita' => [
                 'type'    => Segment::class,
                 'options' => [

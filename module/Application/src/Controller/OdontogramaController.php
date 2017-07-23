@@ -49,7 +49,7 @@ class OdontogramaController extends AbstractActionController {
                 'NUMERO_DIENTE' => $this->getRequest()->getPost('numero_diente', null),
                 'CARA_DIENTE' => $this->getRequest()->getPost('cara_diente', null),
                 'ID_TRATAMIENTO' => $this->getRequest()->getPost('id_tratamiento', null),
-                'ID_DENTISTA' => Enviroment::GetDentista(),
+                'ID_DENTISTA' => Enviroment::GetCookieValue('ID_PERSONAL'),
                 'DESCRIPCION' => $this->getRequest()->getPost('descripcion', null),
                 'ESTADO' => $this->getRequest()->getPost('estado', null),
                 'FECHA_APLICACION' => Enviroment::GetDate(),

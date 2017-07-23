@@ -28,4 +28,19 @@ class Personal extends Persona {
     public function getArrayCopy(){
         return get_object_vars($this);
     }
+
+    public static function getVarNames()
+    {
+        return [
+            'ID_PERSONAL',
+            'ID_PERSONA',
+            'ID_AREA',
+            'TIPO_PERSONAL',
+            'FECHA_INGRESO',
+            'FECHA_CONTRATO_INICIO',
+            'FECHA_CONTRATO_FIN',
+            'ESPECIALIDAD',
+            'CARGO',
+        ];
+    }
 }

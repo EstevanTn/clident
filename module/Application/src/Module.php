@@ -10,7 +10,9 @@ namespace Application;
 use Application\Controller\AuthController;
 use Application\Controller\MedicamentoController;
 use Application\Controller\SiteController;
+use Application\Controller\UsuarioController;
 use Application\View\Helper\ControllerName;
+use Application\View\Helper\MenuSession;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -180,6 +182,9 @@ class Module implements ConfigProviderInterface
                 Controller\MedicamentoController::class => function($container){
                     return new MedicamentoController($container->get(Model\MedicamentoTable::class));
                 },
+                Controller\UsuarioController::class => function($container){
+                    return new UsuarioController($container->get(Model\UsuarioTable::class));
+                },
                 Controller\SiteController::class => InvokableFactory::class,
             ],
         ];
@@ -223,7 +228,8 @@ class Module implements ConfigProviderInterface
             ->read($sm->get($nameService)->getStorage()->getSessionId())) {
                 $controller = $e->getRouteMatch()->getParam('controller');
                 if ($controller != 'Auth') {
-                    return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
+                    return $e->getTarget()->getEventManager()->getSharedManager()
+                        ->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {
                         $controller = $e->getTarget();
                         $controller->redirect()->toRoute('auth');
                     }, -11);
@@ -238,6 +244,10 @@ class Module implements ConfigProviderInterface
                 'ControllerName' => function ($sm) {
                     $match = $sm->get('application')->getMvcEvent()->getRouteMatch();
                     return new ControllerName($match);
+                },
+                'MenuSession'=> function($sm){
+                    $tableGateway = $sm->get(Model\UsuarioTableGateway::class);
+                    return new MenuSession(new Model\UsuarioTable($tableGateway));
                 },
             ],
        ];
