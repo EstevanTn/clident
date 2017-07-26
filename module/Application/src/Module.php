@@ -192,6 +192,7 @@ class Module implements ConfigProviderInterface
     
     public function onBootstrap(Event $e)
     {
+        //session_set_cookie_params(1485, '/');
         session_start();
         $em = $e->getApplication()->getEventManager();
         $em->attach('route', array($this, 'verificateSession'));
@@ -200,7 +201,8 @@ class Module implements ConfigProviderInterface
     
     public function verificateSession(Event $e){
         $sm = $e->getApplication()->getServiceManager();
-        if(!isset($_COOKIE[Enviroment::NAME_COOKIE])){
+        //isset($_COOKIE[Enviroment::NAME_COOKIE])
+        if(!file_exists(Enviroment::FILE_SESSION)){
             $controller = $e->getRouteMatch()->getParam('controller');
             if ($controller != SiteController::class && $controller != AuthController::class) {
                 return $e->getTarget()->getEventManager()->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e)  {

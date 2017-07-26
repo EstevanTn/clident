@@ -129,15 +129,16 @@ class AuthController extends AbstractActionController {
         ]);
     }
 
-    public function logoutAction() 
+    public function logoutAction()
     {   
         session_destroy();
+        unlink(Enviroment::FILE_SESSION);
         unset($_COOKIE[Enviroment::NAME_COOKIE]);
         setcookie(Enviroment::NAME_COOKIE, '', time()-5000, '/');
         return $this->redirect()->toRoute('site');
     }
-    
-    public function login($email, $password, $rememberMe)
+
+    /*public function login($email, $password, $rememberMe)
     {
         // Check if user has already logged in. If so, do not allow to log in
         // twice.
@@ -171,6 +172,6 @@ class AuthController extends AbstractActionController {
         
         // Remove identity from session.
         $this->authService->clearIdentity();
-    }
+    }*/
 
 }

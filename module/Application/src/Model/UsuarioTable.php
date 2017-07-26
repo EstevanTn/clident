@@ -54,7 +54,6 @@ class UsuarioTable extends BaseTable{
                 'usuario.PASSWORD'  => sha1($pwd)
             ]);
         $resultSet = $this->tableGateway->selectWith($select);
-
         $entry = $resultSet->current();
         if(!$entry){
             return array(
@@ -63,9 +62,9 @@ class UsuarioTable extends BaseTable{
             );
         }else{
             $entry = get_object_vars($entry);
-            $path = '/';
             $_SESSION[Enviroment::NAME_SESSION] = $entry['USERNAME'];
-            setcookie(Enviroment::NAME_COOKIE, json_encode($entry), time()*3600, $path);
+            //setcookie(Enviroment::NAME_COOKIE, json_encode($entry), time()*3600, '/');
+            Enviroment::setSessionData($entry);
             $this->getAppSettings();
             return array(
                 'IsSuccess' => true,
@@ -77,9 +76,11 @@ class UsuarioTable extends BaseTable{
     public function getAppSettings(){
         $resultSet = $this->tableGatewaySettings->select();
         $entries = $this->toEntries($resultSet);
-        define(KEY_PERSONAL_DENTISTA, (int) $entries[0]['VALOR']);
-        define(KEY_PRE_CITA, (int) $entries[1]['VALOR']);
-        define(KEY_CITA, (int) $entries[2]['VALOR']);
+        if(count($entries)>0 && count($entries)>=3){
+            define(KEY_PERSONAL_DENTISTA, (int) $entries[0]['VALOR']);
+            define(KEY_PRE_CITA, (int) $entries[1]['VALOR']);
+            define(KEY_CITA, (int) $entries[2]['VALOR']);
+        }
         //define(KEY_PERSONAL_DENTISTA, $entries[0]['VALOR']);
     }
 

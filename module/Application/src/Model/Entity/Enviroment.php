@@ -4,7 +4,8 @@ namespace Application\Model\Entity;
 class Enviroment{
     //Session settings
     const NAME_SESSION = 'appTnqSoft';
-    const NAME_COOKIE = 'infoUser';
+    const NAME_COOKIE = 'appTnqSoft';
+    const FILE_SESSION = 'data/session.json';
 
 	//Mensajes
 	const MSG_SAVE = 'Se ha guardado el registro satisfacoriamente.';
@@ -32,9 +33,13 @@ class Enviroment{
 	}
 	
 	public static function GetCookieUsuario(){
-	    if(isset($_COOKIE[Enviroment::NAME_COOKIE]))
+	    /*if(isset($_COOKIE[Enviroment::NAME_COOKIE]))
         {
             return json_decode($_COOKIE[Enviroment::NAME_COOKIE], true);
+        }*/
+	    if(file_exists(Enviroment::FILE_SESSION)){
+	        $data = file_get_contents(Enviroment::FILE_SESSION);
+            return json_decode($data, true);
         }
         return null;
 	}
@@ -42,5 +47,12 @@ class Enviroment{
 	    $cookie = Enviroment::GetCookieUsuario();
 	    $value = $cookie[$key];
 	    return $value;
+    }
+
+    public static function setSessionData(array $data){
+	    $json = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $fh = fopen(Enviroment::FILE_SESSION, 'w');
+        fwrite($fh, $json);
+        fclose($fh);
     }
 }
